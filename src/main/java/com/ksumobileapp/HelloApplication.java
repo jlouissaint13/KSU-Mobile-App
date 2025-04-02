@@ -17,6 +17,7 @@ public class HelloApplication extends Application {
         stage.show();
     }
     //hello
+    //Malachi was here
     public static void main(String[] args) {
         launch();
     }

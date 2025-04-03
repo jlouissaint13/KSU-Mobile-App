@@ -12,13 +12,22 @@ public class RegisterService {
 public void databaseConnection() throws SQLException {
     Connection connection = null;
     String url = "jdbc:sqlite:accounts.db";
+    String sql = "Create Table if  not exists users (" +
+            "firstName" +
+            "lastName" +
+            "email" +
+            "phone" +
+            "dob" +
+            "classification" +
+            "major);";
+
     connection = DriverManager.getConnection(url); {
-        System.out.println("Connection was successful");
 
     }
 
+
 }
 public void registerUser(RegisterModel registerModel) {
-   registerModel.getName();
+   System.out.println(registerModel.getFname());
 }
 }

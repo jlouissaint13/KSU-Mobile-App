@@ -13,12 +13,17 @@ public class RegisterMain extends Application {
     }
     Button button;
     private RegisterView registerView;
+    private RegisterModel registerModel;
+    private RegisterService registerService;
     @Override
     public void start(Stage primaryStage) {
 
 
 
             RegisterView registerView = new RegisterView(primaryStage);
+            RegisterModel registerModel1 = new RegisterModel("","","","","","","");
+            RegisterService registerService1 = new RegisterService();
+            RegisterController registerController = new RegisterController(registerView,registerService1,registerModel1);
 
     }
 }

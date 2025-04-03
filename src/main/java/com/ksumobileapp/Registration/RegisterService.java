@@ -19,6 +19,6 @@ public void databaseConnection() throws SQLException {
 
 }
 public void registerUser(RegisterModel registerModel) {
-    //TODO
+   registerModel.getName();
 }
 }

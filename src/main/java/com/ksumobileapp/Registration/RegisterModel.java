@@ -14,4 +14,7 @@ public class RegisterModel {
         this.major = major;
     }
 
+    public void getName() {
+        System.out.println(this.fname + " " + this.lname);
+    }
 }

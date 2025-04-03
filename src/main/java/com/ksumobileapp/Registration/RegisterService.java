@@ -16,5 +16,9 @@ public void databaseConnection() throws SQLException {
         System.out.println("Connection was successful");
 
     }
+
+}
+public void registerUser(RegisterModel registerModel) {
+    //TODO
 }
 }

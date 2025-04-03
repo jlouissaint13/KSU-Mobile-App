@@ -1,7 +1,10 @@
 package com.ksumobileapp.Registration;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
@@ -10,8 +13,14 @@ import javafx.stage.Stage;
 public class RegisterView {
 private Stage stage;
 private Pane pane;
-private TextField fName,lName,email,phone,dob,classification,major;
+private TextField fName,lName,email,phone,dob;
 private Text fnameT,lnameT,emailT,phoneT,dobT,classificationT,majorT,register;
+ private ObservableList<String> options;
+ private ComboBox classification,major;
+private Button registerButton;
+
+
+
 public void components() {
     pane = new Pane();
     fName = new TextField();
@@ -25,13 +34,28 @@ public void components() {
     phoneT = new Text("Phone");
     dob = new TextField();
     dobT = new Text("Date of Birth");
-    classification = new TextField();
     classificationT = new Text("Classification");
-    major = new TextField();
+
     majorT = new Text("Major");
     register = new Text("Registration");
+    registerButton = new Button("Register");
+     options =
+            FXCollections.observableArrayList(
+                    "Freshman",
+                    "Sophmore",
+                    "Junior",
+                    "Senior"
+            );
+   classification = new ComboBox(options);
+    options =
+            FXCollections.observableArrayList(
+                    "Computer Science"
+            );
+    major = new ComboBox(options);
 
 }
+
+
 public void properties() {
 fName.setLayoutX(30);
 fName.setLayoutY(100);
@@ -63,12 +87,40 @@ majorT.setLayoutX(30);
 majorT.setLayoutY(450);
 register.setLayoutX(145);
 register.setLayoutY(40);
+registerButton.setLayoutX(145);
+registerButton.setLayoutY(525);
 }
 public void addComponents() {
-pane.getChildren().addAll(fName,lName,email,phone,dob,classification,major,fnameT,lnameT,emailT,phoneT,dobT,classificationT,majorT,register);
+pane.getChildren().addAll(fName,lName,email,phone,dob,classification,major,
+        fnameT,lnameT,emailT,phoneT,dobT,classificationT,majorT,register,registerButton);
 
 }
-//
+
+public String getfName() {
+    return fName.getText();
+}
+    public String getlName() {
+        return lName.getText();
+    }
+    public String getEmail() {
+        return email.getText();
+    }
+    public String getPhone() {
+        return phone.getText();
+    }
+    public String getDOB() {
+        return dob.getText();
+    }
+    public String getClassification() {
+            return classification.getValue().toString();
+    }
+    public String getMajor() {
+            return major.getValue().toString();
+    }
+    public Button getRegisterButton() {
+            return registerButton;
+    }
+
 public RegisterView(Stage stage) {
     components();
     properties();

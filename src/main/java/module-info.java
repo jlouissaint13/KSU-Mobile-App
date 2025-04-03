@@ -1,6 +1,7 @@
 module com.ksumobileapp {
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.sql;
 
 
     opens com.ksumobileapp to javafx.fxml;

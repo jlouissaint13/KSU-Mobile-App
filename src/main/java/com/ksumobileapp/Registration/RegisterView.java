@@ -68,7 +68,7 @@ public void addComponents() {
 pane.getChildren().addAll(fName,lName,email,phone,dob,classification,major,fnameT,lnameT,emailT,phoneT,dobT,classificationT,majorT,register);
 
 }
-
+//
 public RegisterView(Stage stage) {
     components();
     properties();

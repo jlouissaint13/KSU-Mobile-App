@@ -1,0 +1,24 @@
+package com.ksumobileapp.Registration;
+
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
+
+public class RegisterMain extends Application {
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+    Button button;
+    private RegisterView registerView;
+    @Override
+    public void start(Stage primaryStage) {
+
+
+
+            RegisterView registerView = new RegisterView(primaryStage);
+
+    }
+}

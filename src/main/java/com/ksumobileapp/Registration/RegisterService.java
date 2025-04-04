@@ -47,7 +47,7 @@ public String generateEmail(RegisterModel registerModel) {
     //get the first letter of the students first name
     sb.append(registerModel.getFname().charAt(0));
 
-    //if last name of student is equal to 5 or greater then take six letters and add to email;
+    //if last name of student is equal to 5 or greater than take six letters and add to email;
     //otherwise just add 3 letters
     if (registerModel.getLname().length() >= 6) {
         sb.append(registerModel.getLname().substring(0,6));

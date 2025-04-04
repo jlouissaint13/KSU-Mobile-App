@@ -15,6 +15,8 @@ public class LoginMain extends Application {
     @Override
     public void start(Stage primaryStage) {
        loginView = new LoginView(primaryStage);
+       loginModel = new LoginModel("","");
+       loginService = new LoginService();
        LoginController loginController = new LoginController(primaryStage,loginView,loginModel,loginService);
 
     }

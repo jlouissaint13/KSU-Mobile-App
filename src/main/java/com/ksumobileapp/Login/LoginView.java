@@ -50,7 +50,12 @@ public class LoginView {
         pane.getChildren().addAll(login,campusEmail,password,campusEmailT,passwordT,loginButton,createAccountButton);
     }
 
-
+    public String getCampusEmail() {
+       return campusEmail.getText();
+    }
+    public String getPassword () {
+       return password.getText();
+    }
 
     public Button getLoginButton() {
         return loginButton;

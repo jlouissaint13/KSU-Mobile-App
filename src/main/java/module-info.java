@@ -9,4 +9,6 @@ module com.ksumobileapp {
     exports com.ksumobileapp;
     exports com.ksumobileapp.Registration;
     opens com.ksumobileapp.Registration to javafx.fxml;
+    exports com.ksumobileapp.Login;
+    opens com.ksumobileapp.Login to javafx.fxml;
 }

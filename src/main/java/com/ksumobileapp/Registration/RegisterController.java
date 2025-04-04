@@ -20,6 +20,8 @@ public class RegisterController {
 
 
         registerButton.setOnAction(e -> {
+
+
             try {
                 register();
             } catch (SQLException ex) {
@@ -47,12 +49,27 @@ public class RegisterController {
                 "Louissaint",
                 "jared@gmail.com",
                 "password",
-                "6788888888",
+                "5551234567",
                 "05/10/2002",
                 "Senior",
                 "Computer Science"
         );
         //registerService.registerUser(this.registerModel);
+        this.registerModel.setData();
+        //input validation don't forget to move when done testing
+        if (registerService.isEmpty(registerModel) == true) {
+            System.out.println("Something is empty");
+            return;
+        }
+        if (registerService.emailValidation(this.registerModel) == false) {
+            System.out.println("Email invalid");
+            return;
+        }
+
+        if (registerService.validPhoneNumber(registerModel) == false) {
+            System.out.println("Invalid phone number");
+            return;
+        }
         registerService.databaseConnection(this.registerModel);
     }
 }

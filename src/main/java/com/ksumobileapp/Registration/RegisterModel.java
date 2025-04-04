@@ -8,6 +8,7 @@ public class RegisterModel {
         this.fname = fname;
         this.lname = lname;
         this.email = email;
+        this.password = password;
         this.phone = phone;
         this.dob = dob;
         this.classification = classification;
@@ -45,10 +46,9 @@ public class RegisterModel {
         data[2] = this.email;
         data[3] = this.password;
         data[4] = this.phone;
-        data[5] = this.phone;
-        data[6] = this.dob;
-        data[7] = this.classification;
-        data[8] = this.major;
+        data[5] = this.dob;
+        data[6] = this.classification;
+        data[7] = this.major;
    }
 
    public void setAll(String fname,String lname,String email,String password,String phone,String dob,String classification,String major) {

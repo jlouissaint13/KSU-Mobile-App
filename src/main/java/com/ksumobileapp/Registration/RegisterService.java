@@ -64,9 +64,9 @@ public String generateEmail(RegisterModel registerModel) {
 }
 //True means textField is empty
 public boolean isEmpty(RegisterModel registerModel) {
-    for (int i = 0;i<registerModel.data.length;i++) {
-        if (registerModel.data[i].equals("")) return true;
-    }
+   for(String d: registerModel.data) {
+       if (d == "" || d == null) return true;
+   }
     return false;
 }
 //false is invalid email
@@ -77,7 +77,7 @@ public boolean emailValidation(RegisterModel registerModel) {
 }
 public boolean validPhoneNumber(RegisterModel registerModel) {
     //first make sure phone length is equal to ten. Then confirm that phone number is all digits
-    if (registerModel.getPhone().length() == 10 ) return registerModel.getPhone().matches("\\d+");
+    if (registerModel.getPhone().length() == 10) return registerModel.getPhone().matches("\\d+");
 
     return false;
 }

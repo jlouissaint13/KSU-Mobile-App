@@ -53,7 +53,7 @@ public void components() {
      options =
             FXCollections.observableArrayList(
                     "Freshman",
-                    "Sophmore",
+                    "Sophomore",
                     "Junior",
                     "Senior"
             );

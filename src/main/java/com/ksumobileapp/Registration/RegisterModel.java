@@ -13,7 +13,7 @@ public class RegisterModel {
         this.classification = classification;
         this.major = major;
     }
-
+    //Setters
     public void setFname(String fname) {
         this.fname = fname;
    }
@@ -45,10 +45,27 @@ public class RegisterModel {
         this.major = major;
    }
 
-   //Testing purposes
+   //Getters
    public String getFname() {
         return this.fname;
    }
-
+   public String getLname() {
+        return this.lname;
+   }
+   public String getEmail() {
+        return this.email;
+   }
+   public String getPhone() {
+        return this.phone;
+   }
+   public String getDob() {
+        return this.dob;
+   }
+   public String getClassification() {
+        return this.classification;
+   }
+   public String getMajor() {
+        return this.major;
+   }
 
 }

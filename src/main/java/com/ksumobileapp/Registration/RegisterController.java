@@ -40,7 +40,7 @@ public class RegisterController {
                 registerView.getMajor()
         );
         //registerService.registerUser(this.registerModel);
-        registerService.databaseConnection();
+        registerService.databaseConnection(this.registerModel);
     }
 }
 

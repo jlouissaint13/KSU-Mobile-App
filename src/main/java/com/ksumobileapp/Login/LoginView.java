@@ -52,6 +52,12 @@ public class LoginView {
 
 
 
+    public Button getLoginButton() {
+        return loginButton;
+    }
+    public Button getCreateAccountButton() {
+        return createAccountButton;
+    }
 
 
 public LoginView(Stage stage) {

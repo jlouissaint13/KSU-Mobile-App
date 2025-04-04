@@ -9,8 +9,13 @@ public class LoginMain extends Application {
         launch(args);
     }
     private LoginView loginView;
+    private LoginController loginController;
+    private LoginModel loginModel;
+    private LoginService loginService;
     @Override
     public void start(Stage primaryStage) {
        loginView = new LoginView(primaryStage);
+       LoginController loginController = new LoginController(primaryStage,loginView,loginModel,loginService);
+
     }
 }

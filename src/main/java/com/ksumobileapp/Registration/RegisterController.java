@@ -1,5 +1,6 @@
 package com.ksumobileapp.Registration;
 
+import com.ksumobileapp.Login.LoginMain;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
@@ -10,11 +11,12 @@ public class RegisterController {
     private RegisterModel registerModel;
     private RegisterService registerService;
     private Button registerButton;
-
-    public RegisterController(RegisterView registerView,RegisterService registerService,RegisterModel registerModel) {
+    private LoginMain main;
+    public RegisterController(Stage stage,RegisterView registerView,RegisterService registerService,RegisterModel registerModel) {
         this.registerView = registerView;
         this.registerService = registerService;
         this.registerModel = registerModel;
+        LoginMain loginMain = new LoginMain();
         registerButton = registerView.getRegisterButton();
 
 
@@ -23,7 +25,7 @@ public class RegisterController {
 
 
             try {
-                register();
+                register(stage,loginMain);
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);
             }
@@ -31,7 +33,7 @@ public class RegisterController {
     }
 
 
-    public void register() throws SQLException {
+    public void register(Stage stage,LoginMain loginMain) throws SQLException {
        /* this.registerModel.setAll(
                 registerView.getfName().trim(),
                 registerView.getlName().trim(),
@@ -71,6 +73,7 @@ public class RegisterController {
             return;
         }
         registerService.databaseConnection(this.registerModel);
+        loginMain.start(stage);
     }
 }
 

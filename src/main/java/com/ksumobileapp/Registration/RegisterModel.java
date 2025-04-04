@@ -2,9 +2,9 @@ package com.ksumobileapp.Registration;
 
 
 public class RegisterModel {
-    private String fname, lname, email, phone, dob, classification, major;
+    private String fname, lname, email, password, phone, dob, classification, major;
 
-    public RegisterModel(String fname,String lname,String email,String phone,String dob,String classification,String major) {
+    public RegisterModel(String fname,String lname,String email,String password,String phone,String dob,String classification,String major) {
         this.fname = fname;
         this.lname = lname;
         this.email = email;
@@ -23,6 +23,9 @@ public class RegisterModel {
    public void setEmail(String email) {
         this.email = email;
    }
+   public void setPassword(String password) {
+        this.password = password;
+   }
    public void setPhone(String phone) {
         this.phone = phone;
    }
@@ -35,10 +38,11 @@ public class RegisterModel {
    public void setMajor(String major) {
         this.major = major;
    }
-   public void setAll(String fname,String lname,String email,String phone,String dob,String classification,String major) {
+   public void setAll(String fname,String lname,String email,String password,String phone,String dob,String classification,String major) {
         this.fname = fname;
         this.lname = lname;
         this.email = email;
+        this.password = password;
         this.phone = phone;
         this.dob = dob;
         this.classification = classification;
@@ -54,6 +58,9 @@ public class RegisterModel {
    }
    public String getEmail() {
         return this.email;
+   }
+   public String getPassword() {
+        return this.password;
    }
    public String getPhone() {
         return this.phone;

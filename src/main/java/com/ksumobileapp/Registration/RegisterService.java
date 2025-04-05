@@ -60,13 +60,13 @@ public String generateEmail(RegisterModel registerModel) {
     String campusEmail = new String(sb);
     return campusEmail.toLowerCase();
 }
+//generates a username
 public String generateUsername(RegisterModel registerModel) {
     StringBuilder sb = new StringBuilder();
     String userName = generateEmail(registerModel);
     for(int i = 0;i<registerModel.getEmail().length();i++) {
         if (userName.charAt(i) == '@') return sb.toString().toLowerCase();
         sb.append(userName.charAt(i));
-
 
     }
     return "none";

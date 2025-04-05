@@ -131,9 +131,22 @@ public void addComponents() {
     scrollPane.setMaxHeight(10);
 }
 
-public String getfName() {
-    return fName.getText();
+
+public RegisterView(Stage stage) {
+    components();
+    properties();
+    addComponents();
+    stage.setTitle("Registration");
+    Scene scene1 = new Scene(scrollPane,350,600);
+
+    stage.setScene(scene1);
+    stage.show();
+
 }
+//getters
+    public String getfName() {
+        return fName.getText();
+    }
     public String getlName() {
         return lName.getText();
     }
@@ -150,24 +163,12 @@ public String getfName() {
         return dob.getText();
     }
     public String getClassification() {
-            return classification.getValue().toString();
+        return classification.getValue().toString();
     }
     public String getMajor() {
-            return major.getValue().toString();
+        return major.getValue().toString();
     }
     public Button getRegisterButton() {
-            return registerButton;
+        return registerButton;
     }
-
-public RegisterView(Stage stage) {
-    components();
-    properties();
-    addComponents();
-    stage.setTitle("Registration");
-    Scene scene1 = new Scene(scrollPane,350,600);
-
-    stage.setScene(scene1);
-    stage.show();
-
-}
 }

@@ -11,7 +11,7 @@ public class RegisterMain extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    Button button;
+
     private RegisterView registerView;
     private RegisterModel registerModel;
     private RegisterService registerService;

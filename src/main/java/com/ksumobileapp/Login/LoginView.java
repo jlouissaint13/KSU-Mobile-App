@@ -50,19 +50,7 @@ public class LoginView {
         pane.getChildren().addAll(login,campusEmail,password,campusEmailT,passwordT,loginButton,createAccountButton);
     }
 
-    public String getCampusEmail() {
-       return campusEmail.getText();
-    }
-    public String getPassword () {
-       return password.getText();
-    }
 
-    public Button getLoginButton() {
-        return loginButton;
-    }
-    public Button getCreateAccountButton() {
-        return createAccountButton;
-    }
 
 
 public LoginView(Stage stage) {
@@ -76,5 +64,19 @@ public LoginView(Stage stage) {
     stage.setScene(scene1);
     stage.show();
 }
+//all getters will be under constructor
+    public String getCampusEmail() {
+        return campusEmail.getText();
+    }
+    public String getPassword () {
+        return password.getText();
+    }
+
+    public Button getLoginButton() {
+        return loginButton;
+    }
+    public Button getCreateAccountButton() {
+        return createAccountButton;
+    }
 
 }

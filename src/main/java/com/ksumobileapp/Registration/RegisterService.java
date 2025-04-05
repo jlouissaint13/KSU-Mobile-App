@@ -6,7 +6,7 @@ import java.sql.Connection;
 
 
 public class RegisterService {
-
+    String url = "jdbc:sqlite:accounts.db";
 public void databaseConnection(RegisterModel registerModel) throws SQLException {
 
     String url = "jdbc:sqlite:accounts.db";
@@ -51,7 +51,6 @@ public String generateEmail(RegisterModel registerModel) {
     if (registerModel.getLname().length() >= 6) {
         sb.append(registerModel.getLname().substring(0,6));
         sb.append("@students.kennesaw.edu");
-        System.out.println(sb);
         String campusEmail = new String(sb);
         return campusEmail.toLowerCase();
     }
@@ -89,6 +88,38 @@ public boolean validPhoneNumber(RegisterModel registerModel) {
     if (registerModel.getPhone().length() == 10) return registerModel.getPhone().matches("\\d+");
 
     return false;
+}
+//if email exists then true
+public boolean ifExistsEmail(RegisterModel registerModel) {
+    String url = "jdbc:sqlite:accounts.db";
+    String sql = "Select personalEmail from users where personalEmail = ?";
+    var personalEmail = registerModel.getEmail();
+    try (var conn = DriverManager.getConnection(url);
+         var pstmt = conn.prepareStatement(sql)) {
+        pstmt.setString(1, personalEmail);
+        var rs = pstmt.executeQuery();
+        return rs.getString(1).equals(personalEmail);
+
+
+    } catch (SQLException e) {
+        throw new RuntimeException(e);
+    }
+}
+//if true then phone number exists
+public boolean ifExistsPhone(RegisterModel registerModel) {
+    String url = "jdbc:sqlite:accounts.db";
+    String sql = "Select phone from users where phone= ?";
+    var phoneNumber = registerModel.getPhone();
+    try (var conn = DriverManager.getConnection(url);
+         var pstmt = conn.prepareStatement(sql)) {
+        pstmt.setString(1, phoneNumber);
+        var rs = pstmt.executeQuery();
+        return rs.getString(1).equals(phoneNumber);
+
+
+    } catch (SQLException e) {
+        throw new RuntimeException(e);
+    }
 }
 
 

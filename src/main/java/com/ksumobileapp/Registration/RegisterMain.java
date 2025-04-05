@@ -1,5 +1,6 @@
 package com.ksumobileapp.Registration;
 
+import com.ksumobileapp.Login.LoginMain;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -15,6 +16,7 @@ public class RegisterMain extends Application {
     private RegisterView registerView;
     private RegisterModel registerModel;
     private RegisterService registerService;
+
     @Override
     public void start(Stage primaryStage) {
 

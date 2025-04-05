@@ -1,6 +1,7 @@
 package com.ksumobileapp.Registration;
 
 import com.ksumobileapp.Login.LoginMain;
+import com.ksumobileapp.Profile.ProfileMain;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
@@ -12,10 +13,12 @@ public class RegisterController {
     private RegisterService registerService;
     private Button registerButton;
     private LoginMain main;
+    private ProfileMain profileMain;
     public RegisterController(Stage stage,RegisterView registerView,RegisterService registerService,RegisterModel registerModel) {
         this.registerView = registerView;
         this.registerService = registerService;
         this.registerModel = registerModel;
+        this.profileMain = new ProfileMain();
         LoginMain loginMain = new LoginMain();
         registerButton = registerView.getRegisterButton();
 
@@ -64,22 +67,35 @@ public class RegisterController {
         );
         //registerService.registerUser(this.registerModel);
         this.registerModel.setData();
+        //TODO add animations for input validation
         //input validation don't forget to move when done testing
-        if (registerService.isEmpty(registerModel) == true) {
+        if (registerService.isEmpty(this.registerModel)) {
             System.out.println("Something is empty");
             return;
         }
-        if (registerService.emailValidation(this.registerModel) == false) {
+        if (!registerService.emailValidation(this.registerModel)) {
             System.out.println("Email invalid");
             return;
         }
 
-        if (registerService.validPhoneNumber(registerModel) == false) {
+        if (!registerService.validPhoneNumber(registerModel)) {
             System.out.println("Invalid phone number");
             return;
         }
+        /*Undo later commented out for testing reasons
+        if (registerService.ifExistsEmail(this.registerModel)) {
+            System.out.println("phone exists");
+            return;
+        }
+        if (registerService.ifExistsEmail(this.registerModel)) {
+            System.out.println("email exists");
+            return;
+        }
+
+         */
+
         registerService.databaseConnection(this.registerModel);
-        loginMain.start(stage);
+        profileMain.start(stage);
     }
 }
 

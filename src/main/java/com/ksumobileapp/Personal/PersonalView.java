@@ -62,7 +62,7 @@ public class PersonalView {
         majorT = new Text("Major");
         personalInfoText = new Text("Personal Information");
         registerButton = new Button("Save Changes");
-        backButton = new Button("Log Out");
+        backButton = new Button("<");
         studentID = new TextField();
         studentIDT = new Text("Student ID");
         options =
@@ -191,8 +191,8 @@ public class PersonalView {
 
         registerButton.setLayoutX(145);
         registerButton.setLayoutY(960);
-        backButton.setLayoutX(145);
-        backButton.setLayoutY(1000);
+        backButton.setLayoutX(20);
+        backButton.setLayoutY(20);
 
     }
     public void setInformation(PersonalModel personalModel) {

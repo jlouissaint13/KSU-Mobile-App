@@ -14,7 +14,7 @@ public class ProfileView {
     private Text profileT;
     public void components() {
     pane = new Pane();
-    backButton = new Button("<");
+    backButton = new Button("Log Out");
     profileT = new Text("Profile");
     viewInformation = new Button("Personal Information");
     editProfile = new Button("Change Information");
@@ -35,22 +35,23 @@ public class ProfileView {
 
         //buttons
         viewInformation.setLayoutX(110);
-        viewInformation.setLayoutY(180);
+        viewInformation.setLayoutY(120);
         editProfile.setLayoutX(110);
-        editProfile.setLayoutY(180);
+        editProfile.setLayoutY(120);
         payCourses.setLayoutX(110);
-        payCourses.setLayoutY(240);
+        payCourses.setLayoutY(180);
         viewCourses.setLayoutX(110);
-        viewCourses.setLayoutY(300);
+        viewCourses.setLayoutY(240);
         recCourses.setLayoutX(110);
-        recCourses.setLayoutY(360);
+        recCourses.setLayoutY(300);
         scheduleBuilder.setLayoutX(110);
-        scheduleBuilder.setLayoutY(420);
+        scheduleBuilder.setLayoutY(360);
         digitalAdvisor.setLayoutX(110);
-        digitalAdvisor.setLayoutY(480);
+        digitalAdvisor.setLayoutY(420);
 
-        backButton.setLayoutX(20);
-        backButton.setLayoutY(20);
+        backButton.setLayoutX(110);
+        backButton.setLayoutY(480);
+
     }
 
 

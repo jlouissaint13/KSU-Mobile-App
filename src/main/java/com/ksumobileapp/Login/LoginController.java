@@ -26,7 +26,7 @@ private LoginModel loginModel;
 
         loginButton.setOnAction(e-> {
             try {
-                login(loginModel);
+                login(this.loginModel);
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);
             }
@@ -43,7 +43,10 @@ private LoginModel loginModel;
         this.loginModel.setCampusEmail("jlouiss@students.kennesaw.edu");
         this.loginModel.setPassword("password");
 
-        loginService.login(this.loginModel);
+        if (loginService.login(this.loginModel) == true) {
+
+        }
+
     }
 
     public void register(Stage stage,RegisterMain registerMain) {

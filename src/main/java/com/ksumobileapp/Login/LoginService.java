@@ -6,27 +6,39 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class LoginService {
-private LoginModel loginModel;
-public LoginService() {
+    private LoginModel loginModel;
 
-}
-
-
-
-public void login(LoginModel loginModel) throws SQLException {
-    String url = "jdbc:sqlite:accounts.db";
-    String sql = "Select users.password from users where users.campusEmail = ?";
-    var campusEmail = loginModel.getCampusEmail();
-    try (var conn = DriverManager.getConnection(url);
-         var pstmt = conn.prepareStatement(sql)) {
-        pstmt.setString(1,campusEmail);
-        var rs = pstmt.executeQuery();
-        System.out.println(rs.getString(1));
+    public LoginService() {
 
     }
-}
-//todo take login function and make a new method just for getting the password that way login function
-    //does not get to long
 
 
+    public boolean login(LoginModel loginModel) {
+
+        //System.out.println(loginModel.getPassword());
+        //System.out.println(password(loginModel));
+        if (loginModel.getPassword().equals(password(loginModel))) {
+            return true;
+        }
+        return false;
+
+    }
+
+    public String password(LoginModel loginModel) {
+        String url = "jdbc:sqlite:accounts.db";
+        String sql = "Select users.password from users where users.campusEmail = ?";
+        var campusEmail = loginModel.getCampusEmail();
+        try (var conn = DriverManager.getConnection(url);
+             var pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, campusEmail);
+            var rs = pstmt.executeQuery();
+          return rs.getString(1);
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
+    }
 }

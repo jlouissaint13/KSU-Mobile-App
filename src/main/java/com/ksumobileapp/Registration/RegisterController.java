@@ -11,7 +11,7 @@ public class RegisterController {
     private RegisterView registerView;
     private RegisterModel registerModel;
     private RegisterService registerService;
-    private Button registerButton;
+    private Button registerButton,backButton;
     private LoginMain main;
     private ProfileMain profileMain;
     public RegisterController(Stage stage,RegisterView registerView,RegisterService registerService,RegisterModel registerModel) {
@@ -21,7 +21,7 @@ public class RegisterController {
         this.profileMain = new ProfileMain();
         LoginMain loginMain = new LoginMain();
         registerButton = registerView.getRegisterButton();
-
+        backButton = registerView.getBackButton();
 
 
         registerButton.setOnAction(e -> {
@@ -33,7 +33,10 @@ public class RegisterController {
                 throw new RuntimeException(ex);
             }
         });
+
+        backButton.setOnAction(e -> back(stage,loginMain));
     }
+
 
 
     public void register(Stage stage,LoginMain loginMain) throws SQLException {
@@ -96,6 +99,11 @@ public class RegisterController {
 
         registerService.databaseConnection(this.registerModel);
         profileMain.start(stage);
+    }
+
+
+    public void back(Stage stage,LoginMain loginMain) {
+        loginMain.start(stage);
     }
 }
 

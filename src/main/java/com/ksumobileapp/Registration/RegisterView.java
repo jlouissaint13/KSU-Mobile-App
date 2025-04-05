@@ -17,10 +17,11 @@ private Text fnameT,lnameT,emailT,phoneT,passwordT,genderT,dobT,classificationT,
 private VBox vbox;
 private ScrollPane scrollPane;
 private DatePicker dob;
+
  private ObservableList<String> options;
  private ComboBox classification,major,race,gender;
  ;
-private Button registerButton;
+private Button registerButton,backButton;
 
 
 
@@ -49,6 +50,7 @@ public void components() {
     majorT = new Text("Major");
     register = new Text("Registration");
     registerButton = new Button("Register");
+    backButton = new Button("<-");
      options =
             FXCollections.observableArrayList(
                     "Freshman",
@@ -142,8 +144,11 @@ majorT.setLayoutY(690);
 register.setLayoutX(145);
 register.setLayoutY(40);
 
+//buttons
 registerButton.setLayoutX(145);
 registerButton.setLayoutY(780);
+backButton.setLayoutX(10);
+backButton.setLayoutY(25);
 
 
 
@@ -151,7 +156,8 @@ registerButton.setLayoutY(780);
 public void addComponents() {
 
     pane.getChildren().addAll(fName,lName,email,phone,dob,classification,major,
-        fnameT,lnameT,emailT,phoneT,dobT,classificationT,majorT,register,registerButton,password,passwordT,race,raceT, gender, genderT,address,addressT);
+        fnameT,lnameT,emailT,phoneT,dobT,classificationT,majorT,register,registerButton,
+            password,passwordT,race,raceT, gender, genderT,address,addressT,backButton);
     vbox = new VBox();
     vbox.getChildren().add(pane);
     scrollPane = new ScrollPane(vbox);
@@ -211,5 +217,8 @@ public RegisterView(Stage stage) {
     }
     public Button getRegisterButton() {
         return registerButton;
+    }
+    public Button getBackButton() {
+    return backButton;
     }
 }

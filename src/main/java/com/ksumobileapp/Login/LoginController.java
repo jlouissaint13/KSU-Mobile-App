@@ -45,9 +45,15 @@ private ProfileMain profileMain;
         this.loginModel.setCampusEmail("jlouiss@students.kennesaw.edu");
         this.loginModel.setPassword("password");
 
+        //TODO special admin permissions email
+        //if(admin take to a page of profiles which allows the admin to edit any profile for any user)
+
+
         if (loginService.login(this.loginModel)) {
                 profileMain.start(stage);
         }
+
+
 
     }
 

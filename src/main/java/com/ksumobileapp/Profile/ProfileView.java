@@ -35,7 +35,7 @@ public class ProfileView {
 
         //buttons
         viewInformation.setLayoutX(110);
-        viewInformation.setLayoutY(120);
+        viewInformation.setLayoutY(180);
         editProfile.setLayoutX(110);
         editProfile.setLayoutY(180);
         payCourses.setLayoutX(110);
@@ -55,7 +55,7 @@ public class ProfileView {
 
 
     public void addComponents() {
-        pane.getChildren().addAll(viewInformation,editProfile,payCourses,
+        pane.getChildren().addAll(viewInformation,payCourses,
                 viewCourses,recCourses,scheduleBuilder,digitalAdvisor,profileT,backButton);
     }
 
@@ -74,9 +74,6 @@ public class ProfileView {
     //getters;
     public Button getViewInformation() {
         return viewInformation;
-    }
-    public Button getEditProfile() {
-        return editProfile;
     }
     public Button getPayCourses() {
         return payCourses;

@@ -14,11 +14,12 @@ import java.time.LocalDate;
 public class PersonalView {
     private Stage stage;
     private Pane pane;
-    private TextField fName,lName,email,phone,password,address,username,campusEmail;
-    private Text fnameT,lnameT,emailT,phoneT,passwordT,genderT,dobT,classificationT,majorT, personalInfoText,raceT,addressT,campusEmailT,usernameT;
+    private TextField fName,lName,email,phone,password,address,username,campusEmail,studentID;
+    private Text fnameT,lnameT,emailT,phoneT,passwordT,genderT,dobT,classificationT,majorT, personalInfoText,raceT,addressT,campusEmailT,usernameT,studentIDT;
     private VBox vbox;
     private ScrollPane scrollPane;
     private DatePicker dob;
+
 
     private ObservableList<String> options;
     private ComboBox classification,major,race,gender;
@@ -57,6 +58,8 @@ public class PersonalView {
         personalInfoText = new Text("Personal Information");
         registerButton = new Button("Save Changes");
         backButton = new Button("<-");
+        studentID = new TextField();
+        studentIDT = new Text("Student ID");
         options =
                 FXCollections.observableArrayList(
                         "Freshman",
@@ -105,77 +108,83 @@ public class PersonalView {
         lnameT.setLayoutX(30);
         lnameT.setLayoutY(150);
 
+
+        studentID.setLayoutX(30);
+        studentID.setLayoutY(220);
+        studentID.setEditable(false);
+        studentIDT.setLayoutX(30);
+        studentIDT.setLayoutY(210);
+
         campusEmail.setLayoutX(30);
-        campusEmail.setLayoutY(220);
-        campusEmail.setEditable(false);
+        campusEmail.setLayoutY(280);
         campusEmailT.setLayoutX(30);
-        campusEmailT.setLayoutY(210);
+        campusEmailT.setLayoutY(270);
 
         username.setLayoutX(30);
-        username.setLayoutY(280);
+        username.setLayoutY(340);
         username.setEditable(false);
         usernameT.setLayoutX(30);
-        usernameT.setLayoutY(270);
+        usernameT.setLayoutY(330);
 
         phone.setLayoutX(30);
-        phone.setLayoutY(340);
+        phone.setLayoutY(400);
         phoneT.setLayoutX(30);
-        phoneT.setLayoutY(330);
+        phoneT.setLayoutY(390);
 
         email.setLayoutX(30);
-        email.setLayoutY(400);
+        email.setLayoutY(460);
 
         emailT.setLayoutX(30);
-        emailT.setLayoutY(390);
+        emailT.setLayoutY(450);
 
         password.setLayoutX(30);
-        password.setLayoutY(460);
+        password.setLayoutY(520);
         password.setEditable(true);
         passwordT.setLayoutX(30);
-        passwordT.setLayoutY(450);
+        passwordT.setLayoutY(510);
 
         address.setLayoutX(30);
-        address.setLayoutY(520);
+        address.setLayoutY(580);
         address.setEditable(true);
         addressT.setLayoutX(30);
-        addressT.setLayoutY(510);
+        addressT.setLayoutY(570);
 
         gender.setLayoutX(30);
-        gender.setLayoutY(580);
+        gender.setLayoutY(640);
         gender.setValue("Male");
         gender.setEditable(false);
         genderT.setLayoutX(30);
-        genderT.setLayoutY(570);
+        genderT.setLayoutY(630);
 
         race.setLayoutX(30);
-        race.setLayoutY(640);
+        race.setLayoutY(700);
         race.setEditable(false);
         raceT.setLayoutX(30);
-        raceT.setLayoutY(630);
+        raceT.setLayoutY(690);
 
         dob.setLayoutX(30);
-        dob.setLayoutY(700);
-        dob.setEditable(false);;
+        dob.setLayoutY(760);
+        dob.setEditable(false);
         dobT.setLayoutX(30);
-        dobT.setLayoutY(690);
+        dobT.setLayoutY(750);
 
         classification.setLayoutX(30);
-        classification.setLayoutY(760);
+        classification.setLayoutY(820);
         classification.setEditable(false);
         classificationT.setLayoutX(30);
-        classificationT.setLayoutY(750);
+        classificationT.setLayoutY(810);
 
         major.setLayoutX(30);
-        major.setLayoutY(820);
+        major.setLayoutY(880);
         major.setEditable(false);
         majorT.setLayoutX(30);
-        majorT.setLayoutY(810);
+        majorT.setLayoutY(870);
 
         personalInfoText.setLayoutX(145);
         personalInfoText.setLayoutY(20);
 
         registerButton.setLayoutX(145);
-        registerButton.setLayoutY(900);
+        registerButton.setLayoutY(960);
         backButton.setLayoutX(10);
         backButton.setLayoutY(25);
 
@@ -184,14 +193,14 @@ public class PersonalView {
 
         pane.getChildren().addAll(fName,lName,email,phone,dob,classification,major,
                 fnameT,lnameT,emailT,phoneT,dobT,classificationT,majorT, personalInfoText,registerButton,
-                password,passwordT,race,raceT, gender, genderT,address,addressT,backButton,campusEmail,campusEmailT,username,usernameT);
+                password,passwordT,race,raceT, gender, genderT,address,addressT,backButton,campusEmail,campusEmailT,username,usernameT,studentID,studentIDT);
         vbox = new VBox();
         vbox.getChildren().add(pane);
         scrollPane = new ScrollPane(vbox);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
 
-        vbox.setPrefHeight(1000);
+        vbox.setPrefHeight(1050);
         scrollPane.setMaxHeight(10);
     }
 

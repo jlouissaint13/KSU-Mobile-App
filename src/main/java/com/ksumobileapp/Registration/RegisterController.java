@@ -85,8 +85,9 @@ public class RegisterController {
             System.out.println("Invalid phone number");
             return;
         }
+        //TODO undo these
         /*Undo later commented out for testing reasons
-        if (registerService.ifExistsEmail(this.registerModel)) {
+        if (registerService.ifExistsPhone(this.registerModel)) {
             System.out.println("phone exists");
             return;
         }

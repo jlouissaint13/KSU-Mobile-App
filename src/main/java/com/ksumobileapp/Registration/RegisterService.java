@@ -3,31 +3,31 @@ package com.ksumobileapp.Registration;
 
 import java.sql.*;
 import java.sql.Connection;
-
+import java.util.Random;
 
 public class RegisterService {
     String url = "jdbc:sqlite:accounts.db";
 public void databaseConnection(RegisterModel registerModel) throws SQLException {
 
     String url = "jdbc:sqlite:accounts.db";
-    String sql = "INSERT INTO users(firstName, lastName, phone,campusEmail,username,personalEmail,password, address, gender, race, dob, classification, major) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    String sql = "INSERT INTO users(studentID,firstName, lastName, phone,campusEmail,username,personalEmail,password, address, gender, race, dob, classification, major) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
     try (Connection connection = DriverManager.getConnection(url);
          PreparedStatement pstmt = connection.prepareStatement(sql)) {
-
-        pstmt.setString(1, registerModel.getFname());
-        pstmt.setString(2, registerModel.getLname());
-        pstmt.setString(3, registerModel.getPhone());
-        pstmt.setString(4, generateEmail(registerModel));
-        pstmt.setString(5, generateUsername(registerModel));
-        pstmt.setString(6, registerModel.getEmail());
-        pstmt.setString(7, registerModel.getPassword());
-        pstmt.setString(8, registerModel.getAddress());
-        pstmt.setString(9, registerModel.getGender());
-        pstmt.setString(10, registerModel.getRace());
-        pstmt.setString(11, registerModel.getDob());
-        pstmt.setString(12, registerModel.getClassification());
-        pstmt.setString(13, registerModel.getMajor());
+        pstmt.setString(1,idGenerator());
+        pstmt.setString(2, registerModel.getFname());
+        pstmt.setString(3, registerModel.getLname());
+        pstmt.setString(4, registerModel.getPhone());
+        pstmt.setString(5, generateEmail(registerModel));
+        pstmt.setString(6, generateUsername(registerModel));
+        pstmt.setString(7, registerModel.getEmail());
+        pstmt.setString(8, registerModel.getPassword());
+        pstmt.setString(9, registerModel.getAddress());
+        pstmt.setString(10, registerModel.getGender());
+        pstmt.setString(11, registerModel.getRace());
+        pstmt.setString(12, registerModel.getDob());
+        pstmt.setString(13, registerModel.getClassification());
+        pstmt.setString(14, registerModel.getMajor());
 
 
         pstmt.executeUpdate();
@@ -38,7 +38,7 @@ public void databaseConnection(RegisterModel registerModel) throws SQLException 
 
 }
 
-
+//Generators
 //campus email generator
 public String generateEmail(RegisterModel registerModel) {
 
@@ -70,6 +70,21 @@ public String generateUsername(RegisterModel registerModel) {
     }
     return "none";
 }
+
+
+public String idGenerator() {
+    String studentID;
+    Random rand = new Random();
+    do {
+        int intID = rand.nextInt(500000) + 500000;
+        studentID = "000" + intID;
+    }while (ifExistsID(studentID));
+
+    return studentID;
+}
+
+
+//Validators
     //True means textField is empty
 public boolean isEmpty(RegisterModel registerModel) {
    for(String d: registerModel.data) {
@@ -121,6 +136,22 @@ public boolean ifExistsPhone(RegisterModel registerModel) {
         throw new RuntimeException(e);
     }
 }
+//if false then ID does not exist
+    public boolean ifExistsID(String ID) {
+        String url = "jdbc:sqlite:accounts.db";
+        String sql = "Select studentID from users where studentID = ?";
+        try (var conn = DriverManager.getConnection(url);
+             var pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, ID);
+            var rs = pstmt.executeQuery();
+
+            return rs.getString(1) == ID;
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 
 

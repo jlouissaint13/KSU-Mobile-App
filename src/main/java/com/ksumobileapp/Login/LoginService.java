@@ -39,6 +39,26 @@ public class LoginService {
             throw new RuntimeException(e);
         }
 
+    }
+    public void setCurrentLoggedIn() {
+        String url = "jdbc:sqlite:accounts.db";
+        String sql = "Select users.personalEmail from users where users.campusEmail = ?";
+        var campusEmail = this.loginModel.getCampusEmail();
+        try (var conn = DriverManager.getConnection(url);
+             var pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, campusEmail);
+            var rs = pstmt.executeQuery();
+            //LoginModel.setCurrentUser() = rs.getString(1);
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    //run this everytime on when clicking login so this can prevent needing to be reset;
+    /*public String getCurrentUser(LoginModel loginModel) {
 
     }
+
+     */
 }

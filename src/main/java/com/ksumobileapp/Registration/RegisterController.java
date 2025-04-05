@@ -1,6 +1,7 @@
 package com.ksumobileapp.Registration;
 
 import com.ksumobileapp.Login.LoginMain;
+import com.ksumobileapp.Login.LoginService;
 import com.ksumobileapp.Profile.ProfileMain;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
@@ -99,6 +100,7 @@ public class RegisterController {
          */
 
         registerService.databaseConnection(this.registerModel);
+
         profileMain.start(stage);
     }
 

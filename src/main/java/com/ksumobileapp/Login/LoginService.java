@@ -40,16 +40,15 @@ public class LoginService {
         }
 
     }
-    public void setCurrentLoggedIn() {
+    public void setCurrentLoggedIn(LoginModel loginModel) {
         String url = "jdbc:sqlite:accounts.db";
-        String sql = "Select users.personalEmail from users where users.campusEmail = ?";
-        var campusEmail = this.loginModel.getCampusEmail();
+        String sql = "Select users.studentID from users where users.campusEmail = ?";
+        var campusEmail = loginModel.getCampusEmail();
         try (var conn = DriverManager.getConnection(url);
              var pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, campusEmail);
             var rs = pstmt.executeQuery();
-            //LoginModel.setCurrentUser() = rs.getString(1);
-
+            LoginModel.setCurrentUser(rs.getString(1));
 
         } catch (SQLException e) {
             throw new RuntimeException(e);

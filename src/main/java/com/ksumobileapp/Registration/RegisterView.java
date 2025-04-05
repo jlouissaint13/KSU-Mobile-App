@@ -50,7 +50,7 @@ public void components() {
     majorT = new Text("Major");
     register = new Text("Registration");
     registerButton = new Button("Register");
-    backButton = new Button("<-");
+    backButton = new Button("<");
      options =
             FXCollections.observableArrayList(
                     "Freshman",

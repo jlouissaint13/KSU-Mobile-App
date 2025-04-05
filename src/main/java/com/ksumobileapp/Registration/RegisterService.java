@@ -6,7 +6,8 @@ import java.sql.Connection;
 import java.util.Random;
 
 public class RegisterService {
-    String url = "jdbc:sqlite:accounts.db";
+    private static String studentID;
+
 public void databaseConnection(RegisterModel registerModel) throws SQLException {
 
     String url = "jdbc:sqlite:accounts.db";
@@ -14,7 +15,7 @@ public void databaseConnection(RegisterModel registerModel) throws SQLException 
 
     try (Connection connection = DriverManager.getConnection(url);
          PreparedStatement pstmt = connection.prepareStatement(sql)) {
-        pstmt.setString(1,idGenerator());
+        pstmt.setString(1,idGenerator(registerModel));
         pstmt.setString(2, registerModel.getFname());
         pstmt.setString(3, registerModel.getLname());
         pstmt.setString(4, registerModel.getPhone());
@@ -72,16 +73,18 @@ public String generateUsername(RegisterModel registerModel) {
 }
 
 
-public String idGenerator() {
+public String idGenerator(RegisterModel registerModel) {
     String studentID;
     Random rand = new Random();
     do {
         int intID = rand.nextInt(500000) + 500000;
         studentID = "000" + intID;
     }while (ifExistsID(studentID));
-
+    //TODO BANDAID SOLUTION FIND A BETTER WAY
+    RegisterModel.setStudentID(studentID);
     return studentID;
 }
+
 
 
 //Validators

@@ -9,9 +9,16 @@ public class PersonalController {
     private PersonalView personalView;
     private Button backButton;
     private ProfileMain profileMain;
-    public PersonalController(Stage stage,PersonalView personalView) {
-        this.personalView = personalView;
+    private PersonalModel personalModel;
+    private PersonalService personalService;
+    public PersonalController(Stage stage,PersonalView personalView,PersonalService personalService, PersonalModel personalModel) {
         profileMain = new ProfileMain();
+        this.personalModel = personalModel;
+        this.personalService = personalService;
+        personalService.getData(this.personalModel);
+        this.personalView = personalView;
+        this.personalView.setInformation(this.personalModel);
+
         backButton = this.personalView.getBackButton();
 
         backButton.setOnAction(e-> back(stage,profileMain));

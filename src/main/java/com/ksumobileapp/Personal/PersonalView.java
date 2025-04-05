@@ -1,5 +1,7 @@
 package com.ksumobileapp.Personal;
 
+import com.ksumobileapp.Login.LoginModel;
+import com.ksumobileapp.Registration.RegisterModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
@@ -10,6 +12,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class PersonalView {
     private Stage stage;
@@ -19,7 +22,9 @@ public class PersonalView {
     private VBox vbox;
     private ScrollPane scrollPane;
     private DatePicker dob;
-
+    private LoginModel loginModel;
+    private RegisterModel registerModel;
+    private PersonalModel personalModel;
 
     private ObservableList<String> options;
     private ComboBox classification,major,race,gender;
@@ -57,7 +62,7 @@ public class PersonalView {
         majorT = new Text("Major");
         personalInfoText = new Text("Personal Information");
         registerButton = new Button("Save Changes");
-        backButton = new Button("<-");
+        backButton = new Button("Log Out");
         studentID = new TextField();
         studentIDT = new Text("Student ID");
         options =
@@ -117,6 +122,7 @@ public class PersonalView {
 
         campusEmail.setLayoutX(30);
         campusEmail.setLayoutY(280);
+        campusEmail.setEditable(false);
         campusEmailT.setLayoutX(30);
         campusEmailT.setLayoutY(270);
 
@@ -185,8 +191,33 @@ public class PersonalView {
 
         registerButton.setLayoutX(145);
         registerButton.setLayoutY(960);
-        backButton.setLayoutX(10);
-        backButton.setLayoutY(25);
+        backButton.setLayoutX(145);
+        backButton.setLayoutY(1000);
+
+    }
+    public void setInformation(PersonalModel personalModel) {
+        studentID.setText(personalModel.getStudentID());
+        fName.setText(personalModel.getFirstName());
+        lName.setText(personalModel.getLastName());
+        phone.setText(personalModel.getPhone());
+        campusEmail.setText(personalModel.getCampusEmail());
+        username.setText(personalModel.getUsername());
+        email.setText(personalModel.getPersonalEmail());
+        password.setText(personalModel.getPassword());
+        address.setText(personalModel.getAddress());
+        gender.setValue(personalModel.getGender());
+        race.setValue(personalModel.getRace());
+        DateTimeFormatter customDateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate dateofBirth = LocalDate.parse(personalModel.getDob(), customDateTimeFormatter);
+        dob.setValue(dateofBirth);
+        classification.setValue(personalModel.getClassification());
+        major.setValue(personalModel.getMajor());
+
+
+
+
+
+
 
     }
     public void addComponents() {

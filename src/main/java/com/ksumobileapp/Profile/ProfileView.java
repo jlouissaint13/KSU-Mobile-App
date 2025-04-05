@@ -14,7 +14,7 @@ public class ProfileView {
     private Text profileT;
     public void components() {
     pane = new Pane();
-    backButton = new Button("<-");
+    backButton = new Button("<");
     profileT = new Text("Profile");
     viewInformation = new Button("Personal Information");
     editProfile = new Button("Change Information");

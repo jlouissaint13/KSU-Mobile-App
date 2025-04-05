@@ -10,9 +10,14 @@ public class PersonalMain extends Application {
     }
     private PersonalView personalView;
     private PersonalController personalController;
+    private PersonalModel personalModel;
+    private PersonalService personalService;
     @Override
     public void start(Stage primaryStage) {
     personalView = new PersonalView(primaryStage);
-    personalController = new PersonalController(primaryStage,personalView);
+    personalService = new PersonalService();
+    personalModel = new PersonalModel();
+    personalController = new PersonalController(primaryStage,personalView,personalService,personalModel);
+
     }
 }

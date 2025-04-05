@@ -50,7 +50,9 @@ private ProfileMain profileMain;
 
 
         if (loginService.login(this.loginModel)) {
-                profileMain.start(stage);
+
+            loginService.setCurrentLoggedIn(this.loginModel);
+            profileMain.start(stage);
         }
 
 

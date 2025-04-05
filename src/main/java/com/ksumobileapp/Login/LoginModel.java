@@ -3,7 +3,7 @@ package com.ksumobileapp.Login;
 public class LoginModel {
     private String campusEmail,password;
     //we will use this email so we can identify the user who is currently logged in;
-    private static String email;
+    private static String studentID;
     public LoginModel(String campusEmail,String password) {
         this.campusEmail = campusEmail;
         this.password = password;
@@ -23,11 +23,11 @@ public class LoginModel {
     public String getPassword() {
         return this.password;
     }
-    public static void setCurrentUser(String email) {
-        LoginModel.email = email;
+    public static void setCurrentUser(String studentID) {
+        LoginModel.studentID = studentID;
     }
     public static String getCurrentUser() {
-        return email;
+        return LoginModel.studentID;
     }
 
 }

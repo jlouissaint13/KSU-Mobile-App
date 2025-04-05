@@ -3,6 +3,7 @@ package com.ksumobileapp.Registration;
 
 public class RegisterModel {
     private String fname, lname, email, password, phone, dob, classification, major,race,gender,address;
+    private static String studentID;
     String[] data;
     public RegisterModel(String fname, String lname, String phone, String email, String password, String address, String gender, String race, String dob, String classification, String major) {
         this.fname = fname;
@@ -62,6 +63,12 @@ public class RegisterModel {
 
     public void setMajor(String major) {
         this.major = major;
+    }
+    public static void setStudentID(String studentID) {
+        RegisterModel.studentID = studentID;
+    }
+    public static String getStudentID() {
+        return RegisterModel.studentID;
     }
 
     public void setData() {

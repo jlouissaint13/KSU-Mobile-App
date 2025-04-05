@@ -10,7 +10,7 @@ public class RegisterService {
 public void databaseConnection(RegisterModel registerModel) throws SQLException {
 
     String url = "jdbc:sqlite:accounts.db";
-    String sql = "INSERT INTO users(firstName, lastName, phone, email, password, address, gender, race, dob, classification, major) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    String sql = "INSERT INTO users(firstName, lastName, phone,campusEmail,username,personalEmail,password, address, gender, race, dob, classification, major) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
     try (Connection connection = DriverManager.getConnection(url);
          PreparedStatement pstmt = connection.prepareStatement(sql)) {
@@ -19,7 +19,7 @@ public void databaseConnection(RegisterModel registerModel) throws SQLException 
         pstmt.setString(2, registerModel.getLname());
         pstmt.setString(3, registerModel.getPhone());
         pstmt.setString(4, generateEmail(registerModel));
-        pstmt.setString(5, registerModel.getUsername());
+        pstmt.setString(5, generateUsername(registerModel));
         pstmt.setString(6, registerModel.getEmail());
         pstmt.setString(7, registerModel.getPassword());
         pstmt.setString(8, registerModel.getAddress());
@@ -36,11 +36,6 @@ public void databaseConnection(RegisterModel registerModel) throws SQLException 
         System.out.println(e.getMessage());
     }
 
-}
-
-
-public void registerUser(RegisterModel registerModel) {
-   System.out.println(registerModel.getFname());
 }
 
 
@@ -65,10 +60,21 @@ public String generateEmail(RegisterModel registerModel) {
     String campusEmail = new String(sb);
     return campusEmail.toLowerCase();
 }
-//True means textField is empty
+public String generateUsername(RegisterModel registerModel) {
+    StringBuilder sb = new StringBuilder();
+    String userName = generateEmail(registerModel);
+    for(int i = 0;i<registerModel.getEmail().length();i++) {
+        if (userName.charAt(i) == '@') return sb.toString().toLowerCase();
+        sb.append(userName.charAt(i));
+
+
+    }
+    return "none";
+}
+    //True means textField is empty
 public boolean isEmpty(RegisterModel registerModel) {
    for(String d: registerModel.data) {
-       if (d == "" || d == null) return true;
+       if (d.equals("") || d == null) return true;
    }
     return false;
 }
@@ -84,6 +90,7 @@ public boolean validPhoneNumber(RegisterModel registerModel) {
 
     return false;
 }
+
 
 
 }

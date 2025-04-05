@@ -134,16 +134,16 @@ classification.setLayoutY(640);
 classificationT.setLayoutX(30);
 classificationT.setLayoutY(630);
 
-    major.setLayoutX(30);
-    major.setLayoutY(700);
-    majorT.setLayoutX(30);
-    majorT.setLayoutY(690);
+major.setLayoutX(30);
+major.setLayoutY(700);
+majorT.setLayoutX(30);
+majorT.setLayoutY(690);
 
-    register.setLayoutX(145);
-    register.setLayoutY(40);
+register.setLayoutX(145);
+register.setLayoutY(40);
 
-    registerButton.setLayoutX(145);
-    registerButton.setLayoutY(780);
+registerButton.setLayoutX(145);
+registerButton.setLayoutY(780);
 
 
 

@@ -21,8 +21,9 @@ public class RegisterMain extends Application {
 
 
             RegisterView registerView = new RegisterView(primaryStage);
-            RegisterModel registerModel = new RegisterModel("","","","","","","","");
-            RegisterService registerService = new RegisterService();
+        RegisterModel registerModel = new RegisterModel("", "", "", "", "", "", "", "", "", "", "");
+
+        RegisterService registerService = new RegisterService();
             RegisterController registerController = new RegisterController(primaryStage,registerView,registerService,registerModel);
 
     }

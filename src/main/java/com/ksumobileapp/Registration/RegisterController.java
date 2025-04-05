@@ -37,9 +37,12 @@ public class RegisterController {
        /* this.registerModel.setAll(
                 registerView.getfName().trim(),
                 registerView.getlName().trim(),
+                registerView.getPhone().trim(),
                 registerView.getEmail().trim(),
                 registerView.getPassword().trim(),
-                registerView.getPhone().trim(),
+                registerView.getAddress().trim(),
+                registerView.getGender().trim(),
+                registerView.getRace().trim(),
                 registerView.getDOB().trim(),
                 registerView.getClassification().trim(),
                 registerView.getMajor().trim()
@@ -49,9 +52,12 @@ public class RegisterController {
         this.registerModel.setAll(
                 "Jared",
                 "Louissaint",
+                "5551234567",
                 "jared@gmail.com",
                 "password",
-                "5551234567",
+                "125 blane lane",
+                "Male",
+                "Black",
                 "05/10/2002",
                 "Senior",
                 "Computer Science"

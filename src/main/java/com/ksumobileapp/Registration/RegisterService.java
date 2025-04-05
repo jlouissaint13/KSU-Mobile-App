@@ -10,29 +10,32 @@ public class RegisterService {
 public void databaseConnection(RegisterModel registerModel) throws SQLException {
 
     String url = "jdbc:sqlite:accounts.db";
-    String sql = "INSERT INTO users(firstName,lastName,personalEmail,campusEmail,password,phone,dob,classification,major) VALUES(?,?,?,?,?,?,?,?,?)";
+    String sql = "INSERT INTO users(firstName, lastName, phone, email, password, address, gender, race, dob, classification, major) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
-    try (Connection connection = DriverManager.getConnection(url)) {
+    try (Connection connection = DriverManager.getConnection(url);
+         PreparedStatement pstmt = connection.prepareStatement(sql)) {
 
-        PreparedStatement pstmt = connection.prepareStatement(sql);
-        {
-            pstmt.setString(1,registerModel.getFname());
-            pstmt.setString(2,registerModel.getLname());
-            pstmt.setString(3,registerModel.getEmail());
-            pstmt.setString(4,generateEmail(registerModel));
-            pstmt.setString(5,registerModel.getPassword());
-            pstmt.setString(6,registerModel.getPhone());
-            pstmt.setString(7,registerModel.getDob());
-            pstmt.setString(8,registerModel.getClassification());
-            pstmt.setString(9,registerModel.getMajor());
-            pstmt.executeUpdate();
+        pstmt.setString(1, registerModel.getFname());
+        pstmt.setString(2, registerModel.getLname());
+        pstmt.setString(3, registerModel.getPhone());
+        pstmt.setString(4, generateEmail(registerModel));
+        pstmt.setString(5, registerModel.getUsername());
+        pstmt.setString(6, registerModel.getEmail());
+        pstmt.setString(7, registerModel.getPassword());
+        pstmt.setString(8, registerModel.getAddress());
+        pstmt.setString(9, registerModel.getGender());
+        pstmt.setString(10, registerModel.getRace());
+        pstmt.setString(11, registerModel.getDob());
+        pstmt.setString(12, registerModel.getClassification());
+        pstmt.setString(13, registerModel.getMajor());
 
-        }
 
+        pstmt.executeUpdate();
 
     } catch (SQLException e) {
         System.out.println(e.getMessage());
     }
+
 }
 
 

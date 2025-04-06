@@ -9,12 +9,45 @@ import java.sql.SQLException;
 public class PersonalService {
     //TODO find a better way to do this tired rn
     private LoginModel loginModel;
-    private String studentID,firstName,lastName,phone,campusEmail,username,personalEmail,password,address,gender,race,dob,classification,major;
+    private String studentID;
     private PersonalModel personalModel;
     private RegisterModel registerModel;
     public PersonalService() {
 
+        if (LoginModel.getCurrentUser() == null) {
+            this.studentID = RegisterModel.getStudentID();
+        }
+        else {
+            this.studentID = LoginModel.getCurrentUser();
+        }
 
+        }
+
+        public void update(PersonalView personalView) {
+            String url = "jdbc:sqlite:accounts.db";
+            String sql = "update users set " +
+                    "phone = ? ," +
+                    "personalEmail = ? , " +
+                    "password = ? ," +
+                    "address = ?" +
+                    "where studentID = ? ";
+            String phone = personalView.getPhone();
+            String personalEmail = personalView.getEmail();
+            String password = personalView.getPassword();
+            String address = personalView.getAddress();
+            try (var conn = DriverManager.getConnection(url);
+                 var pstmt = conn.prepareStatement(sql)) {
+
+                pstmt.setString(1, phone);
+                pstmt.setString(2,personalEmail);
+                pstmt.setString(3,password);
+                pstmt.setString(4,address);
+                pstmt.setString(5,studentID);
+
+                pstmt.executeUpdate();
+            } catch (SQLException e) {
+                System.err.println(e.getMessage());
+            }
 
         }
 
@@ -25,19 +58,14 @@ public class PersonalService {
         public void getData(PersonalModel personalModel) {
             String url = "jdbc:sqlite:accounts.db";
             String sql = "Select * from users where users.studentID = ?";
-            String studentID;
+
             // if registration path login will be null bc it will not have been init
             //if login path then registration will be null it is not possible for it ot be botb
-            if (LoginModel.getCurrentUser() == null) {
-              studentID = RegisterModel.getStudentID();
-            }
-            else {
-                studentID = LoginModel.getCurrentUser();
-            }
+
 
             try (var conn = DriverManager.getConnection(url);
                  var pstmt = conn.prepareStatement(sql)) {
-                pstmt.setString(1, studentID);
+                pstmt.setString(1, this.studentID);
                 var rs = pstmt.executeQuery();
                 if (rs.next()) {
                     personalModel.setStudentID(rs.getString("studentID")) ;

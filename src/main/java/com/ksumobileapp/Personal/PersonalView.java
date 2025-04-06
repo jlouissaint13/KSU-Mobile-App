@@ -29,7 +29,7 @@ public class PersonalView {
     private ObservableList<String> options;
     private ComboBox classification,major,race,gender;
     ;
-    private Button registerButton,backButton;
+    private Button updateButton,backButton;
 
 
 
@@ -61,7 +61,7 @@ public class PersonalView {
         vbox = new VBox();
         majorT = new Text("Major");
         personalInfoText = new Text("Personal Information");
-        registerButton = new Button("Save Changes");
+        updateButton = new Button("Save Changes");
         backButton = new Button("<");
         studentID = new TextField();
         studentIDT = new Text("Student ID");
@@ -199,8 +199,8 @@ public class PersonalView {
         personalInfoText.setLayoutX(145);
         personalInfoText.setLayoutY(20);
 
-        registerButton.setLayoutX(145);
-        registerButton.setLayoutY(960);
+        updateButton.setLayoutX(145);
+        updateButton.setLayoutY(960);
         backButton.setLayoutX(20);
         backButton.setLayoutY(20);
 
@@ -233,7 +233,7 @@ public class PersonalView {
     public void addComponents() {
 
         pane.getChildren().addAll(fName,lName,email,phone,dob,classification,major,
-                fnameT,lnameT,emailT,phoneT,dobT,classificationT,majorT, personalInfoText,registerButton,
+                fnameT,lnameT,emailT,phoneT,dobT,classificationT,majorT, personalInfoText, updateButton,
                 password,passwordT,race,raceT, gender, genderT,address,addressT,backButton,campusEmail,campusEmailT,username,usernameT,studentID,studentIDT);
         vbox = new VBox();
         vbox.getChildren().add(pane);
@@ -273,7 +273,6 @@ public class PersonalView {
     public String getPhone() {
         return phone.getText();
     }
-    //TODO
     public String getDOB() {
         return dob.getValue().toString();
     }
@@ -292,8 +291,8 @@ public class PersonalView {
     public String getMajor() {
         return major.getValue().toString();
     }
-    public Button getRegisterButton() {
-        return registerButton;
+    public Button getUpdateButton() {
+        return updateButton;
     }
     public Button getBackButton() {
         return backButton;

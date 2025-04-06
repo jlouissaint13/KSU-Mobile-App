@@ -1,6 +1,7 @@
 package com.ksumobileapp.Registration;
 
 import com.ksumobileapp.Login.LoginMain;
+import com.ksumobileapp.Login.LoginModel;
 import com.ksumobileapp.Login.LoginService;
 import com.ksumobileapp.Profile.ProfileMain;
 import javafx.scene.control.Button;
@@ -15,6 +16,7 @@ public class RegisterController {
     private Button registerButton,backButton;
     private LoginMain main;
     private ProfileMain profileMain;
+    private LoginModel loginModel;
     public RegisterController(Stage stage,RegisterView registerView,RegisterService registerService,RegisterModel registerModel) {
         this.registerView = registerView;
         this.registerService = registerService;
@@ -41,7 +43,8 @@ public class RegisterController {
 
 
     public void register(Stage stage,LoginMain loginMain) throws SQLException {
-       /* this.registerModel.setAll(
+
+                this.registerModel.setAll(
                 registerView.getfName().trim(),
                 registerView.getlName().trim(),
                 registerView.getPhone().trim(),
@@ -55,7 +58,9 @@ public class RegisterController {
                 registerView.getMajor().trim()
         );
 
-        */
+
+               /*
+
         this.registerModel.setAll(
                 "Jared",
                 "Louissaint",
@@ -69,6 +74,10 @@ public class RegisterController {
                 "Senior",
                 "Computer Science"
         );
+
+
+               */
+
         //registerService.registerUser(this.registerModel);
         this.registerModel.setData();
         //TODO add animations for input validation
@@ -100,7 +109,6 @@ public class RegisterController {
          */
 
         registerService.databaseConnection(this.registerModel);
-
         profileMain.start(stage);
     }
 

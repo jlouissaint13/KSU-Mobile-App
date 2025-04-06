@@ -102,14 +102,15 @@ public class PersonalView {
     public void properties() {
         fName.setLayoutX(30);
         fName.setLayoutY(100);
-        fName.setText("Jared");
         fName.setEditable(false);
+        fName.setDisable(true);
         fnameT.setLayoutX(30);
         fnameT.setLayoutY(90);
 
         lName.setLayoutX(30);
         lName.setLayoutY(160);
         lName.setEditable(false);
+        lName.setDisable(true);
         lnameT.setLayoutX(30);
         lnameT.setLayoutY(150);
 
@@ -117,18 +118,21 @@ public class PersonalView {
         studentID.setLayoutX(30);
         studentID.setLayoutY(220);
         studentID.setEditable(false);
+        studentID.setDisable(true);
         studentIDT.setLayoutX(30);
         studentIDT.setLayoutY(210);
 
         campusEmail.setLayoutX(30);
         campusEmail.setLayoutY(280);
         campusEmail.setEditable(false);
+        campusEmail.setDisable(true);
         campusEmailT.setLayoutX(30);
         campusEmailT.setLayoutY(270);
 
         username.setLayoutX(30);
         username.setLayoutY(340);
         username.setEditable(false);
+        username.setDisable(true);
         usernameT.setLayoutX(30);
         usernameT.setLayoutY(330);
 
@@ -157,32 +161,38 @@ public class PersonalView {
 
         gender.setLayoutX(30);
         gender.setLayoutY(640);
-        gender.setValue("Male");
         gender.setEditable(false);
+        gender.setDisable(true);
         genderT.setLayoutX(30);
         genderT.setLayoutY(630);
 
         race.setLayoutX(30);
         race.setLayoutY(700);
         race.setEditable(false);
+        race.setDisable(true);
         raceT.setLayoutX(30);
         raceT.setLayoutY(690);
 
         dob.setLayoutX(30);
         dob.setLayoutY(760);
         dob.setEditable(false);
+        dob.setDisable(true);
         dobT.setLayoutX(30);
         dobT.setLayoutY(750);
+
 
         classification.setLayoutX(30);
         classification.setLayoutY(820);
         classification.setEditable(false);
+        classification.setDisable(true);
         classificationT.setLayoutX(30);
         classificationT.setLayoutY(810);
+
 
         major.setLayoutX(30);
         major.setLayoutY(880);
         major.setEditable(false);
+        major.setDisable(true);
         majorT.setLayoutX(30);
         majorT.setLayoutY(870);
 
@@ -207,9 +217,9 @@ public class PersonalView {
         address.setText(personalModel.getAddress());
         gender.setValue(personalModel.getGender());
         race.setValue(personalModel.getRace());
-        DateTimeFormatter customDateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate dateofBirth = LocalDate.parse(personalModel.getDob(), customDateTimeFormatter);
-        dob.setValue(dateofBirth);
+        DateTimeFormatter customDateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate dateOfBirth = LocalDate.parse(personalModel.getDob(), customDateTimeFormatter);
+        dob.setValue(dateOfBirth);
         classification.setValue(personalModel.getClassification());
         major.setValue(personalModel.getMajor());
 

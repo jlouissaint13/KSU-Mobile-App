@@ -80,7 +80,6 @@ public String idGenerator(RegisterModel registerModel) {
         int intID = rand.nextInt(500000) + 500000;
         studentID = "000" + intID;
     }while (ifExistsID(studentID));
-    //TODO BANDAID SOLUTION FIND A BETTER WAY
     RegisterModel.setStudentID(studentID);
     return studentID;
 }

@@ -2,25 +2,27 @@ package com.ksumobileapp.Login;
 
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.scene.text.Text;
 
 
 public class LoginView {
     private Pane pane;
-    private TextField campusEmail,password;
+    private TextField campusEmail;
     private Text login,campusEmailT,passwordT;
     private Button loginButton,createAccountButton;
-
+    private PasswordField password;
     public void components() {
     pane = new Pane();
     login = new Text("Login");
     campusEmailT = new Text("Email");
     passwordT = new Text("Password");
     campusEmail = new TextField();
-    password = new TextField();
+    password = new PasswordField();
     loginButton = new Button("Login");
     createAccountButton = new Button("Create Account");
     }
@@ -32,11 +34,16 @@ public class LoginView {
 
     campusEmail.setLayoutX(90);
     campusEmail.setLayoutY(270);
+    campusEmail.setMinHeight(25);
+    campusEmail.setMinWidth(160);
     campusEmailT.setLayoutX(45);
     campusEmailT.setLayoutY(285);
     password.setLayoutX(90);
     password.setLayoutY(300);
-    passwordT.setLayoutX(32);
+    password.setFont(Font.font(10));
+    password.setMinHeight(25);
+    password.setMinWidth(160);
+    passwordT.setLayoutX(25);
     passwordT.setLayoutY(320);
 
     loginButton.setLayoutX(200);

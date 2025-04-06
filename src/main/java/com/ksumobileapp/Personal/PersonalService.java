@@ -1,6 +1,7 @@
 package com.ksumobileapp.Personal;
 
 import com.ksumobileapp.Login.LoginModel;
+import com.ksumobileapp.Registration.RegisterModel;
 
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -10,6 +11,7 @@ public class PersonalService {
     private LoginModel loginModel;
     private String studentID,firstName,lastName,phone,campusEmail,username,personalEmail,password,address,gender,race,dob,classification,major;
     private PersonalModel personalModel;
+    private RegisterModel registerModel;
     public PersonalService() {
 
 
@@ -23,7 +25,16 @@ public class PersonalService {
         public void getData(PersonalModel personalModel) {
             String url = "jdbc:sqlite:accounts.db";
             String sql = "Select * from users where users.studentID = ?";
-            var studentID = LoginModel.getCurrentUser();
+            String studentID;
+            // if registration path login will be null bc it will not have been init
+            //if login path then registration will be null it is not possible for it ot be botb
+            if (LoginModel.getCurrentUser() == null) {
+              studentID = RegisterModel.getStudentID();
+            }
+            else {
+                studentID = LoginModel.getCurrentUser();
+            }
+
             try (var conn = DriverManager.getConnection(url);
                  var pstmt = conn.prepareStatement(sql)) {
                 pstmt.setString(1, studentID);

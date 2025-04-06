@@ -40,10 +40,10 @@ private ProfileMain profileMain;
 
 
     public void login(Stage stage,LoginModel loginModel) throws SQLException {
-       // this.loginModel.setCampusEmail(loginView.getCampusEmail());
-        //this.loginModel.setPassword(loginView.getPassword());
-        this.loginModel.setCampusEmail("jlouiss@students.kennesaw.edu");
-        this.loginModel.setPassword("password");
+        this.loginModel.setCampusEmail(loginView.getCampusEmail());
+        this.loginModel.setPassword(loginView.getPassword());
+        //this.loginModel.setCampusEmail("jlouiss@students.kennesaw.edu");
+        //this.loginModel.setPassword("password");
 
         //TODO special admin permissions email
         //if(admin take to a page of profiles which allows the admin to edit any profile for any user)

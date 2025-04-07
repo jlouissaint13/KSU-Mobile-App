@@ -125,7 +125,6 @@ public class PersonalView {
         campusEmail.setLayoutX(30);
         campusEmail.setLayoutY(280);
         campusEmail.setEditable(false);
-        campusEmail.setDisable(true);
         campusEmailT.setLayoutX(30);
         campusEmailT.setLayoutY(270);
 

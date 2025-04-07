@@ -1,5 +1,6 @@
 package com.ksumobileapp.Login;
 
+import javafx.animation.PauseTransition;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
@@ -8,6 +9,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 
 
 public class LoginView {
@@ -16,6 +18,7 @@ public class LoginView {
     private Text login,campusEmailT,passwordT;
     private Button loginButton,createAccountButton;
     private PasswordField password;
+    private PauseTransition pause;
     public void components() {
     pane = new Pane();
     login = new Text("Login");
@@ -85,5 +88,26 @@ public LoginView(Stage stage) {
     public Button getCreateAccountButton() {
         return createAccountButton;
     }
+    public void invalidPassword() {
+        Text passwordInv = new Text("Wrong email or password!");
+        pane.getChildren().add(passwordInv);
+        passwordInv.setLayoutX(35);
+        passwordInv.setLayoutY(350);
+        pause = new PauseTransition(Duration.seconds(2));
+        pause.setOnFinished(e -> pane.getChildren().remove(passwordInv));
+        pause.play();
+    }
+  
+    public void displayCompleteFields() {
+        Text allFields = new Text("Please complete all fields");
+        pane.getChildren().add(allFields);
+        allFields.setLayoutX(40);
+        allFields.setLayoutY(350);
+        pause = new PauseTransition(Duration.seconds(2));
+        pause.setOnFinished(e -> pane.getChildren().remove(allFields));
+        pause.play();
+    }
+
+
 
 }

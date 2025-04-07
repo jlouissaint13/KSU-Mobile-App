@@ -13,17 +13,25 @@ public class LoginService {
     }
 
 
-    public boolean login(LoginModel loginModel) {
+    public int login(LoginModel loginModel) {
 
         //System.out.println(loginModel.getPassword());
         //System.out.println(password(loginModel));
+
+
         if (loginModel.getPassword().equals(password(loginModel))) {
-            return true;
+            return 1;
         }
-        return false;
+        if (loginModel.getCampusEmail().isEmpty() || loginModel.getPassword().isEmpty()) {
+            return 2;
+        }
+        
+        return 4;
 
     }
-
+    //code 1 returned OK
+    //code 2 password invalid
+    //code 3 account does not exist
     public String password(LoginModel loginModel) {
         String url = "jdbc:sqlite:accounts.db";
         String sql = "Select users.password from users where users.campusEmail = ?";

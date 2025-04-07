@@ -1,6 +1,8 @@
 package com.ksumobileapp.Login;
 
 import javafx.application.Application;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 public class LoginMain extends Application {
@@ -14,9 +16,15 @@ public class LoginMain extends Application {
     private LoginService loginService;
     @Override
     public void start(Stage primaryStage) {
+        Image image = new Image("logo.png");
+        ImageView imageView = new ImageView();
+        //TODO try to change bar logo
+        imageView.setImage(image);
+        primaryStage.getIcons().add(imageView.getImage());
        loginView = new LoginView(primaryStage);
        loginModel = new LoginModel("","");
        loginService = new LoginService();
+
        LoginController loginController = new LoginController(primaryStage,loginView,loginModel,loginService);
 
     }

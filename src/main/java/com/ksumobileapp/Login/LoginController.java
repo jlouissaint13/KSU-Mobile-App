@@ -3,6 +3,7 @@ package com.ksumobileapp.Login;
 import com.ksumobileapp.Profile.ProfileMain;
 import com.ksumobileapp.Registration.RegisterMain;
 import javafx.scene.control.Button;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 
 import java.sql.SQLException;
@@ -39,6 +40,8 @@ private ProfileMain profileMain;
 
 
 
+
+
     public void login(Stage stage,LoginModel loginModel) throws SQLException {
         this.loginModel.setCampusEmail(loginView.getCampusEmail());
         this.loginModel.setPassword(loginView.getPassword());
@@ -49,13 +52,26 @@ private ProfileMain profileMain;
         //if(admin take to a page of profiles which allows the admin to edit any profile for any user)
 
 
-        if (loginService.login(this.loginModel)) {
+        switch (loginService.login(this.loginModel)) {
+            case 1:
+                loginService.setCurrentLoggedIn(this.loginModel);
+                profileMain.start(stage);
+                break;
+            case 2:
+                loginView.displayCompleteFields();
+                break;
+            case 3:
 
-            loginService.setCurrentLoggedIn(this.loginModel);
-            profileMain.start(stage);
+
+                break;
+
+
+
+
+                case 4:
+                loginView.invalidPassword();
+                break;
         }
-
-
 
     }
 

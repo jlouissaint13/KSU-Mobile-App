@@ -61,7 +61,8 @@ public void components() {
    classification = new ComboBox(options);
     options =
             FXCollections.observableArrayList(
-                    "Computer Science"
+                    "Computer Science",
+                    "Software Engineering"
             );
     major = new ComboBox(options);
     options = FXCollections.observableArrayList(

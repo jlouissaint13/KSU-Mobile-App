@@ -42,7 +42,10 @@ public class RegisterService {
 //Generators
 //campus email generator
 public String generateEmail(RegisterModel registerModel) {
-
+    Random rand = new Random();
+    int random = rand.nextInt(6) + 1;
+    int randForEmail = rand.nextInt(999) + 1;
+    int randForEmails = rand.nextInt(3) + 1;
     StringBuilder sb = new StringBuilder();
     //get the first letter of the students first name
     sb.append(registerModel.getFname().charAt(0));
@@ -50,12 +53,14 @@ public String generateEmail(RegisterModel registerModel) {
     //if last name of student is equal to 5 or greater than take six letters and add to email;
     //otherwise just add 3 letters
     if (registerModel.getLname().length() >= 6) {
-        sb.append(registerModel.getLname().substring(0,6));
+        sb.append(registerModel.getLname().substring(0,random));
+        sb.append(randForEmail);
         sb.append("@students.kennesaw.edu");
         String campusEmail = new String(sb);
         return campusEmail.toLowerCase();
     }
-    sb.append(registerModel.getLname().substring(0,3));
+    sb.append(registerModel.getLname().substring(0,1));
+    sb.append(randForEmail);
     sb.append("@students.kennesaw.edu");
     String campusEmail = new String(sb);
     return campusEmail.toLowerCase();
@@ -192,7 +197,6 @@ public boolean invalidDOBCheck(RegisterModel registerModel) {
     for(int i = 0;i<invalidForms.length;i++) {
         if (invalidForms[i]) {
             result = i;
-            System.out.println(result);
             return result;
         }
     }

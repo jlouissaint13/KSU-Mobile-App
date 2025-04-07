@@ -45,8 +45,9 @@ public class RegisterController {
                 if (registerService.comboBoxCheck(registerView)) {
                     registerView.fieldsEmpty();
                     return;
-                };
-                this.registerModel.setAll(
+                }
+
+        this.registerModel.setAll(
                 registerView.getfName().trim(),
                 registerView.getlName().trim(),
                 registerView.getPhone().trim(),
@@ -59,15 +60,12 @@ public class RegisterController {
                 registerView.getClassification().trim(),
                 registerView.getMajor().trim()
         );
-
-
-               /*
-
+/*
         this.registerModel.setAll(
                 "Jared",
                 "Louissaint",
                 "5551234567",
-                "jared@gmail.com",
+                "jared1@gmail.com",
                 "password",
                 "125 blane lane",
                 "Male",
@@ -77,8 +75,8 @@ public class RegisterController {
                 "Computer Science"
         );
 
+*/
 
-               */
         this.registerModel.setData();
 
         switch (this.registerService.formValid(this.registerModel)) {
@@ -106,29 +104,7 @@ public class RegisterController {
                 registerView.phoneExists();
                 return;
             }
-            default -> {
-                registerService.databaseConnection(this.registerModel);
-                profileMain.start(stage);
-            }
-
-
         }
-
-
-
-
-        //TODO undo these
-        /*Undo later commented out for testing reasons
-        if (registerService.ifExistsPhone(this.registerModel)) {
-            System.out.println("phone exists");
-            return;
-        }
-        if (registerService.ifExistsEmail(this.registerModel)) {
-            System.out.println("email exists");
-            return;
-        }
-
-         */
 
         registerService.databaseConnection(this.registerModel);
         profileMain.start(stage);

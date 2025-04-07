@@ -2,7 +2,6 @@ package com.ksumobileapp.Registration;
 
 import com.ksumobileapp.Login.LoginMain;
 import com.ksumobileapp.Login.LoginModel;
-import com.ksumobileapp.Login.LoginService;
 import com.ksumobileapp.Profile.ProfileMain;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
@@ -43,7 +42,10 @@ public class RegisterController {
 
 
     public void register(Stage stage,LoginMain loginMain) throws SQLException {
-
+                if (registerService.comboBoxCheck(registerView)) {
+                    registerView.fieldsEmpty();
+                    return;
+                };
                 this.registerModel.setAll(
                 registerView.getfName().trim(),
                 registerView.getlName().trim(),
@@ -77,24 +79,44 @@ public class RegisterController {
 
 
                */
-
-        //registerService.registerUser(this.registerModel);
         this.registerModel.setData();
-        //TODO add animations for input validation
-        //input validation don't forget to move when done testing
-        if (registerService.isEmpty(this.registerModel)) {
-            System.out.println("Something is empty");
-            return;
-        }
-        if (!registerService.emailValidation(this.registerModel)) {
-            System.out.println("Email invalid");
-            return;
+
+        switch (this.registerService.formValid(this.registerModel)) {
+            case 0 -> {
+                registerView.fieldsEmpty();
+                return;
+            }
+            case 1 -> {
+                registerView.invalidEmail();
+                return;
+            }
+            case 2 -> {
+                registerView.invalidPhone();
+                return;
+            }
+            case 3 -> {
+                registerView.invalidDOB();
+                return;
+            }
+            case 4 -> {
+                registerView.emailExists();
+                return;
+            }
+            case 5 -> {
+                registerView.phoneExists();
+                return;
+            }
+            default -> {
+                registerService.databaseConnection(this.registerModel);
+                profileMain.start(stage);
+            }
+
+
         }
 
-        if (!registerService.validPhoneNumber(registerModel)) {
-            System.out.println("Invalid phone number");
-            return;
-        }
+
+
+
         //TODO undo these
         /*Undo later commented out for testing reasons
         if (registerService.ifExistsPhone(this.registerModel)) {

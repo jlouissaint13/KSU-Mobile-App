@@ -19,9 +19,8 @@ private VBox vbox;
 private ScrollPane scrollPane;
 private DatePicker dob;
 private PauseTransition pause;
- private ObservableList<String> options;
- private ComboBox classification,major,race,gender;
- ;
+private ObservableList<String> options;
+private ComboBox classification,major,race,gender;
 private Button registerButton,backButton;
 
 
@@ -169,56 +168,57 @@ public void addComponents() {
     scrollPane.setMaxHeight(10);
 }
 
- public void invalidPhoneCheck() {
+ public void invalidPhone() {
         Text text = new Text("Invalid Phone Number!");
         pane.getChildren().add(text);
         text.setLayoutX(150);
-        text.setLayoutY(460);
+        text.setLayoutY(760);
         pause = new PauseTransition(Duration.seconds(1.5));
         pause.setOnFinished(event -> pane.getChildren().remove(text));
         pause.play();
     }
-    public void invalidEmailCheck() {
+    public void invalidEmail() {
         Text invalidEmail = new Text("Invalid Email!");
         pane.getChildren().add(invalidEmail);
         invalidEmail.setLayoutX(150);
-        invalidEmail.setLayoutY(460);
+        invalidEmail.setLayoutY(760);
         pause = new PauseTransition(Duration.seconds(1.5));
         pause.setOnFinished(event -> pane.getChildren().remove(invalidEmail));
         pause.play();
     }
-    public void fieldsEmptyCheck() {
+    public void fieldsEmpty() {
         Text inputValidation = new Text("Please Complete All Fields!");
         pane.getChildren().add(inputValidation);
         inputValidation.setLayoutX(150);
-        inputValidation.setLayoutY(460);
+        inputValidation.setLayoutY(760);
         pause = new PauseTransition(Duration.seconds(1.5));
         pause.setOnFinished(e -> pane.getChildren().remove(inputValidation));
         pause.play();
     }
-   public void invalidDOBEmpty() {
+
+   public void invalidDOB() {
         Text invalidDob = new Text("Invalid Birthdate!");
         pane.getChildren().add(invalidDob);
         invalidDob.setLayoutX(150);
-        invalidDob.setLayoutY(460);
+        invalidDob.setLayoutY(760);
         pause = new PauseTransition(Duration.seconds(1.5));
         pause.setOnFinished(e -> pane.getChildren().remove(invalidDob));
         pause.play();
    }
-   public void phoneExistsCheck() {
+   public void phoneExists() {
         Text phoneExists = new Text("Phone Number Exists!");
         pane.getChildren().add(phoneExists);
         phoneExists.setLayoutX(150);
-        phoneExists.setLayoutY(460);
+        phoneExists.setLayoutY(760);
         pause = new PauseTransition(Duration.seconds(1.5));
         pause.setOnFinished(e -> pane.getChildren().remove(phoneExists));
         pause.play();
    }
-   public void emailExistsCheck() {
+   public void emailExists() {
         Text emailExists = new Text("Email Exists!");
         pane.getChildren().add(emailExists);
         emailExists.setLayoutX(150);
-        emailExists.setLayoutY(460);
+        emailExists.setLayoutY(760);
         pause = new PauseTransition(Duration.seconds(1.5));
         pause.setOnFinished(e -> pane.getChildren().remove(emailExists));
         pause.play();

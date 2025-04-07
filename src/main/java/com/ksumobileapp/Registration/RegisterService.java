@@ -8,7 +8,7 @@ import java.util.Random;
 public class RegisterService {
     private static String studentID;
 
-public void databaseConnection(RegisterModel registerModel) throws SQLException {
+    public void databaseConnection(RegisterModel registerModel) throws SQLException {
 
     String url = "jdbc:sqlite:accounts.db";
     String sql = "INSERT INTO users(studentID,firstName, lastName, phone,campusEmail,username,personalEmail,password, address, gender, race, dob, classification, major) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
@@ -87,29 +87,37 @@ public String idGenerator(RegisterModel registerModel) {
 
 
 //Validators
-    //True means textField is empty
-public boolean isEmpty(RegisterModel registerModel) {
+    //true means textField is empty;
+public boolean isEmptyCheck(RegisterModel registerModel) {
    for(String d: registerModel.data) {
        if (d.equals("") || d == null) return true;
    }
     return false;
 }
-//false is invalid email
-public boolean emailValidation(RegisterModel registerModel) {
+//true is invalid email;
+public boolean invalidlEmailCheck(RegisterModel registerModel) {
 
-    return registerModel.getEmail().contains("@") && registerModel.getEmail().contains(".com");
+     if (registerModel.getEmail().contains("@") && registerModel.getEmail().contains(".com")) return false;
+
+     return true;
 
 }
-public boolean validPhoneNumber(RegisterModel registerModel) {
+//if invalid then true;
+public boolean invalidPhoneCheck(RegisterModel registerModel) {
     //first make sure phone length is equal to ten. Then confirm that phone number is all digits
-    if (registerModel.getPhone().length() == 10) return registerModel.getPhone().matches("\\d+");
+    if (registerModel.getPhone().length() == 10 && registerModel.getPhone().matches("\\d+")) {
+        return false;
+    }
 
-    return false;
+    return true;
 }
-//if email exists then true
-public boolean ifExistsEmail(RegisterModel registerModel) {
+//if email exists then true;
+public boolean ifExistsEmailCheck(RegisterModel registerModel) throws NullPointerException {
+    if (registerModel.getEmail().isBlank()) return false;
+
     String url = "jdbc:sqlite:accounts.db";
     String sql = "Select personalEmail from users where personalEmail = ?";
+
     var personalEmail = registerModel.getEmail();
     try (var conn = DriverManager.getConnection(url);
          var pstmt = conn.prepareStatement(sql)) {
@@ -117,13 +125,15 @@ public boolean ifExistsEmail(RegisterModel registerModel) {
         var rs = pstmt.executeQuery();
         return rs.getString(1).equals(personalEmail);
 
-
+    }catch (NullPointerException e) {
+        return false;
     } catch (SQLException e) {
         throw new RuntimeException(e);
     }
 }
-//if true then phone number exists
-public boolean ifExistsPhone(RegisterModel registerModel) {
+//if true then phone number exists;
+public boolean ifExistsPhoneCheck(RegisterModel registerModel) throws NullPointerException {
+    if (registerModel.getPhone().isBlank()) return false;
     String url = "jdbc:sqlite:accounts.db";
     String sql = "Select phone from users where phone= ?";
     var phoneNumber = registerModel.getPhone();
@@ -132,12 +142,27 @@ public boolean ifExistsPhone(RegisterModel registerModel) {
         pstmt.setString(1, phoneNumber);
         var rs = pstmt.executeQuery();
         return rs.getString(1).equals(phoneNumber);
-
+    }catch (NullPointerException e) {
+        return false;
 
     } catch (SQLException e) {
         throw new RuntimeException(e);
     }
 }
+//true if invalid;
+public boolean invalidDOBCheck(RegisterModel registerModel) {
+    if ((registerModel.getDob().length() == 10)) {
+
+        return false;
+    }
+
+    return true;
+
+}
+
+
+
+
 //if false then ID does not exist
     public boolean ifExistsID(String ID) {
         String url = "jdbc:sqlite:accounts.db";
@@ -155,6 +180,39 @@ public boolean ifExistsPhone(RegisterModel registerModel) {
         }
     }
 
+    public int formValid(RegisterModel registerModel) {
+    boolean invalidForms[] = new boolean[6];
+    invalidForms[0] = isEmptyCheck(registerModel);
+    invalidForms[1] = invalidlEmailCheck(registerModel);
+    invalidForms[2] = invalidPhoneCheck(registerModel);
+    invalidForms[3] = invalidDOBCheck(registerModel);
+    invalidForms[4] = ifExistsEmailCheck(registerModel);
+    invalidForms[5] = ifExistsPhoneCheck(registerModel);
+    int result;
+    for(int i = 0;i<invalidForms.length;i++) {
+        if (invalidForms[i]) {
+            result = i;
+            System.out.println(result);
+            return result;
+        }
+    }
+    return 6;
+    }
+    //if true then something is null
+public boolean comboBoxCheck(RegisterView registerView) throws NullPointerException {
+
+       try {
+           if ( registerView.getGender() == null || registerView.getRace() == null
+                   || registerView.getDOB() == null || registerView.getClassification() == null
+                   || registerView.getMajor() == null)
+               return true;
+       } catch (NullPointerException e) {
+           return true;
+       }
+
+
+    return false;
+}
 
 
 }

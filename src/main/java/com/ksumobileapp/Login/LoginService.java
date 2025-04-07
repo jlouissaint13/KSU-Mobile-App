@@ -19,14 +19,14 @@ public class LoginService {
 
         //System.out.println(loginModel.getPassword());
         //System.out.println(password(loginModel));
-
+        if (loginModel.getCampusEmail().isEmpty() || loginModel.getPassword().isEmpty()) {
+            return 2;
+        }    
 
         if (loginModel.getPassword().equals(password(loginModel))) {
             return 1;
         }
-        if (loginModel.getCampusEmail().isEmpty() || loginModel.getPassword().isEmpty()) {
-            return 2;
-        }
+        
         
         return 3;
 

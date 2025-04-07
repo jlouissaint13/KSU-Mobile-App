@@ -1,7 +1,6 @@
 package com.ksumobileapp.Personal;
 
 import com.ksumobileapp.Profile.ProfileMain;
-import com.ksumobileapp.Profile.ProfileView;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
@@ -35,7 +34,7 @@ public class PersonalController {
     }
 
     public void update(Stage stage) {
-        personalService.update(this.personalView);
+        personalService.updateData(this.personalView);
         profileMain.start(stage);
     }
 

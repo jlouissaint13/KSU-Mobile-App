@@ -23,7 +23,7 @@ public class PersonalService {
 
         }
 
-        public void update(PersonalView personalView) {
+        public void updateData(PersonalView personalView) {
             String url = "jdbc:sqlite:accounts.db";
             String sql = "update users set " +
                     "phone = ? ," +

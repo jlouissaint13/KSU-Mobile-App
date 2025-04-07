@@ -50,8 +50,6 @@ private ProfileMain profileMain;
 
         //TODO special admin permissions email
         //if(admin take to a page of profiles which allows the admin to edit any profile for any user)
-
-
         switch (loginService.login(this.loginModel)) {
             case 1:
                 loginService.setCurrentLoggedIn(this.loginModel);
@@ -61,16 +59,9 @@ private ProfileMain profileMain;
                 loginView.displayCompleteFields();
                 break;
             case 3:
-
-
-                break;
-
-
-
-
-                case 4:
                 loginView.invalidPassword();
                 break;
+
         }
 
     }

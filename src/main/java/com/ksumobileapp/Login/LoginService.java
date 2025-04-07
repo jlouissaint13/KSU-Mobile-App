@@ -12,7 +12,9 @@ public class LoginService {
 
     }
 
-
+    //code 1 returned OK
+    //code 2 fieldEmpty
+    //code 3 invalid password
     public int login(LoginModel loginModel) {
 
         //System.out.println(loginModel.getPassword());
@@ -26,12 +28,10 @@ public class LoginService {
             return 2;
         }
         
-        return 4;
+        return 3;
 
     }
-    //code 1 returned OK
-    //code 2 password invalid
-    //code 3 account does not exist
+
     public String password(LoginModel loginModel) {
         String url = "jdbc:sqlite:accounts.db";
         String sql = "Select users.password from users where users.campusEmail = ?";

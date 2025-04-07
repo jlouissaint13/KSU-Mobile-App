@@ -16,4 +16,6 @@ module com.ksumobileapp {
     opens com.ksumobileapp.Personal to javafx.fxml;
     exports com.ksumobileapp.Payments;
     opens com.ksumobileapp.Payments to javafx.fxml;
+    exports com.ksumobileapp.Schedule;
+    opens com.ksumobileapp.Schedule to javafx.fxml;
 }

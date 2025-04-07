@@ -45,7 +45,7 @@ public class ScheduleView {
     }
 
     public void addComponents(){
-        pane.getChildren().addAll(enroll, remove, submit, backButton);
+        pane.getChildren().addAll(enroll, remove, submit, backButton, scheduleT);
     }
 
     public ScheduleView(Stage stage){

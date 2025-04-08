@@ -30,7 +30,7 @@ public class AdminReviewView {
 
     private ObservableList<String> options;
     private ComboBox classification,major,race,gender;
-    private Button acceptButton,backButton,denyButton;
+    private Button updateProfile,backButton,denyButton;
 
 
 
@@ -68,7 +68,7 @@ public class AdminReviewView {
         vbox = new VBox();
         majorT = new Text("Major");
         personalInfoText = new Text("Student Application");
-        acceptButton = new Button("Accept");
+        updateProfile = new Button("Accept");
         denyButton = new Button("Reject");
         backButton = new Button("<");
         studentID = new TextField();
@@ -200,8 +200,8 @@ public class AdminReviewView {
         personalInfoText.setLayoutX(145);
         personalInfoText.setLayoutY(20);
 
-        acceptButton.setLayoutX(145);
-        acceptButton.setLayoutY(1000);
+        updateProfile.setLayoutX(145);
+        updateProfile.setLayoutY(1000);
         denyButton.setLayoutX(145);
         denyButton.setLayoutY(1035);
         backButton.setLayoutX(20);
@@ -212,7 +212,7 @@ public class AdminReviewView {
     public void addComponents() {
 
         pane.getChildren().addAll(fName,lName,email,phone,dob,classification,major,
-                fnameT,lnameT,emailT,phoneT,dobT,classificationT,majorT, personalInfoText, acceptButton,denyButton,
+                fnameT,lnameT,emailT,phoneT,dobT,classificationT,majorT, personalInfoText, updateProfile,denyButton,
                 password,passwordT,race,raceT, gender, genderT,address,addressT,backButton,campusEmail,campusEmailT,username,usernameT,studentID,studentIDT,status,statusT);
         vbox = new VBox();
         vbox.getChildren().add(pane);
@@ -311,7 +311,7 @@ public class AdminReviewView {
         return email.getText();
     }
     public Button getAcceptButton() {
-        return acceptButton;
+        return updateProfile;
     }
     public Button getBackButton() {
         return backButton;

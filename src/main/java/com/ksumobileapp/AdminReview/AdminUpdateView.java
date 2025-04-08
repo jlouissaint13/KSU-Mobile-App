@@ -31,8 +31,8 @@ public class AdminUpdateView {
 
     private ObservableList<String> options;
     private ComboBox classification,major,race,gender;
-    private Button acceptButton,backButton,denyButton;
-
+    private Button updateProfile;
+    private Button backButton;
 
 
     public void components() {
@@ -63,8 +63,7 @@ public class AdminUpdateView {
         vbox = new VBox();
         majorT = new Text("Major");
         personalInfoText = new Text("Student Application");
-        acceptButton = new Button("Accept");
-        denyButton = new Button("Reject");
+        updateProfile = new Button("Update Profile");
         backButton = new Button("<");
         studentID = new TextField();
         studentIDT = new Text("Student ID");
@@ -194,10 +193,8 @@ public class AdminUpdateView {
         personalInfoText.setLayoutX(145);
         personalInfoText.setLayoutY(20);
 
-        acceptButton.setLayoutX(145);
-        acceptButton.setLayoutY(1000);
-        denyButton.setLayoutX(145);
-        denyButton.setLayoutY(1035);
+        updateProfile.setLayoutX(145);
+        updateProfile.setLayoutY(1000);
         backButton.setLayoutX(20);
         backButton.setLayoutY(20);
 
@@ -206,7 +203,7 @@ public class AdminUpdateView {
     public void addComponents() {
 
         pane.getChildren().addAll(fName,lName,email,phone,dob,classification,major,
-                fnameT,lnameT,emailT,phoneT,dobT,classificationT,majorT, personalInfoText, acceptButton,denyButton,
+                fnameT,lnameT,emailT,phoneT,dobT,classificationT,majorT, personalInfoText, updateProfile,
                 password,passwordT,race,raceT, gender, genderT,address,addressT,backButton,campusEmail,campusEmailT,username,usernameT,studentID,studentIDT,status,statusT);
         vbox = new VBox();
         vbox.getChildren().add(pane);
@@ -299,12 +296,12 @@ public class AdminUpdateView {
     public String getPersonalEmail() {
         return email.getText();
     }
-    public Button getAcceptButton() {
-        return acceptButton;
+    public Button getUpdateProfile() {
+        return updateProfile;
     }
     public Button getBackButton() {
         return backButton;
     }
-    public Button getDenyButton() {return denyButton;}
+
 }
 

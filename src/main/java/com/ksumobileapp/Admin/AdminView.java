@@ -70,6 +70,10 @@ public class AdminView {
     public Button getReviewButton() {
         return reviewApplications;
     }
+    public Button getUpdateProfileButton() {
+        return updateProfile;
+    }
+    public Button getDeleteAccount() {return deleteAccount;}
     public Button getLogout() {
         return logout;
     }

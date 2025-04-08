@@ -59,6 +59,52 @@ public AdminReviewService() {
         }
     }
 
+    public void updateData(AdminUpdateView adminUpdateView) {
+        String url = "jdbc:sqlite:accounts.db";
+        String sql = "UPDATE users SET " +
+                "studentID = ?, " +
+                "firstName = ?, " +
+                "lastName = ?, " +
+                "phone = ?, " +
+                "campusEmail = ?, " +
+                "username = ?, " +
+                "personalEmail = ?, " +
+                "password = ?, " +
+                "address = ?, " +
+                "gender = ?, " +
+                "race = ?, " +
+                "dob = ?, " +
+                "classification = ?, " +
+                "major = ?, " +
+                "status = ? " +
+                "WHERE studentID = ?";
+
+        try (var conn = DriverManager.getConnection(url);
+             var pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, this.studentID);
+            pstmt.setString(2, adminUpdateView.getfName());
+            pstmt.setString(3, adminUpdateView.getlName());
+            pstmt.setString(4, adminUpdateView.getPhone());
+            pstmt.setString(5, adminUpdateView.getCampusEmail());
+            pstmt.setString(6, adminUpdateView.getUsername());
+            pstmt.setString(7, adminUpdateView.getPersonalEmail());
+            pstmt.setString(8, adminUpdateView.getPassword());
+            pstmt.setString(9, adminUpdateView.getAddress());
+            pstmt.setString(10, adminUpdateView.getGender());
+            pstmt.setString(11, adminUpdateView.getRace());
+            pstmt.setString(12, adminUpdateView.getDob());
+            pstmt.setString(13, adminUpdateView.getClassification());
+            pstmt.setString(14, adminUpdateView.getMajor());
+            pstmt.setString(15, adminUpdateView.getStatus());
+            pstmt.setString(16, this.studentID);
+
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
     public void getData(AdminReviewModel adminReviewModel) {
         String url = "jdbc:sqlite:accounts.db";
         String sql = "SELECT * FROM users WHERE users.studentID = ?";

@@ -15,12 +15,14 @@ public class AdminReviewController {
         this.adminReviewService.getData(this.adminReviewModel);
         this.adminReviewView = adminReviewView;
         this.adminReviewView.setInformation(adminReviewModel);
-
+        /*
          this.adminReviewView.getAcceptButton().setOnAction(e-> {
              adminReviewService.updateData(this.adminReviewView);
              adminMain.start(stage);
          });
 
+
+         */
 
          this.adminReviewView.getBackButton().setOnAction(e-> adminMain.start(stage));
 

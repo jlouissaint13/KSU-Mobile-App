@@ -96,7 +96,7 @@ public class PersonalView {
         );
         gender = new ComboBox(options);
         dob = new DatePicker();
-        status = new TextField("Pending");
+        status = new TextField();
         statusT = new Text("Application Status");
     }
 //everything aligned with t stands for text
@@ -229,6 +229,7 @@ public class PersonalView {
         dob.setValue(dateOfBirth);
         classification.setValue(personalModel.getClassification());
         major.setValue(personalModel.getMajor());
+        status.setText(personalModel.getStatus());
 
 
 

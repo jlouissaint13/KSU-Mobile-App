@@ -3,6 +3,7 @@ package com.ksumobileapp.Registration;
 
 import java.sql.*;
 import java.sql.Connection;
+import java.util.Objects;
 import java.util.Random;
 
 public class RegisterService {
@@ -178,7 +179,7 @@ public boolean invalidDOBCheck(RegisterModel registerModel) {
             pstmt.setString(1, ID);
             var rs = pstmt.executeQuery();
 
-            return rs.getString(1) == ID;
+            return Objects.equals(rs.getString(1), ID);
 
 
         } catch (SQLException e) {
@@ -218,6 +219,7 @@ public boolean comboBoxCheck(RegisterView registerView) throws NullPointerExcept
 
     return false;
 }
+
 
 
 }

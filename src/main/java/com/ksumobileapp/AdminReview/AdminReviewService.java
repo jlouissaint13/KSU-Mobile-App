@@ -55,7 +55,7 @@ public AdminReviewService() {
 
             pstmt.executeUpdate();
         } catch (SQLException e) {
-            System.err.println("Error updating user data: " + e.getMessage());
+            System.err.println(e.getMessage());
         }
     }
 
@@ -86,6 +86,40 @@ public AdminReviewService() {
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        }
+    }
+    public void updateStatusAccept(AdminReviewView adminReviewView) {
+        String url = "jdbc:sqlite:accounts.db";
+        String sql = "UPDATE users SET " +
+                "status = ? " +
+                "WHERE studentID = ?";
+
+        try (var conn = DriverManager.getConnection(url);
+             var pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1,"Accepted");
+            pstmt.setString(2, this.studentID);
+
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+    public void updateStatusDenied(AdminReviewView adminReviewView) {
+        String url = "jdbc:sqlite:accounts.db";
+        String sql = "UPDATE users SET " +
+                "status = ? " +
+                "WHERE studentID = ?";
+
+        try (var conn = DriverManager.getConnection(url);
+             var pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1,"Rejected");
+            pstmt.setString(2, this.studentID);
+
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
         }
     }
 }

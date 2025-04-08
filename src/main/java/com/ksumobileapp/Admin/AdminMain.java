@@ -15,6 +15,7 @@ public class AdminMain extends Application {
         this.adminView = new AdminView(primaryStage);
 
         adminController = new AdminController(primaryStage,this.adminView);
+
     }
 
 }

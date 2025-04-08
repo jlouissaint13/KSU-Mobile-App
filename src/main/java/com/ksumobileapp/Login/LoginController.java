@@ -2,6 +2,7 @@ package com.ksumobileapp.Login;
 
 import com.ksumobileapp.Profile.ProfileMain;
 import com.ksumobileapp.Registration.RegisterMain;
+import com.ksumobileapp.StudentLookup.StudentLookUpMain;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
@@ -15,10 +16,12 @@ private LoginService loginService;
 private LoginModel loginModel;
 private ProfileMain profileMain;
    private Button loginButton,registerButton;
+   private StudentLookUpMain studentLookUpMain;
     public LoginController(Stage stage,LoginView loginView,LoginModel loginModel,LoginService loginService) {
         this.loginView = loginView;
         this.loginService = loginService;
         this.loginModel = loginModel;
+        studentLookUpMain = new StudentLookUpMain();
         loginButton = loginView.getLoginButton();
         registerButton = loginView.getCreateAccountButton();
         registerMain = new RegisterMain();
@@ -28,6 +31,8 @@ private ProfileMain profileMain;
 
 
         loginButton.setOnAction(e-> {
+            adminLogin(stage,this.loginView);
+
             try {
                 login(stage,this.loginModel);
             } catch (SQLException ex) {
@@ -47,7 +52,7 @@ private ProfileMain profileMain;
         this.loginModel.setPassword(loginView.getPassword());
         //this.loginModel.setCampusEmail("jlouiss@students.kennesaw.edu");
         //this.loginModel.setPassword("password");
-
+        studentLookUpMain = new StudentLookUpMain();
         //TODO special admin permissions email
         //if(admin take to a page of profiles which allows the admin to edit any profile for any user)
         switch (loginService.login(this.loginModel)) {
@@ -68,5 +73,11 @@ private ProfileMain profileMain;
 
     public void register(Stage stage,RegisterMain registerMain) {
         registerMain.start(stage);
+    }
+
+    public void adminLogin(Stage stage,LoginView loginView) {
+        if ((this.loginView.getCampusEmail().equals("admin@kennesaw.edu")) && this.loginView.getPassword().equals("password")) {
+            studentLookUpMain.start(stage);
+        }
     }
 }

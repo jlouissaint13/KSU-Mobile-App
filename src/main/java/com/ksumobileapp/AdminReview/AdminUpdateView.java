@@ -1,5 +1,6 @@
 package com.ksumobileapp.AdminReview;
 
+
 import com.ksumobileapp.Login.LoginModel;
 import com.ksumobileapp.Personal.PersonalModel;
 import com.ksumobileapp.Registration.RegisterModel;
@@ -15,7 +16,7 @@ import javafx.stage.Stage;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class AdminReviewView {
+public class AdminUpdateView {
     private Stage stage;
     private Pane pane;
     private TextField fName,lName,email,phone,password,address,username,campusEmail,studentID,status;
@@ -101,7 +102,6 @@ public class AdminReviewView {
         gender = new ComboBox(options);
         dob = new DatePicker();
     }
-//everything aligned with t stands for text
 
     public void properties() {
         fName.setLayoutX(30);
@@ -219,11 +219,11 @@ public class AdminReviewView {
     }
 
 
-    public AdminReviewView(Stage stage) {
+    public AdminUpdateView(Stage stage) {
         components();
         properties();
         addComponents();
-        stage.setTitle("Admin Review Page");
+        stage.setTitle("Change Information");
         Scene scene1 = new Scene(scrollPane,350,600);
 
         stage.setScene(scene1);
@@ -307,3 +307,4 @@ public class AdminReviewView {
     }
     public Button getDenyButton() {return denyButton;}
 }
+

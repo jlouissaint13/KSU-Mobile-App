@@ -16,9 +16,26 @@ public class AdminReviewController {
         this.adminReviewView = adminReviewView;
         this.adminReviewView.setInformation(adminReviewModel);
 
-         this.adminReviewView.getUpdateButton().setOnAction(e-> {
+         this.adminReviewView.getAcceptButton().setOnAction(e-> {
              adminReviewService.updateData(this.adminReviewView);
              adminMain.start(stage);
          });
+
+
+         this.adminReviewView.getBackButton().setOnAction(e-> adminMain.start(stage));
+
+         this.adminReviewView.getAcceptButton().setOnAction(e-> acceptance(stage));
+
+         this.adminReviewView.getDenyButton().setOnAction(e-> deny(stage));
     }
+
+    public void acceptance(Stage stage) {
+        adminReviewService.updateStatusAccept(this.adminReviewView);
+        adminMain.start(stage);
+    }
+    public void deny(Stage stage) {
+        adminReviewService.updateStatusDenied(this.adminReviewView);
+        adminMain.start(stage);
+    }
+
 }

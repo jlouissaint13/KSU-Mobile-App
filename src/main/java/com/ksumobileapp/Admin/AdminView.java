@@ -17,7 +17,7 @@ public class AdminView {
     pane = new Pane();
     adminModel = new AdminModel();
     reviewApplications = new Button("Review Application");
-    logout = new Button("Logout");
+    logout = new Button("<");
     adminPage = new Text("Admin");
     updateProfile = new Button("Update Profile");
     deleteAccount = new Button("Delete Account");
@@ -31,8 +31,8 @@ public class AdminView {
     updateProfile.setLayoutY(340);
     deleteAccount.setLayoutX(100);
     deleteAccount.setLayoutY(380);
-    logout.setLayoutX(100);
-    logout.setLayoutY(420);
+    logout.setLayoutX(20);
+    logout.setLayoutY(20);
     adminPage.setLayoutX(160);
     adminPage.setLayoutY(50);
     currentStudentID.setLayoutX(100);

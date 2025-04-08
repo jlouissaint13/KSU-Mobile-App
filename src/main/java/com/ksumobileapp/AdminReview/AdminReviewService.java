@@ -168,4 +168,19 @@ public AdminReviewService() {
             System.err.println(e.getMessage());
         }
     }
-}
+    public void deleteUser() {
+        String url = "jdbc:sqlite:accounts.db";
+        String sql = "DELETE FROM users WHERE studentID = ?";
+
+        try (var conn = DriverManager.getConnection(url);
+             var pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, this.studentID);
+
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+    }
+

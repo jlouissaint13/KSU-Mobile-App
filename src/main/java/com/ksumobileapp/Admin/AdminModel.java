@@ -13,4 +13,7 @@ public class AdminModel {
     public String getStudentID() {
         return AdminModel.studentID;
     }
+    public static String getStudentIDStaticMethod() {
+        return AdminModel.studentID;
+    }
 }

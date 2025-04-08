@@ -1,6 +1,7 @@
 package com.ksumobileapp.Profile;
 
 import com.ksumobileapp.Login.LoginMain;
+import com.ksumobileapp.Payments.PaymentMain;
 import com.ksumobileapp.Personal.PersonalMain;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
@@ -8,21 +9,26 @@ import javafx.stage.Stage;
 public class ProfileController {
     private ProfileView profileView;
     private Stage stage;
-    private Button backButton,viewInfo;
+    private Button backButton,viewInfo,payOnline;
     private LoginMain loginMain;
     private PersonalMain personalMain;
+    private PaymentMain paymentMain;
     public ProfileController(Stage stage, ProfileView profileView) {
         this.profileView = profileView;
         loginMain = new LoginMain();
         backButton = profileView.getBackButton();
         viewInfo = profileView.getViewInformation();
+        payOnline = profileView.getPayCourses();
         personalMain = new PersonalMain();
+        paymentMain = new PaymentMain();
 
 
 
         viewInfo.setOnAction(e -> viewInfo(stage,personalMain));
-
+        payOnline.setOnAction(e ->  paymentMain.start(stage));
         backButton.setOnAction(e-> back(stage,loginMain));
+
+
     }
 
 

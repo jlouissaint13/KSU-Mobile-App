@@ -10,6 +10,6 @@ public class AdminUpdateMain extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        
+
     }
 }

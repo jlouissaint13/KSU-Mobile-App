@@ -42,18 +42,24 @@ public class AdminReviewView {
         lnameT = new Text("Last Name");
 
         username = new TextField();
+        username.setEditable(false);
         campusEmail = new TextField();
+        campusEmail.setEditable(false);
         usernameT = new Text("Username");
         campusEmailT = new Text("Student Email");
         email = new TextField();
+        email.setEditable(false);
         emailT = new Text("Personal Email");
         password = new TextField();
+        password.setEditable(false);
         passwordT = new Text();
         passwordT.setText("Password");
         phone = new TextField();
+        phone.setEditable(false);
         phoneT = new Text("Phone Number");
         dobT = new Text("Date of Birth");
         address = new TextField();
+        address.setEditable(false);
         addressT = new Text("Address");
         classificationT = new Text("Classification");
         gender = new ComboBox();
@@ -106,20 +112,20 @@ public class AdminReviewView {
     public void properties() {
         fName.setLayoutX(30);
         fName.setLayoutY(100);
-
+        fName.setEditable(false);
         fnameT.setLayoutX(30);
         fnameT.setLayoutY(90);
 
         lName.setLayoutX(30);
         lName.setLayoutY(160);
-
+        lName.setEditable(false);
         lnameT.setLayoutX(30);
         lnameT.setLayoutY(150);
 
 
         studentID.setLayoutX(30);
         studentID.setLayoutY(220);
-
+        studentID.setEditable(false);
         studentIDT.setLayoutX(30);
         studentIDT.setLayoutY(210);
 
@@ -127,10 +133,10 @@ public class AdminReviewView {
         campusEmail.setLayoutY(280);
         campusEmailT.setLayoutX(30);
         campusEmailT.setLayoutY(270);
-
+        campusEmail.setEditable(false);
         username.setLayoutX(30);
         username.setLayoutY(340);
-
+        username.setEditable(false);
         usernameT.setLayoutX(30);
         usernameT.setLayoutY(330);
 
@@ -138,22 +144,22 @@ public class AdminReviewView {
         phone.setLayoutY(400);
         phoneT.setLayoutX(30);
         phoneT.setLayoutY(390);
-
+        phone.setEditable(false);
         email.setLayoutX(30);
         email.setLayoutY(460);
-
+        email.setEditable(false);
         emailT.setLayoutX(30);
         emailT.setLayoutY(450);
 
         password.setLayoutX(30);
         password.setLayoutY(520);
-        password.setEditable(true);
+        password.setEditable(false);
         passwordT.setLayoutX(30);
         passwordT.setLayoutY(510);
 
         address.setLayoutX(30);
         address.setLayoutY(580);
-        address.setEditable(true);
+        address.setEditable(false);
         addressT.setLayoutX(30);
         addressT.setLayoutY(570);
 
@@ -241,12 +247,17 @@ public class AdminReviewView {
         password.setText(adminReviewModel.getPassword());
         address.setText(adminReviewModel.getAddress());
         gender.setValue(adminReviewModel.getGender());
+        gender.setDisable(true);
         race.setValue(adminReviewModel.getRace());
+        race.setDisable(true);
         DateTimeFormatter customDateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate dateOfBirth = LocalDate.parse(adminReviewModel.getDob(), customDateTimeFormatter);
         dob.setValue(dateOfBirth);
+        dob.setDisable(true);
         classification.setValue(adminReviewModel.getClassification());
+        classification.setDisable(true);
         major.setValue(adminReviewModel.getMajor());
+        major.setDisable(true);
         status.setText(adminReviewModel.getStatus());
     }
     //getters

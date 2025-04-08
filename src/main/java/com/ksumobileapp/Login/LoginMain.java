@@ -18,7 +18,6 @@ public class LoginMain extends Application {
     public void start(Stage primaryStage) {
         Image image = new Image("logo.png");
         ImageView imageView = new ImageView();
-        //TODO try to change bar logo
         imageView.setImage(image);
         primaryStage.getIcons().add(imageView.getImage());
        loginView = new LoginView(primaryStage);

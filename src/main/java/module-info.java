@@ -18,4 +18,10 @@ module com.ksumobileapp {
     opens com.ksumobileapp.Payments to javafx.fxml;
     exports com.ksumobileapp.Schedule;
     opens com.ksumobileapp.Schedule to javafx.fxml;
+    exports com.ksumobileapp.Admin;
+    opens com.ksumobileapp.Admin to javafx.fxml;
+    exports com.ksumobileapp.AdminReview;
+    opens com.ksumobileapp.AdminReview to javafx.fxml;
+    exports com.ksumobileapp.StudentLookup;
+    opens com.ksumobileapp.StudentLookup to javafx.fxml;
 }

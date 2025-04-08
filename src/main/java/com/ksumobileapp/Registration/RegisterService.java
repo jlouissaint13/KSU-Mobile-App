@@ -11,7 +11,7 @@ public class RegisterService {
     public void databaseConnection(RegisterModel registerModel) throws SQLException {
 
     String url = "jdbc:sqlite:accounts.db";
-    String sql = "INSERT INTO users(studentID,firstName, lastName, phone,campusEmail,username,personalEmail,password, address, gender, race, dob, classification, major) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    String sql = "INSERT INTO users(studentID,firstName, lastName, phone,campusEmail,username,personalEmail,password, address, gender, race, dob, classification, major,status) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
     try (Connection connection = DriverManager.getConnection(url);
          PreparedStatement pstmt = connection.prepareStatement(sql)) {
@@ -29,6 +29,7 @@ public class RegisterService {
         pstmt.setString(12, registerModel.getDob());
         pstmt.setString(13, registerModel.getClassification());
         pstmt.setString(14, registerModel.getMajor());
+        pstmt.setString(15,"Pending");
 
 
         pstmt.executeUpdate();

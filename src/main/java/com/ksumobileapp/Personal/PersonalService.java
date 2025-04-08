@@ -82,6 +82,7 @@ public class PersonalService {
                     personalModel.setDob(rs.getString("dob"));
                     personalModel.setClassification(rs.getString("classification"));
                     personalModel.setMajor(rs.getString("major"));
+                    personalModel.setStatus(rs.getString("status"));
                 }
 
 

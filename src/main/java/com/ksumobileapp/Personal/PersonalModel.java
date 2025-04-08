@@ -1,7 +1,7 @@
 package com.ksumobileapp.Personal;
 
 public class PersonalModel {
-    private String studentID,firstName,lastName,phone,campusEmail,username,personalEmail,password,address,gender,race,dob,classification,major;
+    private String studentID,firstName,lastName,phone,campusEmail,username,personalEmail,password,address,gender,race,dob,classification,major,status;
     public PersonalModel() {
 
     }
@@ -62,6 +62,8 @@ public class PersonalModel {
         this.major = major;
     }
 
+    public void setStatus(String status) {this.status = status;}
+
     public String getStudentID() {
         return studentID;
     }
@@ -117,5 +119,7 @@ public class PersonalModel {
     public String getMajor() {
         return major;
     }
+
+    public String getStatus() {return status;}
 
 }

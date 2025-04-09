@@ -57,8 +57,8 @@ public class ScheduleView {
 
         startButton.setOnAction(e -> {
             try{
-                ScheduleModel schedule = new ScheduleModel();
                 Stage newStage = new Stage();
+                ScheduleModel schedule = new ScheduleModel(newStage);
                 schedule.start(newStage);
 
                 stage.close();

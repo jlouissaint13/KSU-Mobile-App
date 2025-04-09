@@ -4,6 +4,7 @@ package com.ksumobileapp.AdminReview;
 import com.ksumobileapp.Login.LoginModel;
 import com.ksumobileapp.Personal.PersonalModel;
 import com.ksumobileapp.Registration.RegisterModel;
+import javafx.animation.PauseTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
@@ -12,6 +13,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -22,13 +24,13 @@ public class AdminUpdateView {
     private TextField fName,lName,email,phone,password,address,username,campusEmail,studentID,status;
     private Text fnameT,lnameT,emailT,phoneT,passwordT,genderT,dobT,classificationT,majorT, personalInfoText,raceT,
             addressT,campusEmailT,usernameT,studentIDT,statusT;
+    private PauseTransition pause;
     private VBox vbox;
     private ScrollPane scrollPane;
     private DatePicker dob;
     private LoginModel loginModel;
     private RegisterModel registerModel;
     private PersonalModel personalModel;
-
     private ObservableList<String> options;
     private ComboBox classification,major,race,gender;
     private Button updateProfile;
@@ -62,7 +64,7 @@ public class AdminUpdateView {
         raceT = new Text("Race");
         vbox = new VBox();
         majorT = new Text("Major");
-        personalInfoText = new Text("Student Application");
+        personalInfoText = new Text("Student Information");
         updateProfile = new Button("Update Profile");
         backButton = new Button("<");
         studentID = new TextField();
@@ -301,6 +303,39 @@ public class AdminUpdateView {
     }
     public Button getBackButton() {
         return backButton;
+    }
+
+    public boolean isEmptyCheck() {
+        String data[] = new String[14];
+    data[0] = fName.getText();
+    data[1] = lName.getText();
+    data[2] = studentID.getText();
+    data[3] = campusEmail.getText();
+    data[4] = username.getText();
+    data[5] = phone.getText();
+    data[6] = email.getText();
+    data[7] = password.getText();
+    data[8] = address.getText();
+    data[9] = gender.getValue().toString();
+    data[10] = race.getValue().toString();
+    data[11] = dob.getValue().toString();
+    data[12] = classification.getValue().toString();
+    data[13] = major.getValue().toString();
+    for (int i = 0;i<data.length;i++) {
+        if (data[i].isBlank() || data[i] == null) {
+            return true;
+        }
+    }
+    return false;
+    }
+    public void fieldsEmpty () {
+        Text inputValidation = new Text("Please Complete All Fields!");
+        pane.getChildren().add(inputValidation);
+        inputValidation.setLayoutX(150);
+        inputValidation.setLayoutY(1040);
+        pause = new PauseTransition(Duration.seconds(1.5));
+        pause.setOnFinished(e -> pane.getChildren().remove(inputValidation));
+        pause.play();
     }
 
 }

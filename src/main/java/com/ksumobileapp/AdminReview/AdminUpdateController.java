@@ -20,6 +20,11 @@ public class AdminUpdateController {
         this.adminUpdateView.getBackButton().setOnAction(e-> adminMain.start(stage));
 
         this.adminUpdateView.getUpdateProfile().setOnAction(e->{
+            if (this.adminUpdateView.isEmptyCheck()) {
+                this.adminUpdateView.fieldsEmpty();
+                return;
+            }
+
             this.adminReviewService.updateData(this.adminUpdateView);
             adminMain.start(stage);
         });

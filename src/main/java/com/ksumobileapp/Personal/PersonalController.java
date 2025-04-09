@@ -24,7 +24,13 @@ public class PersonalController {
 
         backButton.setOnAction(e-> back(stage,profileMain));
 
-        updateButton.setOnAction( e->update(stage));
+        updateButton.setOnAction( e->{
+            if (this.personalView.isEmptyCheck()) {
+                this.personalView.fieldsEmpty();
+                return;
+            }
+            update(stage);
+        });
 
 
     }

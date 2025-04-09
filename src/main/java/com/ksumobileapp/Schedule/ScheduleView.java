@@ -1,7 +1,10 @@
 package com.ksumobileapp.Schedule;
 
+import com.ksumobileapp.Profile.ProfileMain;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -12,32 +15,26 @@ public class ScheduleView {
 
     private Pane pane;
     private Text scheduleT;
-    private Button enroll, remove, submit, backButton;
+    private Button startButton, backButton;
+
 
     public void components(){
         pane = new Pane();
-        enroll = new Button("Enroll");
-        remove = new Button("Remove");
-        submit = new Button("Submit");
+        startButton = new Button("Start");
         backButton = new Button("<-");
         scheduleT = new Text("Schedule Builder");
+
     }
 
     public void properties(){
 
         //Text
-        scheduleT.setLayoutX(175);
-        scheduleT.setLayoutY(75);
+        scheduleT.setLayoutX(125);
+        scheduleT.setLayoutY(50);
 
         //Buttons
-        enroll.setLayoutX(20);
-        enroll.setLayoutY(100);
-
-        remove.setLayoutX(40);
-        remove.setLayoutY(100);
-
-        submit.setLayoutX(175);
-        submit.setLayoutY(200);
+        startButton.setLayoutX(150);
+        startButton.setLayoutY(100);
 
         backButton.setLayoutX(5);
         backButton.setLayoutY(5);
@@ -45,7 +42,7 @@ public class ScheduleView {
     }
 
     public void addComponents(){
-        pane.getChildren().addAll(enroll, remove, submit, backButton, scheduleT);
+        pane.getChildren().addAll( startButton,backButton, scheduleT);
     }
 
     public ScheduleView(Stage stage){
@@ -58,11 +55,35 @@ public class ScheduleView {
         stage.setScene(initial);
         stage.show();
 
+        startButton.setOnAction(e -> {
+            try{
+                ScheduleModel schedule = new ScheduleModel();
+                Stage newStage = new Stage();
+                schedule.start(newStage);
+
+                stage.close();
+
+            }catch (Exception exception){
+                exception.printStackTrace();
+            }
+        });
+
+        backButton.setOnAction(e -> {
+            try{
+                ProfileMain profile = new ProfileMain();
+                Stage newStage = new Stage();
+                profile.start(newStage);
+
+                stage.close();
+
+            }catch (Exception exception){
+                exception.printStackTrace();
+            }
+        });
+
     }
 
     public Button getBackButton() {return backButton;}
-    public Button getEnroll(){return enroll;}
-    public Button getRemove(){return remove;}
-    public Button getSubmit(){return submit;}
+
 
 }

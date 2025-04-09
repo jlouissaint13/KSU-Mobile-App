@@ -1,12 +1,12 @@
 package com.ksumobileapp.Schedule;
-import java.util.List;
+import java.util.HashSet;
 
 public class CourseModel {
-    private String courseName;
-    private String courseCode;
-    public List<CourseModel> preReqs;
+    public String courseName;
+    public String courseCode;
+    public HashSet<CourseModel> preReqs;
 
-    public CourseModel(String name, String code, List<CourseModel> preReqs){
+    public CourseModel(String name, String code, HashSet<CourseModel> preReqs){
         this.courseName = name;
         this.courseCode = code;
         this.preReqs = preReqs;

@@ -123,7 +123,7 @@ public class PersonalView {
         studentID.setLayoutX(30);
         studentID.setLayoutY(220);
         studentID.setEditable(false);
-        studentID.setDisable(true);
+        studentID.setDisable(false);
         studentIDT.setLayoutX(30);
         studentIDT.setLayoutY(210);
 

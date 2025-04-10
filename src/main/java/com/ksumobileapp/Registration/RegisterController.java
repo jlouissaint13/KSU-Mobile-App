@@ -3,10 +3,13 @@ package com.ksumobileapp.Registration;
 import com.ksumobileapp.Login.LoginMain;
 import com.ksumobileapp.Login.LoginModel;
 import com.ksumobileapp.Profile.ProfileMain;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 
 import java.sql.SQLException;
+import java.util.Optional;
 
 public class RegisterController {
     private RegisterView registerView;
@@ -107,7 +110,17 @@ public class RegisterController {
         }
 
         registerService.databaseConnection(this.registerModel);
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("IMPORTANT ALERT!");
+        alert.setHeaderText("Personal Information");
+        alert.setContentText("Upon registration a student email will be generated for you.\n Before logging out copy your student email or write it down so you can log back in.\n" +
+                "This can be found by clicking the personal information button before logging out.\n Do not log out without doing so please!");
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+
         profileMain.start(stage);
+
     }
 
 

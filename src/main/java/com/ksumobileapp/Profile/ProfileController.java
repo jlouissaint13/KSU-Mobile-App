@@ -1,11 +1,16 @@
 package com.ksumobileapp.Profile;
 
+import com.ksumobileapp.Admin.AdminModel;
 import com.ksumobileapp.Login.LoginMain;
 import com.ksumobileapp.Payments.PaymentMain;
 import com.ksumobileapp.Personal.PersonalMain;
 import com.ksumobileapp.Schedule.ScheduleMain;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
+
+import java.util.Optional;
 
 public class ProfileController {
     private ProfileView profileView;
@@ -25,7 +30,6 @@ public class ProfileController {
         viewInfo = profileView.getViewInformation();
         payOnline = profileView.getPayCourses();
         schedule = profileView.getViewCourses();
-
 
 
 

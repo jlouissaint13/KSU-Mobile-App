@@ -48,10 +48,21 @@ public class ScheduleModel extends Application {
         enrolledCoursesList.setPrefSize(250, 100);
 
         //position the Buttons
-        enroll.setLayoutX(150);
+        enroll.setLayoutX(105);
         enroll.setLayoutY(200);
-        remove.setLayoutX(150);
+        enroll.setPrefSize(140, 5);
+        remove.setLayoutX(105);
         remove.setLayoutY(250);
+        remove.setPrefSize(140, 5);
+
+        //button actions
+        enroll.setOnAction(e ->{
+
+        });
+
+        remove.setOnAction(e -> {
+
+        });
     }
 
     public void addComponents(){
@@ -59,10 +70,18 @@ public class ScheduleModel extends Application {
                 enroll, remove);
     }
 
+    public void populateCourses(){
+        availableCourses = availableCoursesList.getItems();
+
+
+    }
+
     public ScheduleModel(Stage stage){
         components();
         properties();
         addComponents();
+        populateCourses();
+
 
         stage.setTitle("Schedule Builder");
         Scene scene = new Scene(pane, 350, 600);

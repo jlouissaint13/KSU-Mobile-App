@@ -1,5 +1,6 @@
 package com.ksumobileapp.Schedule;
 import java.util.HashSet;
+import java.util.Objects;
 
 public class CourseModel {
     public String courseName;
@@ -33,6 +34,20 @@ public class CourseModel {
     @Override
     public String toString(){
         return courseCode + " - " + courseName;
+    }
+
+    //Overriding equals and hashCode methods
+    @Override
+    public boolean equals(Object object){
+        if (this == object) return true;
+        if (this == null || getClass() != object.getClass()) return false;
+        CourseModel that = (CourseModel) object;
+        return Objects.equals(courseCode, that.courseCode);
+    }
+
+    @Override
+    public int hashCode(){
+        return Objects.hash(courseCode);
     }
 
 }

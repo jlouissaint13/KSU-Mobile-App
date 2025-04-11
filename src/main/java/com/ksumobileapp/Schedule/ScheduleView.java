@@ -1,89 +1,73 @@
 package com.ksumobileapp.Schedule;
 
-import com.ksumobileapp.Profile.ProfileMain;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
-import javafx.scene.text.Text;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.scene.control.*;
+import javafx.collections.*;
 
 
+public class ScheduleView  {
 
-public class ScheduleView {
+    private Image logo = new Image("logo.png");
+    private ImageView imageView = new ImageView(logo);
 
-    private Pane pane;
-    private Text scheduleT;
-    private Button startButton, backButton;
+    public ScheduleView(Stage window){
 
+        //Create UI
+        Label availableClassesLabel = new Label("Available Classes");
+        Label scheduleLabel = new Label("Your Schedule");
 
-    public void components(){
-        pane = new Pane();
-        startButton = new Button("Start");
-        backButton = new Button("<-");
-        scheduleT = new Text("Schedule Builder");
+        TableView<CourseModel> courseTable = new TableView<>();
+        TableColumn<CourseModel, String> courseNameColumn = new TableColumn<>("Course Name");
+        TableColumn<CourseModel, String> courseCodeColumn = new TableColumn<>("Course Code");
 
-    }
+        //Add them to the table
+        courseTable.getColumns().addAll(courseNameColumn, courseCodeColumn);
 
-    public void properties(){
+        //Create available classes
+        ObservableList<CourseModel> availableCourses = FXCollections.observableArrayList(
+                new CourseModel("Data Structures", "CS 3305"),
+                new CourseModel("Calculus II", "MATH 2202"),
+                new CourseModel("English II", "ENGL 1101"),
+                new CourseModel("Programming & Problem Solving II", "CSE 1322")
+        );
 
-        //Text
-        scheduleT.setLayoutX(125);
-        scheduleT.setLayoutY(50);
+        courseTable.setItems(availableCourses);
 
-        //Buttons
-        startButton.setLayoutX(150);
-        startButton.setLayoutY(100);
+        ListView<String> scheduleList = new ListView<>();
 
-        backButton.setLayoutX(5);
-        backButton.setLayoutY(5);
-
-    }
-
-    public void addComponents(){
-        pane.getChildren().addAll( startButton,backButton, scheduleT);
-    }
-
-    public ScheduleView(Stage stage){
-        components();
-        properties();
-        addComponents();
-
-        stage.setTitle("Schedule Builder");
-        Scene initial = new Scene(pane, 350, 600);
-        stage.setScene(initial);
-        stage.show();
-
-        startButton.setOnAction(e -> {
-            try{
-                Stage newStage = new Stage();
-                ScheduleModel schedule = new ScheduleModel(newStage);
-                schedule.start(newStage);
-
-                stage.close();
-
-            }catch (Exception exception){
-                exception.printStackTrace();
+        //Enroll button
+        Button enrollButton = new Button("Enroll");
+        enrollButton.setOnAction(e -> {
+            CourseModel selectedCourse = courseTable.getSelectionModel().getSelectedItem();
+            if(selectedCourse != null){
+                scheduleList.getItems().add(selectedCourse.getName() + " - " + selectedCourse.getCode());
+            } else{
+                showAlert("No class selected", "Select a class to continue.");
             }
         });
 
-        backButton.setOnAction(e -> {
-            try{
-                ProfileMain profile = new ProfileMain();
-                Stage newStage = new Stage();
-                profile.start(newStage);
+        //Layout
+        VBox layout = new VBox(10);
+        layout.getChildren().addAll(availableClassesLabel, scheduleLabel,
+                courseTable, enrollButton, scheduleList);
 
-                stage.close();
-
-            }catch (Exception exception){
-                exception.printStackTrace();
-            }
-        });
-
+        Scene scene = new Scene(layout, 350, 600);
+        window.getIcons().add(imageView.getImage());
+        window.setScene(scene);
+        window.show();
     }
 
-    public Button getBackButton() {return backButton;}
 
+    public void showAlert(String title, String message){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
 
 }

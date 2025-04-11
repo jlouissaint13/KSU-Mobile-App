@@ -1,53 +1,37 @@
 package com.ksumobileapp.Schedule;
-import java.util.HashSet;
-import java.util.Objects;
+import java.util.ArrayList;
 
 public class CourseModel {
     public String courseName;
     public String courseCode;
-    public HashSet<CourseModel> preReqs;
+    public String time;
+    public ArrayList<String> prerequisites;
+
 
     public CourseModel(String name, String code){
         this.courseName = name;
         this.courseCode = code;
-        this.preReqs = new HashSet<CourseModel>();
     }
 
-    //Add prerequisites
-    public void addPreReqs(CourseModel course){
-        preReqs.add(course);
+    public void setPrerequisites(ArrayList<String> prerequisites){
+        this.prerequisites = prerequisites;
     }
 
-    //Check if the course has prerequisites
-    public boolean hasPreReqs(){
-        return !preReqs.isEmpty();
+    public void setTime(String time){
+        this.time = time;
     }
 
-    //Check if student can enroll in course
-    public boolean canEnroll(HashSet<CourseModel> completedCourses){
-        return completedCourses.containsAll(preReqs);
+    public String getName(){
+        return courseName;
     }
 
-    public String getCourseName(){return courseName;}
-    public String getCourseCode(){return courseCode;}
-
-    @Override
-    public String toString(){
-        return courseCode + " - " + courseName;
+    public String getCode(){
+        return courseCode;
     }
 
-    //Overriding equals and hashCode methods
-    @Override
-    public boolean equals(Object object){
-        if (this == object) return true;
-        if (this == null || getClass() != object.getClass()) return false;
-        CourseModel that = (CourseModel) object;
-        return Objects.equals(courseCode, that.courseCode);
+    public ArrayList<String> getPrerequisites(){
+        return prerequisites;
     }
 
-    @Override
-    public int hashCode(){
-        return Objects.hash(courseCode);
-    }
 
 }

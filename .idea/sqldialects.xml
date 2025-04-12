@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="SqlDialectMappings">
-    <file url="file://$PROJECT_DIR$/src/main/java/com/ksumobileapp/Registration/RegisterService.java" dialect="GenericSQL" />
-    <file url="file://$APPLICATION_CONFIG_DIR$/consoles/db/54f9ac59-a3fc-4b7d-ae53-8f7f69e277d7/console_1.sql" dialect="SQLite" />
-    <file url="PROJECT" dialect="SQLite" />
-  </component>
-</project>

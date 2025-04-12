@@ -3,6 +3,7 @@ package com.ksumobileapp.ScheduleBuilder;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -24,11 +25,13 @@ public class ScheduleBView {
     private Text scheduleBuilder;
     private ComboBox<String> selectCourse;
     private TableView<Object> tableView;
-
+    private Button enroll,unenroll;
+    private String []info;
     public void components() {
         pane = new Pane();
         scheduleBuilder = new Text("Schedule Builder");
-
+        enroll = new Button("Enroll");
+        unenroll = new Button("Unenroll");
         tableView = new TableView<>();
         /*
         TableColumn<Course, String> codeCol = new TableColumn<>("Course Code");
@@ -119,11 +122,19 @@ public class ScheduleBView {
         swe.setStyle("-fx-font-size: 12.5px;");
         swe.setVisible(false);
 
+
+        enroll.setLayoutX(130);
+        enroll.setLayoutY(180);
+        enroll.setPrefWidth(80);
+        unenroll.setLayoutX(130);
+        unenroll.setLayoutY(220);
+        unenroll.setPrefWidth(80);
+
     }
 
 
     public void addComponents() {
-    pane.getChildren().addAll(scheduleBuilder,subjectComboBox,selectCourse,swe,cs,cse,math,stat,tcom,it);
+    pane.getChildren().addAll(scheduleBuilder,subjectComboBox,selectCourse,swe,cs,cse,math,stat,tcom,it,enroll,unenroll);
     }
 
     public ScheduleBView(Stage stage) {
@@ -138,6 +149,13 @@ public class ScheduleBView {
 
         stage.setScene(scene1);
         stage.show();
+    }
+    public String getCourseID(String courseName) {
+
+        info = courseName.split(" ");
+        String courseID = info[0] + " " + info[1];
+        System.out.println(courseID);
+        return courseID;
     }
 
 
@@ -157,73 +175,79 @@ public class ScheduleBView {
         );
         subjectComboBox = new ComboBox<>(subjectOptions);
         ObservableList<String> cseOptions = FXCollections.observableArrayList(
-                "CSE 1321 Programming and Problem Solving I - 9:00-10:30",
-                "CSE 1321L Programming and Problem Solving I Laboratory - 10:30-12:00",
-                "CSE 1322 Programming and Problem Solving II - 1:00-2:30",
-                "CSE 1322L Programming and Problem Solving II Laboratory - 2:30-4:00",
-                "CSE 2300 Discrete Structures for Computing - 9:00-10:30",
-                "CSE 3153 Database Systems - 3:30-5:00",
-                "CSE 3801 Professional Practices and Ethics - 12:00-1:30",
-                "CSE 4983 CSE Computing Internship - 2:00-3:30"
+                "CSE 1321 Programming and Problem Solving I 9:00-10:30",
+                "CSE 1321L Programming and Problem Solving I Laboratory 10:30-12:00",
+                "CSE 1322 Programming and Problem Solving II 1:00-2:30",
+                "CSE 1322L Programming and Problem Solving II Laboratory 2:30-4:00",
+                "CSE 2300 Discrete Structures for Computing 9:00-10:30",
+                "CSE 3153 Database Systems 3:30-5:00",
+                "CSE 3801 Professional Practices and Ethics 12:00-1:30",
+                "CSE 4983 CSE Computing Internship 2:00-3:30"
         );
         cse = new ComboBox(cseOptions);
+
         ObservableList<String> csOptions = FXCollections.observableArrayList(
-                "CS 3305 Data Structures - 9:30-11:00",
-                "CS 3502 Operating Systems - 10:30-12:00",
-                "CS 3503 Computer Organization and Architecture - 1:30-3:00",
-                "CS 4308 Concepts of Programming Languages - 3:00-4:30",
-                "CS 4504 Parallel and Distributed Computing - 11:00-12:30",
-                "CS 4514 Real-Time Systems - 2:00-3:30",
-                "CS 4523 Programming Massively Parallel Processors - 9:00-10:30",
-                "CS 4524 Cloud Computing - 1:00-2:30",
-                "CS 4612 Software Security - 12:30-2:00",
-                "CS 4622 Computer Networks - 10:00-11:30",
-                "CS 4632 Modeling and Simulation - 1:00-2:30",
-                "CS 4712 User Interface Engineering - 3:30-5:00",
-                "CS 4720 Internet Programming - 9:30-11:00",
-                "CS 4722 Computer Graphics and Multimedia - 12:00-1:30",
-                "CS 4732 Machine Vision - 2:30-4:00"
+                "CS 3305 Data Structures 9:30-11:00",
+                "CS 3502 Operating Systems 10:30-12:00",
+                "CS 3503 Computer Organization and Architecture 1:30-3:00",
+                "CS 4308 Concepts of Programming Languages 3:00-4:30",
+                "CS 4504 Parallel and Distributed Computing 11:00-12:30",
+                "CS 4514 Real Time Systems 2:00-3:30",
+                "CS 4523 Programming Massively Parallel Processors 9:00-10:30",
+                "CS 4524 Cloud Computing 1:00-2:30",
+                "CS 4612 Software Security 12:30-2:00",
+                "CS 4622 Computer Networks 10:00-11:30",
+                "CS 4632 Modeling and Simulation 1:00-2:30",
+                "CS 4712 User Interface Engineering 3:30-5:00",
+                "CS 4720 Internet Programming 9:30-11:00",
+                "CS 4722 Computer Graphics and Multimedia 12:00-1:30",
+                "CS 4732 Machine Vision 2:30-4:00"
         );
         cs = new ComboBox(csOptions);
+
         ObservableList<String> statOptions = FXCollections.observableArrayList(
-                "STAT 2332 Probability and Data Analysis - 3:30-5:00"
+                "STAT 2332 Probability and Data Analysis 3:30-5:00"
         );
         stat = new ComboBox(statOptions);
+
         ObservableList<String> itOptions = FXCollections.observableArrayList(
-                "IT 4823 Information Security Administration & Privacy - 1:30-3:00",
-                "IT 4323 Data Communications & Networking - 9:00-10:30",
-                "IT 4683 Management of Information Technology and Human Computer Interaction - 2:30-4:00",
-                "IT 4723 IT Policy and Laws - 11:00-12:30"
+                "IT 4823 Information Security Administration & Privacy 1:30-3:00",
+                "IT 4323 Data Communications & Networking 9:00-10:30",
+                "IT 4683 Management of Information Technology and Human Computer Interaction 2:30-4:00",
+                "IT 4723 IT Policy and Laws 11:00-12:30"
         );
         it = new ComboBox(itOptions);
+
         ObservableList<String> mathOptions = FXCollections.observableArrayList(
-                "MATH 1111 College Algebra - 9:00-10:30",
-                "MATH 1113 Precalculus - 10:30-12:00",
-                "MATH 1190 Calculus I - 1:00-2:30",
-                "MATH 2202 Calculus II - 3:00-4:30",
-                "MATH 2345 Discrete Mathematics - 9:30-11:00"
+                "MATH 1111 College Algebra 9:00-10:30",
+                "MATH 1113 Precalculus 10:30-12:00",
+                "MATH 1190 Calculus I 1:00-2:30",
+                "MATH 2202 Calculus II 3:00-4:30",
+                "MATH 2345 Discrete Mathematics 9:30-11:00"
         );
         math = new ComboBox(mathOptions);
+
         ObservableList<String> tcomOptions = FXCollections.observableArrayList(
-                "TCOM 2010 Technical Writing - 3:30-5:00"
+                "TCOM 2010 Technical Writing 3:30-5:00"
         );
         tcom = new ComboBox(tcomOptions);
+
         ObservableList<String> sweOptions = FXCollections.observableArrayList(
-                "SWE 3313 Introduction to Software Engineering - 9:00-10:30",
-                "SWE 3623 Software Systems Requirements - 10:30-12:00",
-                "SWE 3633 Software Architecture and Design - 1:00-2:30",
-                "SWE 3643 Software Testing & Quality Assurance - 2:30-4:00",
-                "SWE 4324 User-Centered Design - 3:00-4:30",
-                "SWE 4663 Software Project Management - 9:00-10:30",
-                "SWE 4713 SWE Application Domain - 12:00-1:30",
-                "SWE 4724 Software Engineering Capstone Project - 3:30-5:00",
-                "SWE 3683 Embedded Systems Analysis and Design - 9:30-11:00",
-                "SWE 4633 Cloud Software Development - 10:30-12:00",
-                "SWE 4723 Undergraduate Research Methods - 12:30-2:00",
-                "SWE 4743 Object-Oriented Development - 1:30-3:00",
-                "SWE 4783 User Interaction Engineering - 2:30-4:00",
-                "SWE 4490 Special Topics - 3:30-5:00",
-                "SWE 4803 Independent Study - 12:00-1:30"
+                "SWE 3313 Introduction to Software Engineering 9:00-10:30",
+                "SWE 3623 Software Systems Requirements 10:30-12:00",
+                "SWE 3633 Software Architecture and Design 1:00-2:30",
+                "SWE 3643 Software Testing & Quality Assurance 2:30-4:00",
+                "SWE 4324 User Centered Design 3:00-4:30",
+                "SWE 4663 Software Project Management 9:00-10:30",
+                "SWE 4713 SWE Application Domain 12:00-1:30",
+                "SWE 4724 Software Engineering Capstone Project 3:30-5:00",
+                "SWE 3683 Embedded Systems Analysis and Design 9:30-11:00",
+                "SWE 4633 Cloud Software Development 10:30-12:00",
+                "SWE 4723 Undergraduate Research Methods 12:30-2:00",
+                "SWE 4743 Object Oriented Development 1:30-3:00",
+                "SWE 4783 User Interaction Engineering 2:30-4:00",
+                "SWE 4490 Special Topics 3:30-5:00",
+                "SWE 4803 Independent Study 12:00-1:30"
         );
         swe = new ComboBox(sweOptions);
 
@@ -262,6 +286,12 @@ public class ScheduleBView {
     }
     public ComboBox<String> getSweCombo() {
         return swe;
+    }
+    public Button getEnroll() {
+        return enroll;
+    }
+    public Button getUnenroll() {
+        return unenroll;
     }
 
     public void setCoursesInvisible() {

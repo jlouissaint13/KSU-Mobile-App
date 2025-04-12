@@ -29,7 +29,7 @@ public class ProfileController {
         backButton = profileView.getBackButton();
         viewInfo = profileView.getViewInformation();
         payOnline = profileView.getPayCourses();
-        schedule = profileView.getViewCourses();
+        schedule = profileView.getScheduleBuilder();
 
 
 

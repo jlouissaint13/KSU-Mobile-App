@@ -9,8 +9,11 @@ public class ScheduleBMain extends Application {
         launch(args);
     }
     private ScheduleBView scheduleBView;
+    private ScheduleBController scheduleBController;
     @Override
     public void start(Stage primaryStage) {
        scheduleBView = new ScheduleBView(primaryStage);
+
+       scheduleBController = new ScheduleBController(primaryStage,scheduleBView);
     }
 }

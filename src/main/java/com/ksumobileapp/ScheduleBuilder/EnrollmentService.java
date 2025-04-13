@@ -91,7 +91,7 @@ public class EnrollmentService {
             LocalTime timeOne = LocalTime.parse(rs.getString(1), formatter);
             LocalTime timeTwo = LocalTime.parse(rs.getString(2),formatter);
             Duration duration = Duration.between(timeOne,timeTwo);
-            if (duration.toMinutes() > 90) return true;
+            if (duration.toMinutes() < 90) return true;
 
             return false;
 

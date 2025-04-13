@@ -1,9 +1,20 @@
 package com.ksumobileapp.ScheduleBuilder;
 
 public class CourseModel {
-    private String courseID;
+    private static String courseID;
+    private static String semester;
 
-    public CourseModel(String courseID) {
-        this.courseID = courseID;
+
+    public static void setCourseID(String courseID) {
+        CourseModel.courseID = courseID;
+    }
+    public static String getCourseID() {
+        return courseID;
+    }
+    public static void setSemester(String semester) {
+        CourseModel.semester = semester;
+    }
+    public static String getSemester() {
+        return semester;
     }
 }

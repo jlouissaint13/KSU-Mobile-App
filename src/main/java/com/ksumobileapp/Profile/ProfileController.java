@@ -5,6 +5,7 @@ import com.ksumobileapp.Login.LoginMain;
 import com.ksumobileapp.Payments.PaymentMain;
 import com.ksumobileapp.Personal.PersonalMain;
 import com.ksumobileapp.Schedule.ScheduleMain;
+import com.ksumobileapp.ScheduleBuilder.SemesterMain;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -20,12 +21,13 @@ public class ProfileController {
     private PersonalMain personalMain;
     private PaymentMain paymentMain;
     private ScheduleMain scheduleMain;
+    private SemesterMain semesterMain;
     public ProfileController(Stage stage, ProfileView profileView) {
         this.profileView = profileView;
         loginMain = new LoginMain();
         personalMain = new PersonalMain();
         paymentMain = new PaymentMain();
-        scheduleMain = new ScheduleMain();
+        semesterMain = new SemesterMain();
         backButton = profileView.getBackButton();
         viewInfo = profileView.getViewInformation();
         payOnline = profileView.getPayCourses();
@@ -35,9 +37,11 @@ public class ProfileController {
 
         viewInfo.setOnAction(e -> viewInfo(stage,personalMain));
         payOnline.setOnAction(e ->  paymentMain.start(stage));
-        backButton.setOnAction(e-> back(stage,loginMain));
-        schedule.setOnAction(e -> scheduleMain.start(stage));
+        schedule.setOnAction(e -> semesterMain.start(stage));
 
+
+
+        backButton.setOnAction(e-> back(stage,loginMain));
     }
 
 

@@ -25,7 +25,7 @@ public class ScheduleBView {
     private Text scheduleBuilder;
     private ComboBox<String> selectCourse;
     private TableView<Object> tableView;
-    private Button enroll,unenroll;
+    private Button enroll,unenroll,back;
     private String []info;
     public void components() {
         pane = new Pane();
@@ -33,6 +33,7 @@ public class ScheduleBView {
         enroll = new Button("Enroll");
         unenroll = new Button("Unenroll");
         tableView = new TableView<>();
+        back = new Button("<");
         /*
         TableColumn<Course, String> codeCol = new TableColumn<>("Course Code");
         codeCol.setCellValueFactory(new PropertyValueFactory<>("courseCode"));
@@ -129,12 +130,14 @@ public class ScheduleBView {
         unenroll.setLayoutX(130);
         unenroll.setLayoutY(220);
         unenroll.setPrefWidth(80);
+        back.setLayoutX(30);
+        back.setLayoutY(30);
 
     }
 
 
     public void addComponents() {
-    pane.getChildren().addAll(scheduleBuilder,subjectComboBox,selectCourse,swe,cs,cse,math,stat,tcom,it,enroll,unenroll);
+    pane.getChildren().addAll(scheduleBuilder,subjectComboBox,selectCourse,swe,cs,cse,math,stat,tcom,it,enroll,unenroll,back);
     }
 
     public ScheduleBView(Stage stage) {
@@ -292,6 +295,34 @@ public class ScheduleBView {
     }
     public Button getUnenroll() {
         return unenroll;
+    }
+    public Button getBack() {
+        return back;
+    }
+
+
+    //combobox values
+
+    public String getcseValue() {
+       return cse.getValue().toString();
+    }
+    public String getStatValue() {
+       return stat.getValue().toString();
+    }
+    public String getSweValue() {
+        return swe.getValue().toString();
+    }
+    public String getITValue() {
+        return it.getValue().toString();
+    }
+    public String getCsValue() {
+        return cs.getValue().toString();
+    }
+    public String getMathValue() {
+        return mathComboBox.getValue().toString();
+    }
+    public String getTcomValue() {
+        return tcom.getValue().toString();
     }
 
     public void setCoursesInvisible() {

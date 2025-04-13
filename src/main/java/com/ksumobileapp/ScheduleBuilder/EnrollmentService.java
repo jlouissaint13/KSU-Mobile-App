@@ -6,6 +6,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.time.Duration;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 public class EnrollmentService {
 
@@ -54,8 +57,48 @@ public class EnrollmentService {
         }
     }
 
-    public void courseExists() {
+    public boolean courseExists() throws SQLException {
+        String url = "jdbc:sqlite:accounts.db";
+        String sql = "SELECT courseID FROM enrollment WHERE courseID = ? and studentID = ?";
+        String courseID;
+        String studentID;
+        courseID = CourseModel.getCourseID();
+        studentID = LoginModel.getCurrentUser();
+        try (var conn = DriverManager.getConnection(url);
+             var pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, courseID);
+            pstmt.setString(2, studentID);
+            var rs = pstmt.executeQuery();
+            if (rs.getString(1) == null) return false;
 
+            return true;
+
+        }
+    }
+    public boolean scheduleError(EnrollmentModel enrollmentModel) {
+        String url = "jdbc:sqlite:accounts.db";
+        String sql = "SELECT schedule FROM enrollment WHERE courseID = ? and studentID = ? and semesterID = ?";
+        String courseID;
+        String studentID;
+        courseID = CourseModel.getCourseID();
+        studentID = LoginModel.getCurrentUser();
+        try (var conn = DriverManager.getConnection(url);
+             var pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, courseID);
+            pstmt.setString(2, studentID);
+            var rs = pstmt.executeQuery();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("H:mm");
+            LocalTime timeOne = LocalTime.parse(rs.getString(1), formatter);
+            LocalTime timeTwo = LocalTime.parse(rs.getString(2),formatter);
+            Duration duration = Duration.between(timeOne,timeTwo);
+            if (duration.toMinutes() > 90) return true;
+
+            return false;
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 
@@ -82,6 +125,8 @@ public class EnrollmentService {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
+
     }
 
 

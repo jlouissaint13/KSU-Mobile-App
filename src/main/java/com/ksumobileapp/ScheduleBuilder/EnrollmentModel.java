@@ -1,15 +1,18 @@
 package com.ksumobileapp.ScheduleBuilder;
 
 public class EnrollmentModel {
-private String courseID,courseName,credit,semester,prefix,time,studentID;
-    public EnrollmentModel(String studentID,String courseID, String courseName, String credit, String prefix,String semester,String time) {
+private String courseID,courseName,credit,semester,prefix,schedule,studentID;
+    public EnrollmentModel(String studentID,String courseID, String courseName, String credit, String prefix,String semester,String schedule) {
         this.studentID = studentID;
         this.courseID = courseID;
         this.courseName = courseName;
         this.credit = credit;
         this.prefix = prefix;
         this.semester = semester;
-        this.time = time;
+        this.schedule = schedule;
+    }
+    public EnrollmentModel() {
+
     }
 
     public String getStudentID() {
@@ -36,8 +39,8 @@ private String courseID,courseName,credit,semester,prefix,time,studentID;
         return semester;
     }
 
-    public String getTime() {
-        return time;
+    public String getSchedule() {
+        return schedule;
     }
 
     public void setStudentID(String studentID) {
@@ -64,8 +67,8 @@ private String courseID,courseName,credit,semester,prefix,time,studentID;
         this.semester = semester;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setSchedule(String schedule) {
+        this.schedule = schedule;
     }
 
 

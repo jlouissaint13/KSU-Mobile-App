@@ -9,14 +9,25 @@ public class ScheduleBController {
     private ScheduleBView scheduleBView;
     private CourseModel courseModel;
     private SemesterMain semesterMain;
-    public ScheduleBController(Stage stage,ScheduleBView scheduleBView) {
+    private EnrollmentService enrollmentService;
+    private EnrollmentModel enrollmentModel;
+    public ScheduleBController(Stage stage,ScheduleBView scheduleBView,EnrollmentModel enrollmentModel) {
         this.scheduleBView = scheduleBView;
+        enrollmentService = new EnrollmentService();
+        this.enrollmentModel = enrollmentModel;
         this.scheduleBView.getSubjectComboBox().setOnAction(e -> setVisibleBox(this.scheduleBView.returnSubject()));
         semesterMain = new SemesterMain();
 
         this.scheduleBView.getEnroll().setOnAction(e-> {
             CourseModel.setCourseID(scheduleBView.getCourseID(whichValue()));
+            enrollmentService.getData(this.enrollmentModel);
+            enrollmentService.enroll(this.enrollmentModel);
 
+        });
+
+        this.scheduleBView.getUnenroll().setOnAction(e-> {
+            CourseModel.setCourseID(scheduleBView.getCourseID(whichValue()));
+            enrollmentService.unenroll();
         });
 
         this.scheduleBView.getBack().setOnAction(e-> semesterMain.start(stage));

@@ -157,7 +157,6 @@ public class ScheduleBView {
 
         info = courseName.split(" ");
         String courseID = info[0] + " " + info[1];
-        System.out.println(courseID);
         return courseID;
     }
 

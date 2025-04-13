@@ -15,18 +15,21 @@ public class EnrollmentService {
 
 
 
-/*
-    public void enroll() {
+
+    public void enroll(EnrollmentModel enrollmentModel) {
         String url = "jdbc:sqlite:accounts.db";
-        String sql = "INSERT INTO enrollments (studentID, courseID,courseName,credit,schedule,prefix,semester,time) VALUES (?, ?, ?, ?,?,?,?)";
+        String sql = "INSERT INTO enrollments (studentID, courseID,courseName,credit,prefix,semester,schedule) VALUES (?, ?, ?, ?,?,?,?)";
 
         try (Connection conn = DriverManager.getConnection(url);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            pstmt.setInt(1, studentID);
-            pstmt.setString(2, courseID);
-            pstmt.setString(3, semester);
-            pstmt.setString(4, status);
+            pstmt.setString(1, LoginModel.getCurrentUser());
+            pstmt.setString(2, CourseModel.getCourseID());
+            pstmt.setString(3, enrollmentModel.getCourseName());
+            pstmt.setString(4,enrollmentModel.getCredit());
+            pstmt.setString(5,enrollmentModel.getPrefix());
+            pstmt.setString(6,enrollmentModel.getSemester());
+            pstmt.setString(7,enrollmentModel.getSchedule());
 
             pstmt.executeUpdate();
 
@@ -35,7 +38,7 @@ public class EnrollmentService {
             throw new RuntimeException(e);
         }
     }
-    /*
+
     public void unenroll() {
         String url = "jdbc:sqlite:accounts.db";
         String sql = "DELETE FROM enrollments WHERE studentID = ? and courseID = ?";
@@ -43,14 +46,14 @@ public class EnrollmentService {
         try (var conn = DriverManager.getConnection(url);
              var pstmt = conn.prepareStatement(sql)) {
 
-            pstmt.setString(1, this.studentID);
-
+            pstmt.setString(1,LoginModel.getCurrentUser());
+            pstmt.setString(2,CourseModel.getCourseID());
             pstmt.executeUpdate();
         } catch (SQLException e) {
-            System.err.println(e.getMessage());
+            throw new RuntimeException();
         }
     }
-/*
+
     public void courseExists() {
 
 
@@ -63,17 +66,17 @@ public class EnrollmentService {
         courseID = CourseModel.getCourseID();
         try (var conn = DriverManager.getConnection(url);
              var pstmt = conn.prepareStatement(sql)) {
-
+            pstmt.setString(1,courseID);
             var rs = pstmt.executeQuery();
             if (rs.next()) {
 
                 enrollmentModel.setStudentID(LoginModel.getCurrentUser());
-                enrollmentModel.setCourseID(rs.getString("courseID"));
+                enrollmentModel.setCourseID(rs.getString(1));
                 enrollmentModel.setCourseName(rs.getString("courseName"));
                 enrollmentModel.setCredit(rs.getString("credit"));
                 enrollmentModel.setPrefix(rs.getString("prefix"));
-                enrollmentModel.setSemester(rs.getString("semester"));
-                enrollmentModel.setTime(rs.getString("time"));
+                enrollmentModel.setSemester(CourseModel.getSemester());
+                enrollmentModel.setSchedule(rs.getString("schedule"));
             }
 
         } catch (SQLException e) {
@@ -81,30 +84,15 @@ public class EnrollmentService {
         }
     }
 
-    /*
-    public void setData() {
-        String url = "jdbc:sqlite:accounts.db";
-        String sql = "INSERT INTO enrollments() VALUES()";
-
-        try (Connection connection = DriverManager.getConnection(url);
-             PreparedStatement pstmt = connection.prepareStatement(sql)) {
-            pstmt.setString(1,idGenerator(registerModel));
 
 
 
-            pstmt.executeUpdate();
-
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-
-    }
 
 
     }
 
-     */
 
 
-}
+
+
 

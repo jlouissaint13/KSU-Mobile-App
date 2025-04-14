@@ -1,7 +1,10 @@
 package com.ksumobileapp.ScheduleBuilder;
 
+import java.util.ArrayList;
+
 public class EnrollmentModel {
 private String courseID,courseName,credit,semester,prefix,schedule,studentID;
+private ArrayList<String> prerequisites;
     public EnrollmentModel(String studentID,String courseID, String courseName, String credit, String prefix,String semester,String schedule) {
         this.studentID = studentID;
         this.courseID = courseID;
@@ -69,6 +72,14 @@ private String courseID,courseName,credit,semester,prefix,schedule,studentID;
 
     public void setSchedule(String schedule) {
         this.schedule = schedule;
+    }
+    public void setPrerequisites(ArrayList<String> prerequisites) {
+
+        this.prerequisites = prerequisites;
+
+    }
+    public ArrayList<String> getPrerequisites() {
+        return this.prerequisites;
     }
 
 

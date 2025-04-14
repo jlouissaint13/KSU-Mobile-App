@@ -20,7 +20,10 @@ public class ScheduleBController {
 
         this.scheduleBView.getEnroll().setOnAction(e-> {
             CourseModel.setCourseID(scheduleBView.getCourseID(whichValue()));
+
+            enrollmentService.setPrerequisites(this.enrollmentModel);
             enrollmentService.getData(this.enrollmentModel);
+            enrollmentService.prereqChecker(this.enrollmentModel);
             enrollmentService.enroll(this.enrollmentModel);
 
         });

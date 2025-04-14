@@ -48,10 +48,10 @@ public class EnrollmentService {
             throw new RuntimeException();
         }
     }
-//TODO needs to be tested;
+
     public boolean courseExists() throws SQLException {
         String url = "jdbc:sqlite:accounts.db";
-        String sql = "SELECT courseID FROM enrollment WHERE courseID = ? and studentID = ?";
+        String sql = "SELECT courseID,semester FROM enrollments WHERE courseID = ? and studentID = ?";
         String courseID;
         String studentID;
         courseID = CourseModel.getCourseID();
@@ -59,66 +59,85 @@ public class EnrollmentService {
         try (var conn = DriverManager.getConnection(url);
              var pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, courseID);
+            pstmt.setString(2,studentID);
             var rs = pstmt.executeQuery();
-            if (rs.getString(1) == null) return false;
+            //if semester and courseID are the same then tell the student they are already enrolled;
+            if (rs.getString(1).equals(CourseModel.getCourseID()) && rs.getString(2).equals(CourseModel.getSemester())) return true;
 
-            return true;
+            return false;
 
+        } catch (NullPointerException e) {
+            return false;
         }
     }
 //TODO needs to be tested
     public boolean scheduleError(EnrollmentModel enrollmentModel) {
         String url = "jdbc:sqlite:accounts.db";
-        String sql = "SELECT schedule FROM enrollment WHERE courseID = ? and studentID = ? and semesterID = ?";
-        String courseID;
+        String sql = "SELECT schedule FROM enrollments WHERE studentID = ? and semester = ?";
         String studentID;
-        courseID = CourseModel.getCourseID();
+        String semester;
+        String selectedTime = enrollmentModel.getSchedule();
         studentID = LoginModel.getCurrentUser();
+        semester = CourseModel.getSemester();
         try (var conn = DriverManager.getConnection(url);
              var pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, courseID);
-            pstmt.setString(2, studentID);
+            pstmt.setString(1, studentID);
+            pstmt.setString(2,semester);
             var rs = pstmt.executeQuery();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("H:mm");
-            LocalTime timeOne = LocalTime.parse(rs.getString(1), formatter);
-            LocalTime timeTwo = LocalTime.parse(rs.getString(2), formatter);
-            Duration duration = Duration.between(timeOne, timeTwo);
-            if (duration.toMinutes() < 90) return true;
+            //grabs start time of class student is trying to enroll in
+            String[] split = selectedTime.split("-");
+            LocalTime start = LocalTime.parse(split[0], formatter);
+            //will compare the time with all classes the student is in for the semester
+            while (rs.next()) {
+                String compareTime = rs.getString("schedule");
+                String[] compareSplit = compareTime.split("-");
+                LocalTime compareStart = LocalTime.parse(compareSplit[0], formatter);
 
-            return false;
+                long diffMinutes = Math.abs(Duration.between(compareStart, start).toMinutes());
 
 
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
-    }
-    //needs to run after the get and set prereq func
-    //if true then student has the prerequisites
-    public boolean prereqChecker(EnrollmentModel enrollmentModel) {
-        String enrollmentCourseID = " ";
-        String url = "jdbc:sqlite:accounts.db";
-        String sql = "SELECT courseID FROM enrollments WHERE courseID = ? and studentID = ?";
-        var courseID = CourseModel.getCourseID();
-        var studentID = LoginModel.getCurrentUser();
-        try(var conn = DriverManager.getConnection(url)) {
-            var pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1,courseID);
-            pstmt.setString(2,studentID);
-            var rs = pstmt.executeQuery();
-            if (rs.next()) {
-               enrollmentCourseID = rs.getString(1);
+                if (diffMinutes < 90) {
+                    return true;
+                }
             }
-            for (int i = 0;i<enrollmentModel.getPrerequisites().size();i++) {
-                if (enrollmentModel.getPrerequisites().get(i).equals(enrollmentCourseID))
-                    System.out.println("Has the prerqu");
-                return true;
-            }
-
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         return false;
+
+    }
+    //needs to run after the get and set prereq func
+    //if true then student has the prerequisites
+    public int prereqChecker(EnrollmentModel enrollmentModel) {
+
+        if (enrollmentModel.getPrerequisites().getFirst().equals("N/A")) return 0;
+        String url = "jdbc:sqlite:accounts.db";
+        String sql = "SELECT courseID,semester FROM enrollments WHERE courseID = ? and studentID = ?";
+        var studentID = LoginModel.getCurrentUser();
+       for (int i = 0;i<enrollmentModel.getPrerequisites().size();i++) {
+           var courseID = enrollmentModel.getPrerequisites().get(i);
+           try (var conn = DriverManager.getConnection(url)) {
+               var pstmt = conn.prepareStatement(sql);
+               System.out.println(courseID);
+               pstmt.setString(1, courseID);
+               pstmt.setString(2, studentID);
+               var rs = pstmt.executeQuery();
+               if (rs.next())
+                   //This means that the student is attempting to take a prerequisite that takes place during the same semester as the class that requires it;
+                   //lazy fix does not check to see if semester was before or after just checks for semester due to time constraints;
+                   if (enrollmentModel.getPrerequisites().get(i).equals(rs.getString(1)) && CourseModel.getSemester().equals(rs.getString(2))) return 1;
+
+                    if (enrollmentModel.getPrerequisites().get(i).equals(rs.getString("courseID"))) return 0;
+
+               } catch (SQLException e) {
+               throw new RuntimeException(e);
+           }
+
+       }
+
+        //prereq issues
+        return 2;
     }
 
 

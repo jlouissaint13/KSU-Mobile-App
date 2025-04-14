@@ -3,6 +3,7 @@ package com.ksumobileapp.ScheduleBuilder;
 import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
 
+import java.sql.SQLException;
 
 
 public class ScheduleBController {
@@ -23,7 +24,37 @@ public class ScheduleBController {
 
             enrollmentService.setPrerequisites(this.enrollmentModel);
             enrollmentService.getData(this.enrollmentModel);
-            enrollmentService.prereqChecker(this.enrollmentModel);
+
+
+            if (enrollmentService.scheduleError(enrollmentModel)) {
+                System.out.println("Schedule Error");
+                return;
+            }
+
+
+            try {
+                if (enrollmentService.courseExists()) {
+
+                    System.out.println("You are already enrolled for this course");
+                    return;
+                };
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+
+
+            switch (enrollmentService.prereqChecker(this.enrollmentModel)) {
+                case 1 -> {
+                    System.out.println("Semester issue");
+                    return;
+                }
+                case 2 -> {
+                    System.out.println("prereq issue");
+                    return;
+                }
+            }
+
+
             enrollmentService.enroll(this.enrollmentModel);
 
         });

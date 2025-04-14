@@ -237,8 +237,8 @@ public class ScheduleBView {
         ObservableList<String> cseOptions = FXCollections.observableArrayList(
                 "CSE 1321 Programming and Problem Solving I 9:00-10:30",
                 "CSE 1321L Programming and Problem Solving I Laboratory 10:30-12:00",
-                "CSE 1322 Programming and Problem Solving II 1:00-2:30",
-                "CSE 1322L Programming and Problem Solving II Laboratory 2:30-4:00",
+                "CSE 1322 Programming and Problem Solving II 9:00-10:30",
+                "CSE 1322L Programming and Problem Solving II Laboratory 10:30-12:00",
                 "CSE 2300 Discrete Structures for Computing 9:00-10:30",
                 "CSE 3153 Database Systems 3:30-5:00",
                 "CSE 3801 Professional Practices and Ethics 12:00-1:30",
@@ -279,10 +279,10 @@ public class ScheduleBView {
         it = new ComboBox(itOptions);
 
         ObservableList<String> mathOptions = FXCollections.observableArrayList(
-                "MATH 1111 College Algebra 2:30-4:00",
-                "MATH 1113 Precalculus 10:30-12:00",
-                "MATH 1190 Calculus I 1:00-2:30",
-                "MATH 2202 Calculus II 3:00-4:30",
+                "MATH 1111 College Algebra 7:00-8:30",
+                "MATH 1113 Precalculus 7:00-8:30",
+                "MATH 1190 Calculus I 7:00-8:30",
+                "MATH 2202 Calculus II 7:00-8:30",
                 "MATH 2345 Discrete Mathematics 6:30-8:00"
         );
         math = new ComboBox(mathOptions);
@@ -312,7 +312,7 @@ public class ScheduleBView {
         swe = new ComboBox(sweOptions);
 
         ObservableList<String> econOptions = FXCollections.observableArrayList(
-                "ECON 1000 Contemporary Economic Issues 2:00-3:30"
+                "ECON 1000 Contemporary Economic Issues 7:00-8:30"
         );
         econ = new ComboBox<>(econOptions);
 
@@ -326,17 +326,17 @@ public class ScheduleBView {
         );
         engl = new ComboBox<>(englOptions);
         ObservableList<String> histOptions = FXCollections.observableArrayList(
-                "HIST 1111 Survey of World History I 3:15-4:45",
+                "HIST 1111 Survey of World History I 5:30-7:00",
                 "HIST 1112 Survey of World History II 4:45-6:15",
                 "HIST 2111 Survey of U.S. History I 5:30-7:00",
                 "HIST 2112 Survey of U.S. History II 4:00-5:30"
         );
         hist = new ComboBox<>(histOptions);
         ObservableList<String> chemOptions = FXCollections.observableArrayList(
-                "CHEM 1211 Principles of Chemistry I 11:00-12:30",
-                "CHEM 1211L Principles of Chemistry Laboratory I 12:45-2:15",
-                "CHEM 1212 Principles of Chemistry II 11:00-12:30",
-                "CHEM 1212L Principles of Chemistry Laboratory II 12:45-2:15"
+                "CHEM 1211 Principles of Chemistry I 12:00-1:30",
+                "CHEM 1211L Principles of Chemistry Laboratory I 1:30-3:00",
+                "CHEM 1212 Principles of Chemistry II 12:00-1:30",
+                "CHEM 1212L Principles of Chemistry Laboratory II 1:30-3:00"
         );
         chem = new ComboBox<>(chemOptions);
 
@@ -352,10 +352,10 @@ public class ScheduleBView {
         );
         phys = new ComboBox<>(physOptions);
         ObservableList<String> biolOptions = FXCollections.observableArrayList(
-                "BIOL 1107 Principles of Biology I 10:30-12:00",
-                "BIOL 1107L Principles of Biology I Laboratory 12:15-1:45",
-                "BIOL 1108 Principles of Biology II 10:30-12:00",
-                "BIOL 1108L Principles of Biology II Laboratory 12:15-1:45"
+                "BIOL 1107 Principles of Biology I 7:00-8:30",
+                "BIOL 1107L Principles of Biology I Laboratory 1:30-3:00",
+                "BIOL 1108 Principles of Biology II 12:00-1:30",
+                "BIOL 1108L Principles of Biology II Laboratory 1:30-3:00"
         );
          biol = new ComboBox<>(biolOptions);
     }

@@ -26,6 +26,12 @@ public class ScheduleBController {
             enrollmentService.getData(this.enrollmentModel);
 
 
+            if (enrollmentService.creditLimitError()) {
+                System.out.println("To many credits");
+                return;
+            }
+
+
             if (enrollmentService.scheduleError(enrollmentModel)) {
                 System.out.println("Schedule Error");
                 return;

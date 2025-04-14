@@ -1,7 +1,9 @@
 package com.ksumobileapp.Payments;
 
 import com.ksumobileapp.Login.LoginModel;
+import com.ksumobileapp.Personal.PersonalService;
 import com.ksumobileapp.Profile.ProfileMain;
+import com.ksumobileapp.ScheduleBuilder.EnrollmentService;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -93,7 +95,10 @@ public class PaymentMain extends Application {
         // Final layout: top = back button, middle = content
         VBox root = new VBox(backButtonContainer, contentBox);
         Scene scene = new Scene(root, 350, 600);
-
+        /*
+        EnrollmentService enrollmentService = new EnrollmentService();
+        enrollmentService.getCreditForPayment();
+         */
         primaryStage.setTitle("Payment");
         primaryStage.setScene(scene);
         primaryStage.show();

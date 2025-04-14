@@ -168,6 +168,62 @@ public class EnrollmentService {
 
 
     }
+
+    public int getCredit() {
+        int totalCredits = 0;
+        int credit;
+        String url = "jdbc:sqlite:accounts.db";
+        String sql =  "select credit from enrollments where studentID = ? and semester = ?";
+        String studentID = LoginModel.getCurrentUser();
+        String semseter = CourseModel.getSemester();
+        try(var conn = DriverManager.getConnection(url)) {
+            var pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1,studentID);
+            pstmt.setString(2,semseter);
+            var resultSet = pstmt.executeQuery();
+            while (resultSet.next()) {
+                    credit = Integer.parseInt(resultSet.getString(1));
+                    totalCredits += credit;
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return totalCredits;
+
+    }
+    public boolean creditLimitError() {
+        if (getCredit()>18) return true;
+        return false;
+    }
+
+public int getCreditForPayment() {
+    int totalCredits = 0;
+    int credit;
+    String url = "jdbc:sqlite:accounts.db";
+    String sql =  "select credit from enrollments where studentID = ? and semester = ?";
+    String studentID = LoginModel.getCurrentUser();
+    String semseter = "Spring 2025";
+    try(var conn = DriverManager.getConnection(url)) {
+        var pstmt = conn.prepareStatement(sql);
+        pstmt.setString(1,studentID);
+        pstmt.setString(2,semseter);
+        var resultSet = pstmt.executeQuery();
+        while (resultSet.next()) {
+            credit = Integer.parseInt(resultSet.getString(1));
+            totalCredits += credit;
+        }
+
+    } catch (SQLException e) {
+        throw new RuntimeException(e);
+    }
+    return totalCredits;
+
+}
+
+
+
+
     public ArrayList<String> setPrerequisites(EnrollmentModel enrollmentModel) {
         String url = "jdbc:sqlite:accounts.db";
         String sql = "Select prerequisite_code from coursePrerequisites where courseID = ?";
@@ -186,6 +242,11 @@ public class EnrollmentService {
         }
         return prerequisites;
     }
+
+
+
+
+
 }
 
 

@@ -27,6 +27,14 @@ public class ScheduleBView {
     private TableView<Object> tableView;
     private Button enroll,unenroll,back;
     private String []info;
+    private ComboBox<String> econ;
+    private ObservableList<String> englOptions;
+    private ComboBox<String> hist;
+    private ComboBox<String> chem;
+    private ComboBox<String> phys;
+    private ComboBox<String> biol;
+    private ComboBox<String> engl;
+
     public void components() {
         pane = new Pane();
         scheduleBuilder = new Text("Schedule Builder");
@@ -124,6 +132,50 @@ public class ScheduleBView {
         swe.setVisible(false);
 
 
+
+        econ.setLayoutX(65);
+        econ.setLayoutY(140);
+        econ.setPrefWidth(200);
+        econ.setPromptText("Select Course");
+        econ.setStyle("-fx-font-size: 12.5px;");
+        econ.setVisible(false);
+
+        engl.setLayoutX(65);
+        engl.setLayoutY(140);
+        engl.setPrefWidth(200);
+        engl.setPromptText("Select Course");
+        engl.setStyle("-fx-font-size: 12.5px;");
+        engl.setVisible(false);
+
+        hist.setLayoutX(65);
+        hist.setLayoutY(140);
+        hist.setPrefWidth(200);
+        hist.setPromptText("Select Course");
+        hist.setStyle("-fx-font-size: 12.5px;");
+        hist.setVisible(false);
+
+        chem.setLayoutX(65);
+        chem.setLayoutY(140);
+        chem.setPrefWidth(200);
+        chem.setPromptText("Select Course");
+        chem.setStyle("-fx-font-size: 12.5px;");
+        chem.setVisible(false);
+
+        phys.setLayoutX(65);
+        phys.setLayoutY(140);
+        phys.setPrefWidth(200);
+        phys.setPromptText("Select Course");
+        phys.setStyle("-fx-font-size: 12.5px;");
+        phys.setVisible(false);
+
+        biol.setLayoutX(65);
+        biol.setLayoutY(140);
+        biol.setPrefWidth(200);
+        biol.setPromptText("Select Course");
+        biol.setStyle("-fx-font-size: 12.5px;");
+        biol.setVisible(false);
+
+
         enroll.setLayoutX(130);
         enroll.setLayoutY(180);
         enroll.setPrefWidth(80);
@@ -137,7 +189,7 @@ public class ScheduleBView {
 
 
     public void addComponents() {
-    pane.getChildren().addAll(scheduleBuilder,subjectComboBox,selectCourse,swe,cs,cse,math,stat,tcom,it,enroll,unenroll,back);
+    pane.getChildren().addAll(scheduleBuilder,subjectComboBox,selectCourse,swe,cs,cse,math,stat,tcom,it,hist,chem,biol,engl,phys,econ,enroll,unenroll,back);
     }
 
     public ScheduleBView(Stage stage) {
@@ -173,7 +225,13 @@ public class ScheduleBView {
                 "MATH-Mathematics",
                 "STAT-Statistics",
                 "IT-Information Technology",
-                "TCOM-Technical Communication"
+                "TCOM-Technical Communication",
+                "ECON-Economics",
+                "ENGL-English",
+                "HIST-History",
+                "CHEM-Chemistry",
+                "PHYS-Physics",
+                "BIOL-Biology"
         );
         subjectComboBox = new ComboBox<>(subjectOptions);
         ObservableList<String> cseOptions = FXCollections.observableArrayList(
@@ -221,11 +279,11 @@ public class ScheduleBView {
         it = new ComboBox(itOptions);
 
         ObservableList<String> mathOptions = FXCollections.observableArrayList(
-                "MATH 1111 College Algebra 9:00-10:30",
+                "MATH 1111 College Algebra 2:30-4:00",
                 "MATH 1113 Precalculus 10:30-12:00",
                 "MATH 1190 Calculus I 1:00-2:30",
                 "MATH 2202 Calculus II 3:00-4:30",
-                "MATH 2345 Discrete Mathematics 9:30-11:00"
+                "MATH 2345 Discrete Mathematics 6:30-8:00"
         );
         math = new ComboBox(mathOptions);
 
@@ -253,6 +311,53 @@ public class ScheduleBView {
         );
         swe = new ComboBox(sweOptions);
 
+        ObservableList<String> econOptions = FXCollections.observableArrayList(
+                "ECON 1000 Contemporary Economic Issues 2:00-3:30"
+        );
+        econ = new ComboBox<>(econOptions);
+
+        englOptions = FXCollections.observableArrayList(
+                "ENGL 1101 English Composition I 12:00-1:30",
+                "ENGL 1102 English Composition II 1:45-3:15",
+                "ENGL 2110 World Literature 4:00-5:30",
+                "ENGL 2120 British Literature 5:00-6:30",
+                "ENGL 2130 American Literature 4:30-6:00",
+                "ENGL 2140 African American Literature 6:00-7:30"
+        );
+        engl = new ComboBox<>(englOptions);
+        ObservableList<String> histOptions = FXCollections.observableArrayList(
+                "HIST 1111 Survey of World History I 3:15-4:45",
+                "HIST 1112 Survey of World History II 4:45-6:15",
+                "HIST 2111 Survey of U.S. History I 5:30-7:00",
+                "HIST 2112 Survey of U.S. History II 4:00-5:30"
+        );
+        hist = new ComboBox<>(histOptions);
+        ObservableList<String> chemOptions = FXCollections.observableArrayList(
+                "CHEM 1211 Principles of Chemistry I 11:00-12:30",
+                "CHEM 1211L Principles of Chemistry Laboratory I 12:45-2:15",
+                "CHEM 1212 Principles of Chemistry II 11:00-12:30",
+                "CHEM 1212L Principles of Chemistry Laboratory II 12:45-2:15"
+        );
+        chem = new ComboBox<>(chemOptions);
+
+        ObservableList<String> physOptions = FXCollections.observableArrayList(
+                "PHYS 1111 Introductory Physics I 10:30-12:00",
+                "PHYS 1111L Introductory Physics Laboratory I 12:15-1:45",
+                "PHYS 1112 Introductory Physics II 10:30-12:00",
+                "PHYS 1112L Introductory Physics Laboratory II 12:15-1:45",
+                "PHYS 2211 Principles of Physics I 2:00-3:30",
+                "PHYS 2211L Principles of Physics Laboratory I 3:45-5:15",
+                "PHYS 2212 Principles of Physics II 2:00-3:30",
+                "PHYS 2212L Principles of Physics Laboratory II 3:45-5:15"
+        );
+        phys = new ComboBox<>(physOptions);
+        ObservableList<String> biolOptions = FXCollections.observableArrayList(
+                "BIOL 1107 Principles of Biology I 10:30-12:00",
+                "BIOL 1107L Principles of Biology I Laboratory 12:15-1:45",
+                "BIOL 1108 Principles of Biology II 10:30-12:00",
+                "BIOL 1108L Principles of Biology II Laboratory 12:15-1:45"
+        );
+         biol = new ComboBox<>(biolOptions);
     }
 
 
@@ -289,6 +394,38 @@ public class ScheduleBView {
     public ComboBox<String> getSweCombo() {
         return swe;
     }
+
+    public ComboBox<String> getEconCombo() {
+        return econ;
+    }
+
+    public ComboBox<String> getEnglCombo() {
+        return engl;
+    }
+
+    public ComboBox<String> getHistCombo() {
+        return hist;
+    }
+
+    public ComboBox<String> getChemCombo() {
+        return chem;
+    }
+
+    public ComboBox<String> getPhysCombo() {
+        return phys;
+    }
+
+    public ComboBox<String> getBiolCombo() {
+        return biol;
+    }
+
+
+
+
+
+
+
+
     public Button getEnroll() {
         return enroll;
     }
@@ -323,9 +460,39 @@ public class ScheduleBView {
     public String getTcomValue() {
         return tcom.getValue().toString();
     }
+    public String getEconValue() {
+        return econ.getValue().toString();
+    }
+
+    public String getEnglValue() {
+        return engl.getValue().toString();
+    }
+
+    public String getHistValue() {
+        return hist.getValue().toString();
+    }
+
+    public String getChemValue() {
+        return chem.getValue().toString();
+    }
+
+    public String getPhysValue() {
+        return phys.getValue().toString();
+    }
+
+    public String getBiolValue() {
+        return biol.getValue().toString();
+    }
+
 
     public void setCoursesInvisible() {
         cse.setVisible(false);
+        econ.setVisible(false);
+        engl.setVisible(false);
+        hist.setVisible(false);
+        chem.setVisible(false);
+        phys.setVisible(false);
+        biol.setVisible(false);
         math.setVisible(false);
         stat.setVisible(false);
         it.setVisible(false);

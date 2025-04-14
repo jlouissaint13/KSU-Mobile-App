@@ -77,10 +77,16 @@ public class ScheduleBController {
             case "IT-Information Technology" -> this.scheduleBView.getITComboBox().setVisible(true);
             case "TCOM-Technical Communication" -> this.scheduleBView.getTcomComboBox().setVisible(true);
             case "SWE-Software Engineering" -> this.scheduleBView.getSweCombo().setVisible(true);
+            case "ECON-Economics" -> this.scheduleBView.getEconCombo().setVisible(true);
+            case "ENGL-English" -> this.scheduleBView.getEnglCombo().setVisible(true);
+            case "HIST-History" -> this.scheduleBView.getHistCombo().setVisible(true);
+            case "CHEM-Chemistry" -> this.scheduleBView.getChemCombo().setVisible(true);
+            case "PHYS-Physics" -> this.scheduleBView.getPhysCombo().setVisible(true);
+            case "BIOL-Biology" -> this.scheduleBView.getBiolCombo().setVisible(true);
         }
     }
     public String whichValue() {
-        ComboBox[] comboBoxes = new ComboBox[7];
+        ComboBox[] comboBoxes = new ComboBox[13];
         comboBoxes[0] = this.scheduleBView.getCsCombo();
         comboBoxes[1] = this.scheduleBView.getCseCombo();
         comboBoxes[2] = this.scheduleBView.getMathComboBox();
@@ -88,7 +94,14 @@ public class ScheduleBController {
         comboBoxes[4] = this.scheduleBView.getITComboBox();
         comboBoxes[5] = this.scheduleBView.getTcomComboBox();
         comboBoxes[6] = this.scheduleBView.getSweCombo();
-        for (int i = 0;i<7;i++) {
+        comboBoxes[7] = this.scheduleBView.getEconCombo();
+        comboBoxes[8] = this.scheduleBView.getEnglCombo();
+        comboBoxes[9] = this.scheduleBView.getHistCombo();
+        comboBoxes[10] = this.scheduleBView.getChemCombo();
+        comboBoxes[11] = this.scheduleBView.getPhysCombo();
+        comboBoxes[12] = this.scheduleBView.getBiolCombo();
+
+        for (int i = 0; i < 13; i++) {
             if (comboBoxes[i].isVisible()) return comboBoxes[i].getValue().toString();
         }
         return null;

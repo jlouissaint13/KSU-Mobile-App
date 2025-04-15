@@ -26,4 +26,6 @@ module com.ksumobileapp {
     opens com.ksumobileapp.StudentLookup to javafx.fxml;
     exports com.ksumobileapp.ScheduleBuilder;
     opens com.ksumobileapp.ScheduleBuilder to javafx.fxml;
+    exports com.ksumobileapp.AcademicHistory;
+    opens com.ksumobileapp.AcademicHistory to javafx.fxml;
 }

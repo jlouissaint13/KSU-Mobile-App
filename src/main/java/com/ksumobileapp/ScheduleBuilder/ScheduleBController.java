@@ -1,9 +1,12 @@
 package com.ksumobileapp.ScheduleBuilder;
 
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
 
 import java.sql.SQLException;
+import java.util.Optional;
 
 
 public class ScheduleBController {
@@ -27,47 +30,66 @@ public class ScheduleBController {
 
 
             if (enrollmentService.creditLimitError()) {
-                System.out.println("To many credits");
-                return;
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Credit Limit");
+                alert.setHeaderText("Credit Limit Error");
+                alert.setContentText("You cannot take more then 18 credits");
+
+                Optional<ButtonType> result = alert.showAndWait();
+
             }
-
-
-            if (enrollmentService.scheduleError(enrollmentModel)) {
-                System.out.println("Schedule Error");
-                return;
-            }
-
-
             try {
                 if (enrollmentService.courseExists()) {
 
-                    System.out.println("You are already enrolled for this course");
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Duplicate Error");
+                    alert.setHeaderText("Duplicate Error");
+                    alert.setContentText("You are already enrolled in this course");
+
+                    Optional<ButtonType> result = alert.showAndWait();
                     return;
                 };
+
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);
             }
 
 
             switch (enrollmentService.prereqChecker(this.enrollmentModel)) {
-                case 1 -> {
-                    System.out.println("Semester issue");
-                    return;
-                }
-                case 2 -> {
-                    System.out.println("prereq issue");
+                case 1,2 -> {
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Prerequisite Error");
+                    alert.setHeaderText("Prerequisite Error");
+                    alert.setContentText("You are missing at least one of the following prerequisites: " + this.enrollmentModel.getPrerequisites());
+
+                    Optional<ButtonType> result = alert.showAndWait();
                     return;
                 }
             }
 
+            if (enrollmentService.scheduleError(enrollmentModel)) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Schedule Error");
+                alert.setHeaderText("Schedule Error");
+                alert.setContentText("You are enrolled in a class that takes place during the allocated time slot");
+
+                Optional<ButtonType> result = alert.showAndWait();
+                return;
+            }
+
 
             enrollmentService.enroll(this.enrollmentModel);
+            this.scheduleBView.fillTable();
 
         });
 
+
+
+
         this.scheduleBView.getUnenroll().setOnAction(e-> {
-            CourseModel.setCourseID(scheduleBView.getCourseID(whichValue()));
+            CourseModel.setCourseID(this.scheduleBView.getCourseID(whichValue()));
             enrollmentService.unenroll();
+            this.scheduleBView.fillTable();
         });
 
         this.scheduleBView.getBack().setOnAction(e-> semesterMain.start(stage));
@@ -89,6 +111,14 @@ public class ScheduleBController {
             case "CHEM-Chemistry" -> this.scheduleBView.getChemCombo().setVisible(true);
             case "PHYS-Physics" -> this.scheduleBView.getPhysCombo().setVisible(true);
             case "BIOL-Biology" -> this.scheduleBView.getBiolCombo().setVisible(true);
+
+            case "1" -> {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Please select a Subject");
+                alert.setHeaderText("Subject Error");
+                alert.setContentText("You need to select a subject");
+
+            }
         }
     }
     public String whichValue() {
@@ -110,6 +140,6 @@ public class ScheduleBController {
         for (int i = 0; i < 13; i++) {
             if (comboBoxes[i].isVisible()) return comboBoxes[i].getValue().toString();
         }
-        return null;
+        return "1";
     }
 }

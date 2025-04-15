@@ -1,5 +1,6 @@
 package com.ksumobileapp.ScheduleBuilder;
 
+import com.ksumobileapp.Login.LoginModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
@@ -12,6 +13,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 
 public class ScheduleBView {
@@ -34,7 +37,7 @@ public class ScheduleBView {
     private ComboBox<String> phys;
     private ComboBox<String> biol;
     private ComboBox<String> engl;
-
+    public TableView<EnrollmentModel> enrollmentTable;
     public void components() {
         pane = new Pane();
         scheduleBuilder = new Text("Schedule Builder");
@@ -42,26 +45,22 @@ public class ScheduleBView {
         unenroll = new Button("Unenroll");
         tableView = new TableView<>();
         back = new Button("<");
-        /*
-        TableColumn<Course, String> codeCol = new TableColumn<>("Course Code");
-        codeCol.setCellValueFactory(new PropertyValueFactory<>("courseCode"));
-        codeCol.setPrefWidth(100);
+       enrollmentTable = new TableView<>();
+       TableColumn<EnrollmentModel,String> courseID = new TableColumn<>("Course Prefix");
+        TableColumn<EnrollmentModel,String> courseName = new TableColumn<>("Course Name");
+        TableColumn<EnrollmentModel,String> credit = new TableColumn<>("Credit");
+        TableColumn<EnrollmentModel,String> semester = new TableColumn<>("Semester");
+        TableColumn<EnrollmentModel,String> schedule = new TableColumn<>("Schedule");
 
-        TableColumn<Course, String> nameCol = new TableColumn<>("Course Name");
-        nameCol.setCellValueFactory(new PropertyValueFactory<>("courseName"));
-        nameCol.setPrefWidth(200);
+        courseID.setCellValueFactory(new PropertyValueFactory<>("courseID"));
+        courseName.setCellValueFactory(new PropertyValueFactory<>("courseName"));
+        credit.setCellValueFactory(new PropertyValueFactory<>("credit"));
+        semester.setCellValueFactory(new PropertyValueFactory<>("semester"));
+        schedule.setCellValueFactory(new PropertyValueFactory<>("schedule"));
 
-        TableColumn<Course, Integer> creditsCol = new TableColumn<>("Credit Hours");
-        creditsCol.setCellValueFactory(new PropertyValueFactory<>("creditHours"));
-        creditsCol.setPrefWidth(100);
 
-        TableColumn<Course, String> prereqCol = new TableColumn<>("Prerequisites");
-        prereqCol.setCellValueFactory(new PropertyValueFactory<>("prerequisites"));
-        prereqCol.setPrefWidth(150);
+        enrollmentTable.getColumns().addAll(courseID,courseName,credit,semester,schedule);
 
-        tableView.getColumns().addAll(codeCol, nameCol, creditsCol, prereqCol);
-
-         */
     }
 
 
@@ -185,19 +184,30 @@ public class ScheduleBView {
         back.setLayoutX(30);
         back.setLayoutY(30);
 
+
+
+
+        enrollmentTable.setMaxWidth(300);
+        enrollmentTable.setMaxHeight(300);
+
+        enrollmentTable.setLayoutX(20);
+        enrollmentTable.setLayoutY(270);
     }
 
 
     public void addComponents() {
-    pane.getChildren().addAll(scheduleBuilder,subjectComboBox,selectCourse,swe,cs,cse,math,stat,tcom,it,hist,chem,biol,engl,phys,econ,enroll,unenroll,back);
+    pane.getChildren().addAll(scheduleBuilder,subjectComboBox,selectCourse,swe,cs,cse,math,stat,tcom,it,hist,chem,biol,engl,phys,econ,enroll,unenroll,back,enrollmentTable);
     }
 
     public ScheduleBView(Stage stage) {
 
         comboBoxes();
         components();
+        fillTable();
         properties();
+
         addComponents();
+
 
         stage.setTitle("Schedule Builder");
         Scene scene1 = new Scene(pane,350,600);
@@ -483,6 +493,9 @@ public class ScheduleBView {
     public String getBiolValue() {
         return biol.getValue().toString();
     }
+    public TableView getEnrollmentTable() {
+        return enrollmentTable;
+    }
 
 
     public void setCoursesInvisible() {
@@ -501,6 +514,37 @@ public class ScheduleBView {
         swe.setVisible(false);
         selectCourse.setVisible(false);
     }
+
+
+    public void fillTable() {
+        String url = "jdbc:sqlite:accounts.db";
+        String sql = "Select courseID,courseName,credit,semester,schedule from enrollments where studentID = ? and semester = ?";
+        String studentID = LoginModel.getCurrentUser();
+        String semester = CourseModel.getSemester();
+        ObservableList<EnrollmentModel> list = FXCollections.observableArrayList();
+        try (var conn = DriverManager.getConnection(url)) {
+            var pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, studentID);
+            pstmt.setString(2, semester);
+            var rs = pstmt.executeQuery();
+            while (rs.next()) {
+                list.add(new EnrollmentModel(
+                        rs.getString("courseID"),
+                        rs.getString("courseName"),
+                        rs.getString("credit"),
+                        rs.getString("semester"),
+                        rs.getString("schedule")
+                ));
+            }
+            enrollmentTable.setItems(list);
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
+    }
+
 
 
 

@@ -14,6 +14,13 @@ private ArrayList<String> prerequisites;
         this.semester = semester;
         this.schedule = schedule;
     }
+    public EnrollmentModel(String courseID,String courseName,String credit,String semester,String schedule) {
+        this.courseID = courseID;
+        this.courseName = courseName;
+        this.credit = credit;
+        this.semester = semester;
+        this.schedule = schedule;
+    }
     public EnrollmentModel() {
 
     }

@@ -19,7 +19,7 @@ public class ProfileView {
     viewInformation = new Button("Personal Information");
     editProfile = new Button("Change Information");
     payCourses = new Button("Pay Online");
-    viewCourses = new Button("View Schedule");
+    viewCourses = new Button("View Academic History");
     recCourses = new Button("Course Recommendations");
     scheduleBuilder = new Button("Schedule Builder");
     digitalAdvisor = new Button("Digital Advisor");

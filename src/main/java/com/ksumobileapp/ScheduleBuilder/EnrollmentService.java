@@ -75,7 +75,6 @@ public class EnrollmentService {
         }
     }
 
-    //TODO needs to be tested
     public boolean scheduleError(EnrollmentModel enrollmentModel) {
         String url = "jdbc:sqlite:accounts.db";
         String sql = "SELECT schedule FROM enrollments WHERE studentID = ? and semester = ?";

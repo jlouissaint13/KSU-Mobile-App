@@ -70,7 +70,7 @@ public class RegisterModel {
     public static String getStudentID() {
         return RegisterModel.studentID;
     }
-
+    public static void resetStudentID() {RegisterModel.studentID = null;}
     public void setData() {
         data[0] = this.fname;
         data[1] = this.lname;

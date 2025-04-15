@@ -261,17 +261,7 @@ public class ScheduleBView {
                 "CS 3502 Operating Systems 10:30-12:00",
                 "CS 3503 Computer Organization and Architecture 1:30-3:00",
                 "CS 4308 Concepts of Programming Languages 3:00-4:30",
-                "CS 4504 Parallel and Distributed Computing 11:00-12:30",
-                "CS 4514 Real Time Systems 2:00-3:30",
-                "CS 4523 Programming Massively Parallel Processors 9:00-10:30",
-                "CS 4524 Cloud Computing 1:00-2:30",
-                "CS 4612 Software Security 12:30-2:00",
-                "CS 4622 Computer Networks 10:00-11:30",
-                "CS 4632 Modeling and Simulation 1:00-2:30",
-                "CS 4712 User Interface Engineering 3:30-5:00",
-                "CS 4720 Internet Programming 9:30-11:00",
-                "CS 4722 Computer Graphics and Multimedia 12:00-1:30",
-                "CS 4732 Machine Vision 2:30-4:00"
+                "CS 4504 Parallel and Distributed Computing 11:00-12:30"
         );
         cs = new ComboBox(csOptions);
 

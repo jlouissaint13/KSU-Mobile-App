@@ -3,8 +3,10 @@ package com.ksumobileapp.Profile;
 import com.ksumobileapp.AcademicHistory.AcademicHistory;
 import com.ksumobileapp.Admin.AdminModel;
 import com.ksumobileapp.Login.LoginMain;
+import com.ksumobileapp.Login.LoginModel;
 import com.ksumobileapp.Payments.PaymentMain;
 import com.ksumobileapp.Personal.PersonalMain;
+import com.ksumobileapp.Registration.RegisterModel;
 import com.ksumobileapp.Schedule.ScheduleMain;
 import com.ksumobileapp.ScheduleBuilder.SemesterMain;
 import javafx.scene.control.Alert;
@@ -44,7 +46,11 @@ public class ProfileController {
         viewAcademic.setOnAction(e-> academicHistory.start(stage));
 
 
-        backButton.setOnAction(e-> back(stage,loginMain));
+        backButton.setOnAction(e-> {
+            LoginModel.resetLogin();
+            RegisterModel.resetStudentID();;
+            back(stage,loginMain);
+        });
     }
 
 

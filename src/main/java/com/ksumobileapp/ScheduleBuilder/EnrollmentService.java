@@ -1,6 +1,7 @@
 package com.ksumobileapp.ScheduleBuilder;
 
 import com.ksumobileapp.Login.LoginModel;
+import com.ksumobileapp.Registration.RegisterView;
 import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -36,16 +37,17 @@ public class EnrollmentService {
             throw new RuntimeException(e);
         }
     }
-
-    public void unenroll() {
+//TODO add semester as well because well you know
+    public void unenroll(String courseID) {
         String url = "jdbc:sqlite:accounts.db";
-        String sql = "DELETE FROM enrollments WHERE studentID = ? and courseID = ?";
+        String sql = "DELETE FROM enrollments WHERE studentID = ? and courseID = ? and semester = ?";
 
         try (var conn = DriverManager.getConnection(url);
              var pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, LoginModel.getCurrentUser());
-            pstmt.setString(2, CourseModel.getCourseID());
+            pstmt.setString(2, courseID);
+            pstmt.setString(3,CourseModel.getSemester());
             pstmt.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException();

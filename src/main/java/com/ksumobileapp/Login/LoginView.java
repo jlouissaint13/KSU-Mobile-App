@@ -30,7 +30,6 @@ public class LoginView {
     createAccountButton = new Button("Create Account");
     }
 
-
     public void properties(){
     login.setLayoutX(160);
     login.setLayoutY(80);

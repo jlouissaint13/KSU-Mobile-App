@@ -23,6 +23,23 @@ public class ScheduleBController {
         semesterMain = new SemesterMain();
 
         this.scheduleBView.getEnroll().setOnAction(e-> {
+
+            if (subjectNull()) return;
+
+
+            if (whichValue() == "empty") {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Course Selection");
+                alert.setHeaderText("Course Selection");
+                alert.setContentText("Please select a course");
+
+                Optional<ButtonType> result = alert.showAndWait();
+                return;
+            }
+
+
+
+
             CourseModel.setCourseID(scheduleBView.getCourseID(whichValue()));
 
             enrollmentService.setPrerequisites(this.enrollmentModel);
@@ -87,8 +104,19 @@ public class ScheduleBController {
 
 
         this.scheduleBView.getUnenroll().setOnAction(e-> {
-            CourseModel.setCourseID(this.scheduleBView.getCourseID(whichValue()));
-            enrollmentService.unenroll();
+
+
+            if (this.scheduleBView.getSelectedCourse() == null) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Drop error");
+                alert.setHeaderText("Select a class");
+                alert.setContentText("Please select a class to drop");
+
+                Optional<ButtonType> result = alert.showAndWait();
+            }
+
+            enrollmentService.unenroll(this.scheduleBView.getSelectedCourse());
+
             this.scheduleBView.fillTable();
         });
 
@@ -112,13 +140,6 @@ public class ScheduleBController {
             case "PHYS-Physics" -> this.scheduleBView.getPhysCombo().setVisible(true);
             case "BIOL-Biology" -> this.scheduleBView.getBiolCombo().setVisible(true);
 
-            case "1" -> {
-                Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.setTitle("Please select a Subject");
-                alert.setHeaderText("Subject Error");
-                alert.setContentText("You need to select a subject");
-
-            }
         }
     }
     public String whichValue() {
@@ -136,10 +157,27 @@ public class ScheduleBController {
         comboBoxes[10] = this.scheduleBView.getChemCombo();
         comboBoxes[11] = this.scheduleBView.getPhysCombo();
         comboBoxes[12] = this.scheduleBView.getBiolCombo();
+        try {
+            for (int i = 0; i < 13; i++) {
+                if (comboBoxes[i].isVisible() && comboBoxes[i] != null) return comboBoxes[i].getValue().toString();
 
-        for (int i = 0; i < 13; i++) {
-            if (comboBoxes[i].isVisible()) return comboBoxes[i].getValue().toString();
+            }
+        }catch (NullPointerException e) {
+            return "empty";
         }
-        return "1";
+        return "empty";
+
+    }
+    public boolean subjectNull() {
+        if (scheduleBView.returnSubject() == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Subject Selection");
+            alert.setHeaderText("Subject Selection");
+            alert.setContentText("Please select a subject before continuing");
+
+            Optional<ButtonType> result = alert.showAndWait();
+            return true;
+        }
+        return false;
     }
 }

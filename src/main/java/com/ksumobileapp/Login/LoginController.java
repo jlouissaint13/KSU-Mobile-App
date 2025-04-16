@@ -53,7 +53,6 @@ private ProfileMain profileMain;
         //this.loginModel.setCampusEmail("jlouiss@students.kennesaw.edu");
         //this.loginModel.setPassword("password");
         studentLookUpMain = new StudentLookUpMain();
-        //TODO special admin permissions email
         //if(admin take to a page of profiles which allows the admin to edit any profile for any user)
         switch (loginService.login(this.loginModel)) {
             case 1:

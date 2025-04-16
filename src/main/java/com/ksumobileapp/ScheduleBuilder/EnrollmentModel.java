@@ -88,6 +88,11 @@ private ArrayList<String> prerequisites;
     public ArrayList<String> getPrerequisites() {
         return this.prerequisites;
     }
+    @Override
+    public String toString() {
+
+        return this.courseID;
+    }
 
 
 }

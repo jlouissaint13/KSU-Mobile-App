@@ -42,7 +42,7 @@ public class ScheduleBView {
         pane = new Pane();
         scheduleBuilder = new Text("Schedule Builder");
         enroll = new Button("Enroll");
-        unenroll = new Button("Unenroll");
+        unenroll = new Button("Drop");
         tableView = new TableView<>();
         back = new Button("<");
        enrollmentTable = new TableView<>();
@@ -199,7 +199,7 @@ public class ScheduleBView {
     pane.getChildren().addAll(scheduleBuilder,subjectComboBox,selectCourse,swe,cs,cse,math,stat,tcom,it,hist,chem,biol,engl,phys,econ,enroll,unenroll,back,enrollmentTable);
     }
 
-    public ScheduleBView(Stage stage) {
+      public ScheduleBView(Stage stage) {
 
         comboBoxes();
         components();
@@ -293,7 +293,7 @@ public class ScheduleBView {
         tcom = new ComboBox(tcomOptions);
 
         ObservableList<String> sweOptions = FXCollections.observableArrayList(
-                "SWE 3313 Introduction to Software Engineering 9:00-10:30",
+                "SWE 3313 Introduction to Software Engineering 5:30-7:00",
                 "SWE 3623 Software Systems Requirements 10:30-12:00",
                 "SWE 3633 Software Architecture and Design 1:00-2:30",
                 "SWE 3643 Software Testing & Quality Assurance 2:30-4:00",
@@ -533,11 +533,17 @@ public class ScheduleBView {
         }
 
 
-    }
-
-
-
 
     }
+
+    public String getSelectedCourse() {
+
+        ObservableList<EnrollmentModel> selectedCourse = enrollmentTable.getSelectionModel().getSelectedItems();
+
+
+        return selectedCourse.get(0).getCourseID().toString();
+
+    }
+}
 
 

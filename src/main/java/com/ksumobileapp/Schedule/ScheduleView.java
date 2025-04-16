@@ -13,6 +13,13 @@ public class ScheduleView  {
 
     private Image logo = new Image("logo.png");
     private ImageView imageView = new ImageView(logo);
+    public TableView<CourseModel> courseTable;
+    public TableColumn<CourseModel, String> courseNameColumn;
+    public TableColumn<CourseModel, String> courseCodeColumn;
+    ListView<String> scheduleList;
+    private ObservableList<CourseModel> availableCourses;
+    private ObservableList<String> enrolledCourses;
+
 
     public ScheduleView(Stage window){
 
@@ -20,15 +27,15 @@ public class ScheduleView  {
         Label availableClassesLabel = new Label("Available Classes");
         Label scheduleLabel = new Label("Your Schedule");
 
-        TableView<CourseModel> courseTable = new TableView<>();
-        TableColumn<CourseModel, String> courseNameColumn = new TableColumn<>("Course Name");
-        TableColumn<CourseModel, String> courseCodeColumn = new TableColumn<>("Course Code");
+        courseTable = new TableView<>();
+        courseNameColumn = new TableColumn<>("Course Name");
+        courseCodeColumn = new TableColumn<>("Course Code");
 
         //Add them to the table
         courseTable.getColumns().addAll(courseNameColumn, courseCodeColumn);
 
         //Create available classes
-        ObservableList<CourseModel> availableCourses = FXCollections.observableArrayList(
+        availableCourses = FXCollections.observableArrayList(
                 new CourseModel("Data Structures", "CS 3305"),
                 new CourseModel("Calculus II", "MATH 2202"),
                 new CourseModel("English II", "ENGL 1101"),
@@ -37,7 +44,7 @@ public class ScheduleView  {
 
         courseTable.setItems(availableCourses);
 
-        ListView<String> scheduleList = new ListView<>();
+        scheduleList = new ListView<>();
 
         //Enroll button
         Button enrollButton = new Button("Enroll");
@@ -50,6 +57,12 @@ public class ScheduleView  {
             }
         });
 
+        //Remove button
+        Button removeButton = new Button("Remove");
+        removeButton.setOnAction(e -> {
+
+        });
+
         //Layout
         VBox layout = new VBox(10);
         layout.getChildren().addAll(availableClassesLabel, scheduleLabel,
@@ -60,7 +73,6 @@ public class ScheduleView  {
         window.setScene(scene);
         window.show();
     }
-
 
     public void showAlert(String title, String message){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

@@ -45,7 +45,7 @@ public class ScheduleController {
 
     }
 
-    public void handleEnroll(){
+    /*public void handleEnroll(){
         CourseModel selectedCourse = courseTable.getSelectionModel().getSelectedItem();
         if(selectedCourse != null){
             if(!enrolledCourses.contains(selectedCourse.getName() + " - " + selectedCourse.getCode())){
@@ -56,7 +56,7 @@ public class ScheduleController {
         }else {
             showAlert("No class selected.", "Please select a class to enroll.");
         }
-    }
+    }*/
 
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

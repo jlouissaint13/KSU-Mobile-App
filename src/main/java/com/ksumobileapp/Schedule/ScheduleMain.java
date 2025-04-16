@@ -12,6 +12,7 @@ public class ScheduleMain extends Application {
     }
 
     private ScheduleView scheduleView;
+    private ScheduleController scheduleController;
     private Image logo = new Image("logo.png");
     private ImageView imageView = new ImageView(logo);
 
@@ -20,5 +21,6 @@ public class ScheduleMain extends Application {
 
         primaryStage.getIcons().add(imageView.getImage());
         scheduleView = new ScheduleView(primaryStage);
+        scheduleController = new ScheduleController(scheduleView.courseTable, scheduleView.courseNameColumn, scheduleView.courseCodeColumn, scheduleView.scheduleList);
     }
 }

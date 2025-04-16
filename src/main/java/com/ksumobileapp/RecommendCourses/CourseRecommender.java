@@ -1,33 +1,28 @@
-package com.ksumobileapp.ScheduleBuilder;
+package com.ksumobileapp.RecommendCourses;
 
 import java.sql.*;
 import java.util.*;
-import com.ksumobileapp.ScheduleBuilder.EnrollmentModel;
-import com.ksumobileapp.ScheduleBuilder.CourseModel;
-import com.ksumobileapp.ScheduleBuilder.EnrollmentService;
-import javafx.scene.Scene;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import javafx.scene.control.*;
-import javafx.collections.*;
 
 
 public class CourseRecommender {
-    private EnrollmentModel enrollmentModel;
-    private EnrollmentService enrollmentService = new EnrollmentService();
     private String url = "jdbc:sqlite:accounts.db";
+    private String id;
+    private ArrayList<String> recommendations;
 
+    public CourseRecommender(String id) {
+        this.id = id;
+    }
 
     public void connect(){
         try(Connection conn = DriverManager.getConnection(url);){
-
+            recommendations = recommend(conn, id);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
 
-    public List<String> getRecommendedCourses(Connection conn, String studentId) throws SQLException {
+    public ArrayList<String> recommend(Connection conn, String studentId) throws SQLException {
         List<String> completed = new ArrayList<>();
         String major = "";
         String classification = "";
@@ -59,7 +54,7 @@ public class CourseRecommender {
         pstmt3.setString(1, courseID);
         ResultSet rs3 = pstmt3.executeQuery();
 
-        List<String> recommendedCourses = new ArrayList<>();
+        ArrayList<String> recommendedCourses = new ArrayList<>();
         while (rs3.next()) {
             prerequisite = rs3.getString("prerequisite_code");
             courseID = rs3.getString("courseID");
@@ -71,11 +66,7 @@ public class CourseRecommender {
         return recommendedCourses;
     }
 
-    public void showAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
+    public String getStudentID() { return id;}
+
+    public ArrayList<String> getRecommendations() { return recommendations;}
 }

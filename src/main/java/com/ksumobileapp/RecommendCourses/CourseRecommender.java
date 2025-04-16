@@ -11,6 +11,7 @@ public class CourseRecommender {
 
     public CourseRecommender(String id) {
         this.id = id;
+
     }
 
     public void connect(){

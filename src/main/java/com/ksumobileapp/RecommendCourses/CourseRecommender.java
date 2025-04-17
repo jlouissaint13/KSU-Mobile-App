@@ -32,7 +32,7 @@ public class CourseRecommender {
 
 
         //Get major and classification
-        PreparedStatement pstmt1 = conn.prepareStatement("SELECT major, classification FROM `users` WHERE `studentID` = ?");
+        PreparedStatement pstmt1 = conn.prepareStatement("SELECT major, classification FROM users WHERE studentID = ?");
         pstmt1.setString(1, studentId);
         ResultSet rs = pstmt1.executeQuery();
         if (rs.next()) {
@@ -41,7 +41,7 @@ public class CourseRecommender {
         }
 
         //Get completed courses
-        PreparedStatement pstmt2 = conn.prepareStatement("SELECT courseID FROM `enrollments` WHERE `studentID` = ?");
+        PreparedStatement pstmt2 = conn.prepareStatement("SELECT courseID FROM enrollments WHERE studentID = ?");
         pstmt2.setString(1, studentId);
         ResultSet rs2 = pstmt2.executeQuery();
         while (rs2.next()) {
@@ -50,8 +50,7 @@ public class CourseRecommender {
         }
 
         //Get eligible courses
-        PreparedStatement pstmt3 = conn.prepareStatement("SELECT prerequisite_code FROM `coursePrerequisites`"
-        + " WHERE `courseID` = ?");
+        PreparedStatement pstmt3 = conn.prepareStatement("SELECT prerequisite_code FROM coursePrerequisites WHERE courseID = ?");
         pstmt3.setString(1, courseID);
         ResultSet rs3 = pstmt3.executeQuery();
 

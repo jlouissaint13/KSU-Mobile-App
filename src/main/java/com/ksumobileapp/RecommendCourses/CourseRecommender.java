@@ -1,5 +1,7 @@
 package com.ksumobileapp.RecommendCourses;
 
+import com.ksumobileapp.Login.LoginModel;
+
 import java.sql.*;
 import java.util.*;
 
@@ -11,60 +13,53 @@ public class CourseRecommender {
 
     public CourseRecommender(String id) {
         this.id = id;
-
     }
 
-    public void connect(){
+    /*public void connect(){
         try(Connection conn = DriverManager.getConnection(url);){
-            recommendations = recommend(conn, id);
+
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            System.out.println("SQL Error");
         }
-    }
+    }*/
 
 
-    public ArrayList<String> recommend(Connection conn, String studentId) throws SQLException {
-        List<String> completed = new ArrayList<>();
-        String major = "";
-        String classification = "";
+    public ArrayList<String> completedCourses() throws SQLException {
         String courseID = "";
-        String prerequisite;
-
-
-        //Get major and classification
-        PreparedStatement pstmt1 = conn.prepareStatement("SELECT major, classification FROM users WHERE studentID = ?");
-        pstmt1.setString(1, studentId);
-        ResultSet rs = pstmt1.executeQuery();
-        if (rs.next()) {
-            major = rs.getString("major");
-            classification = rs.getString("classification");
-        }
-
-        //Get completed courses
+        ArrayList<String> completed = new ArrayList<>();
+        Connection conn = DriverManager.getConnection(url);
         PreparedStatement pstmt2 = conn.prepareStatement("SELECT courseID FROM enrollments WHERE studentID = ?");
-        pstmt2.setString(1, studentId);
+        pstmt2.setString(1, LoginModel.getCurrentUser());
         ResultSet rs2 = pstmt2.executeQuery();
         while (rs2.next()) {
             courseID = rs2.getString("courseID");
             completed.add(rs2.getString("courseID"));
         }
+        return completed;
+    }
 
-        //Get eligible courses
-        PreparedStatement pstmt3 = conn.prepareStatement("SELECT prerequisite_code FROM coursePrerequisites WHERE courseID = ?");
-        pstmt3.setString(1, courseID);
-        ResultSet rs3 = pstmt3.executeQuery();
-
-        ArrayList<String> recommendedCourses = new ArrayList<>();
-        while (rs3.next()) {
-            prerequisite = rs3.getString("prerequisite_code");
-            courseID = rs3.getString("courseID");
-            if(completed.contains(courseID)) continue;
-            if(prerequisite == null || prerequisite.isEmpty() || completed.contains(prerequisite)) {
-                recommendedCourses.add(courseID);
+    public ArrayList<String> getEligible(ArrayList<String> completed) throws SQLException {
+        ArrayList<String> eligibleCourses = new ArrayList<>();
+        String prerequisite = "";
+        String courseID = "";
+        Connection conn = DriverManager.getConnection(url);
+        PreparedStatement pstmt3 = conn.prepareStatement("SELECT prerequisite_code,courseID FROM coursePrerequisites WHERE courseID = ?");
+        for(int i =0; i < completed.size(); i++){
+            pstmt3.setString(1, completed.get(i));
+            ResultSet rs3 = pstmt3.executeQuery();
+            while (rs3.next()){
+                prerequisite = rs3.getString("prerequisite_code");
+                courseID = rs3.getString("courseID");
+                if(completed.contains(courseID)) continue;
+                if(prerequisite == null || prerequisite.isEmpty() || completed.contains(prerequisite)) {
+                    eligibleCourses.add(courseID);
+                }
             }
         }
-        return recommendedCourses;
+        return eligibleCourses;
     }
+
+
 
     public String getStudentID() { return id;}
 

@@ -17,14 +17,16 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class RecommendationMain extends Application {
     private CourseRecommender recommender;
 
 
+
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws SQLException {
 
         Button back = new Button("<");
         back.setOnAction(e -> {
@@ -49,9 +51,9 @@ public class RecommendationMain extends Application {
         pageLabel.setFont(new Font("Arial", 18));
 
         //Pull user ID and connect
-        String currentUser = LoginModel.getCurrentUser();
-        recommender = new CourseRecommender(currentUser);
-        recommender.connect();
+        recommender = new CourseRecommender(LoginModel.getCurrentUser());
+
+        recommender.getEligible(recommender.completedCourses());
 
         ListView<String> courseList = new ListView<>();
 

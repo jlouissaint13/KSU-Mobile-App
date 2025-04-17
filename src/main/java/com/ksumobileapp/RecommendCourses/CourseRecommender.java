@@ -43,7 +43,7 @@ public class CourseRecommender {
         String prerequisite = "";
         String courseID = "";
         Connection conn = DriverManager.getConnection(url);
-        PreparedStatement pstmt3 = conn.prepareStatement("SELECT prerequisite_code FROM coursePrerequisites WHERE courseID = ?");
+        PreparedStatement pstmt3 = conn.prepareStatement("SELECT prerequisite_code,courseID FROM coursePrerequisites WHERE courseID = ?");
         for(int i =0; i < completed.size(); i++){
             pstmt3.setString(1, completed.get(i));
             ResultSet rs3 = pstmt3.executeQuery();

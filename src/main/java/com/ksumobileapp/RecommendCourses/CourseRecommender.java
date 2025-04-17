@@ -15,13 +15,6 @@ public class CourseRecommender {
         this.id = id;
     }
 
-    /*public void connect(){
-        try(Connection conn = DriverManager.getConnection(url);){
-
-        } catch (Exception e) {
-            System.out.println("SQL Error");
-        }
-    }*/
 
 
     public ArrayList<String> completedCourses() throws SQLException {

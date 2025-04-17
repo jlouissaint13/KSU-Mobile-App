@@ -1,9 +1,7 @@
 package com.ksumobileapp.Payments;
 
 import com.ksumobileapp.Login.LoginModel;
-import com.ksumobileapp.Personal.PersonalService;
 import com.ksumobileapp.Profile.ProfileMain;
-import com.ksumobileapp.ScheduleBuilder.EnrollmentService;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -13,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import com.ksumobileapp.Payments.PaymentOptions;
 
 import java.sql.*;
 
@@ -66,9 +65,9 @@ public class PaymentMain extends Application {
         Label idLabel = new Label("ID: " + studentID);
 
         // Hardcode but can hook real data later
-        Label balanceLabel = new Label("Balance: $1,100.00");
-        Label aidLabel = new Label("Estimated Financial Aid: $1,961.60");
-        Label totalLabel = new Label("Balance including estimated aid: -$861.60");
+        Label balanceLabel = new Label("Balance: $1,961.30");
+        Label aidLabel = new Label("Estimated Financial Aid: $961.60");
+        Label totalLabel = new Label("Balance including estimated aid: -$1099.70");
         Label ebillLabel = new Label("Latest eBill Statement (1/8/25): -$3,238.00");
 
         // Stack all account-related info
@@ -81,7 +80,18 @@ public class PaymentMain extends Application {
         Label confirmationLabel = new Label(); // Will say "Payment Successful!" after click
 
         makePaymentBtn.setOnAction(e -> {
-            confirmationLabel.setText("Payment Successful!");
+            try {
+                // Open the new PaymentOptions screen
+                PaymentOptions paymentOptions = new PaymentOptions();
+                Stage paymentStage = new Stage();
+                paymentOptions.start(paymentStage);
+
+                // Optional: Close current Payment screen
+                // primaryStage.close();
+
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
         });
 
         VBox buttonBox = new VBox(10, makePaymentBtn, confirmationLabel);

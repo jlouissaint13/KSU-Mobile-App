@@ -33,6 +33,7 @@ public class CourseRecommender {
         ResultSet rs2 = pstmt2.executeQuery();
         while (rs2.next()) {
             courseID = rs2.getString("courseID");
+            //System.out.println("Found a completed course");
             completed.add(rs2.getString("courseID"));
         }
         return completed;
@@ -43,17 +44,19 @@ public class CourseRecommender {
         String prerequisite = "";
         String courseID = "";
         Connection conn = DriverManager.getConnection(url);
-        PreparedStatement pstmt3 = conn.prepareStatement("SELECT prerequisite_code,courseID FROM coursePrerequisites WHERE courseID = ?");
-        for(int i =0; i < completed.size(); i++){
-            pstmt3.setString(1, completed.get(i));
-            ResultSet rs3 = pstmt3.executeQuery();
-            while (rs3.next()){
-                prerequisite = rs3.getString("prerequisite_code");
-                courseID = rs3.getString("courseID");
-                if(completed.contains(courseID)) continue;
-                if(prerequisite == null || prerequisite.isEmpty() || completed.contains(prerequisite)) {
-                    eligibleCourses.add(courseID);
-                }
+        PreparedStatement pstmt3 = conn.prepareStatement("SELECT courseID, prerequisite_code FROM coursePrerequisites");
+
+        ResultSet rs = pstmt3.executeQuery();
+        while (rs.next()){
+            courseID = rs.getString("courseID");
+            prerequisite = rs.getString("prerequisite_code");
+
+            //Skip if the course is already completed
+            if(completed.contains(courseID)) continue;
+
+            if(prerequisite == null || prerequisite.isEmpty() || completed.contains(prerequisite)) {
+                    System.out.println("Found a eligible course: " + courseID); //debugging
+                    if(!eligibleCourses.contains(courseID)) eligibleCourses.add(courseID);
             }
         }
         return eligibleCourses;
@@ -63,5 +66,5 @@ public class CourseRecommender {
 
     public String getStudentID() { return id;}
 
-    public ArrayList<String> getRecommendations() { return recommendations;}
+    public ArrayList<String> getRecommendations() { return recommendations != null ? recommendations : new ArrayList<String>(0);}
 }

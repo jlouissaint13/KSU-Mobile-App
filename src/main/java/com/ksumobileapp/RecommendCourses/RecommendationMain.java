@@ -23,8 +23,6 @@ import java.util.ArrayList;
 public class RecommendationMain extends Application {
     private CourseRecommender recommender;
 
-
-
     @Override
     public void start(Stage primaryStage) throws SQLException {
 
@@ -53,14 +51,18 @@ public class RecommendationMain extends Application {
         //Pull user ID and connect
         recommender = new CourseRecommender(LoginModel.getCurrentUser());
 
-        recommender.getEligible(recommender.completedCourses());
 
         ListView<String> courseList = new ListView<>();
+        ObservableList<String> showCourses = FXCollections.observableArrayList();
 
-        ArrayList<String> recs =  recommender.getRecommendations();
-        courseList.getItems().addAll(recs);
+        ArrayList<String> recommendations = recommender.getEligible(recommender.completedCourses());
+        showCourses.addAll(recommendations);
+        courseList.setItems(showCourses);
 
-        VBox vBox = new VBox(10);
+
+
+
+        VBox vBox = new VBox();
         vBox.getChildren().addAll(back, backContain, pageLabel, courseList);
 
         Scene scene = new Scene(vBox, 350, 600);

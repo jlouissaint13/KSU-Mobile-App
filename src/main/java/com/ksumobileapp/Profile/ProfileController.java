@@ -15,6 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 
+import java.sql.SQLException;
 import java.util.Optional;
 
 public class ProfileController {
@@ -49,7 +50,13 @@ public class ProfileController {
         payOnline.setOnAction(e ->  paymentMain.start(stage));
         schedule.setOnAction(e -> semesterMain.start(stage));
         viewAcademic.setOnAction(e-> academicHistory.start(stage));
-        recCourses.setOnAction(e -> recommendationMain.start(stage));
+        recCourses.setOnAction(e -> {
+            try {
+                recommendationMain.start(stage);
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
 
 
         backButton.setOnAction(e-> {

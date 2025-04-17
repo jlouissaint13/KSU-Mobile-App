@@ -30,4 +30,5 @@ module com.ksumobileapp {
     opens com.ksumobileapp.AcademicHistory to javafx.fxml;
     exports com.ksumobileapp.RecommendCourses;
     opens com.ksumobileapp.RecommendCourses to javafx.fxml;
+    exports com.ksumobileapp.Advisor; // JavaFX access to AdvisorMain
 }

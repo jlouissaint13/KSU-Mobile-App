@@ -1,0 +1,110 @@
+package com.ksumobileapp.Advisor;
+
+import javafx.application.Application;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
+import javafx.stage.Stage;
+
+public class AdvisorChat extends Application {
+
+    private VBox chatBox; // Container for chat messages
+
+    @Override
+    public void start(Stage stage) {
+        // Top label for chat window
+        Label titleLabel = new Label("Chat with Advisor");
+        titleLabel.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
+
+        // VBox to hold all chat messages
+        chatBox = new VBox(10);
+        chatBox.setPadding(new Insets(10));
+        chatBox.setStyle("-fx-background-color: #f4f4f4;");
+
+        // Scroll pane to allow scrolling through messages
+        ScrollPane scrollPane = new ScrollPane(chatBox);
+        scrollPane.setFitToWidth(true);
+        scrollPane.setPrefHeight(500);
+
+        // Input field to type a message
+        TextField inputField = new TextField();
+        inputField.setPromptText("Type your message...");
+
+        // Send button
+        Button sendBtn = new Button("Send");
+        sendBtn.setOnAction(e -> {
+            String message = inputField.getText().trim();
+            if (!message.isEmpty()) {
+                addUserMessage(message);
+                addAdvisorResponse(message);
+                inputField.clear();
+            }
+        });
+
+        // Layout for input area
+        HBox inputArea = new HBox(10, inputField, sendBtn);
+        inputArea.setAlignment(Pos.CENTER);
+        inputArea.setPadding(new Insets(10));
+
+        // Main layout
+        VBox root = new VBox(10, titleLabel, scrollPane, inputArea);
+        root.setPadding(new Insets(15));
+
+        // Set window size
+        Scene scene = new Scene(root, 350, 600);
+        stage.setTitle("Email Your Advisor");
+        stage.setScene(scene);
+        stage.show();
+
+        // Advisor initiates conversation
+        advisorIntroMessage();
+    }
+
+    // welcome message + options
+    private void advisorIntroMessage() {
+        String welcome = "Hi there! I'm your advisor 😊\n\nWhat do you need help with today?\nHere are some things I can assist with:\n- Class registration\n- Graduation requirements\n- Course withdrawals\n- Academic probation\n- General questions";
+        addAdvisorText(welcome);
+    }
+
+    // Display user's message
+    private void addUserMessage(String msg) {
+        Label messageLabel = new Label(msg);
+        messageLabel.setStyle("-fx-background-color: #d1e7dd; -fx-padding: 8; -fx-background-radius: 10;");
+        HBox box = new HBox(messageLabel);
+        box.setAlignment(Pos.CENTER_RIGHT);
+        chatBox.getChildren().add(box);
+    }
+
+    // Display advisor's response
+    private void addAdvisorResponse(String userMsg) {
+        String reply = generateAdvisorReply(userMsg);
+
+        addAdvisorText(reply);
+    }
+
+    // Display advisor text
+    private void addAdvisorText(String msg) {
+        Label replyLabel = new Label(msg);
+        replyLabel.setStyle("-fx-background-color: #f8d7da; -fx-padding: 8; -fx-background-radius: 10;");
+        HBox box = new HBox(replyLabel);
+        box.setAlignment(Pos.CENTER_LEFT);
+        chatBox.getChildren().add(box);
+    }
+
+    // auto-response logic
+    private String generateAdvisorReply(String userMsg) {
+        String msg = userMsg.toLowerCase();
+        if (msg.contains("schedule") || msg.contains("register")) {
+            return "Let's take a look at your schedule. Are you \ntrying to add or drop a class?";
+        } else if (msg.contains("graduation")) {
+            return "Awesome! Have you already applied for graduation through Owl Express?";
+        } else if (msg.contains("thank")) {
+            return "You're very welcome! 😊 Let me know if there's anything else.";
+        } else if (msg.contains("withdraw")) {
+            return "For withdrawals, the deadline varies by semester. Do you know the course you want to withdraw from?";
+        }
+        return "Thanks for your message! I’ll look into that and \nget back to you shortly.";
+    }
+}

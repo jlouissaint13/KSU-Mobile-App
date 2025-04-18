@@ -42,7 +42,7 @@ public class PaymentOptions extends Application {
         root.setAlignment(Pos.CENTER);
         root.setPadding(new Insets(20));
 
-        stage.setScene(new Scene(root, 300, 200));
+        stage.setScene(new Scene(root, 350, 600));
         stage.setTitle("Select Payment Method");
         stage.show();
     }

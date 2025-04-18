@@ -35,7 +35,7 @@ public class AdvisorMain extends Application {
         layout.setAlignment(Pos.TOP_LEFT);
         layout.setPadding(new Insets(20));
 
-        Scene scene = new Scene(layout, 350, 300);
+        Scene scene = new Scene(layout, 350, 600);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Advisor");
         primaryStage.show();

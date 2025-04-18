@@ -22,9 +22,12 @@ import java.util.ArrayList;
 
 public class RecommendationMain extends Application {
     private CourseRecommender recommender;
+    private Pane pane;
 
     @Override
     public void start(Stage primaryStage) throws SQLException {
+
+        pane = new Pane();
 
         Button back = new Button("<");
         back.setOnAction(e -> {
@@ -38,14 +41,15 @@ public class RecommendationMain extends Application {
             }
         });
 
+
         //Position the back button on the top left
         HBox backContain = new HBox(back);
         backContain.setAlignment(Pos.TOP_LEFT);
 
         //Title
         Label pageLabel = new Label("Recommended Courses");
-        pageLabel.setLayoutX(150);
-        pageLabel.setLayoutY(5);
+        pageLabel.setLayoutX(78);
+        pageLabel.setLayoutY(23);
         pageLabel.setFont(new Font("Arial", 18));
 
         //Pull user ID and connect
@@ -55,17 +59,19 @@ public class RecommendationMain extends Application {
         ListView<String> courseList = new ListView<>();
         ObservableList<String> showCourses = FXCollections.observableArrayList();
 
+        courseList.setLayoutX(100);
+        courseList.setLayoutY(50);
+        courseList.setPrefSize(150, 400);
+        courseList.setId("courseList");
+
         ArrayList<String> recommendations = recommender.getEligible(recommender.completedCourses());
         showCourses.addAll(recommendations);
         courseList.setItems(showCourses);
 
+        pane.getChildren().addAll(pageLabel, courseList, backContain, back);
 
-
-
-        VBox vBox = new VBox();
-        vBox.getChildren().addAll(back, backContain, pageLabel, courseList);
-
-        Scene scene = new Scene(vBox, 350, 600);
+        Scene scene = new Scene(pane, 350, 600);
+        scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.setTitle("Recommended Courses");
         primaryStage.show();

@@ -1,0 +1,44 @@
+/*
+KSU Colors - via Official KSU Website: https://www.kennesaw.edu/stratcomm/branding/
+
+-Primary Palette-
+    Hooty Hoo Gold: #ffc629
+    Legacy Black: #2D2926
+    Slap Rock Gray: #B2B4B2
+    Bachelor White: #FFFFFF
+
+-Complementary Palette- (just in case you want to use them)
+
+    -Vibrant Cool Colors
+        Marietta Blue: #303AB2
+        Campus Green: #43B02A
+        Phantom Purple: #702F8A
+
+    -Vibrant Warm Color
+        Leaning Man: #F4633A
+
+    -Neutral
+        Horned Owl: #B7A99A
+        Mountain Beige: #f1E6B2
+
+
+ */
+.root{
+    -fx-background-color: #ffc629;
+}
+
+#courseList{
+    -fx-background-color: #B7A99A;
+    -fx-control-inner-background: #B7A99A;
+    -fx-background-radius: 15;
+    -fx-border-radius: 15;
+    -fx-border-color: black;
+    -fx-border-width: 2;
+    -fx-padding: 5;
+}
+
+#courseList.list-cell{
+    -fx-background-color: transparent;
+    -fx-text-fill: black;
+    -fx-font-size: 14px;
+}

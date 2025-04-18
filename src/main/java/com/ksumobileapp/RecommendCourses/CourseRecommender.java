@@ -15,8 +15,6 @@ public class CourseRecommender {
         this.id = id;
     }
 
-
-
     public ArrayList<String> completedCourses() throws SQLException {
         String courseID = "";
         ArrayList<String> completed = new ArrayList<>();
@@ -37,9 +35,9 @@ public class CourseRecommender {
         String prerequisite = "";
         String courseID = "";
         Connection conn = DriverManager.getConnection(url);
-        PreparedStatement pstmt3 = conn.prepareStatement("SELECT courseID, prerequisite_code FROM coursePrerequisites");
+        PreparedStatement pstmt = conn.prepareStatement("SELECT courseID, prerequisite_code FROM coursePrerequisites");
 
-        ResultSet rs = pstmt3.executeQuery();
+        ResultSet rs = pstmt.executeQuery();
         while (rs.next()){
             courseID = rs.getString("courseID");
             prerequisite = rs.getString("prerequisite_code");
@@ -54,7 +52,6 @@ public class CourseRecommender {
         }
         return eligibleCourses;
     }
-
 
 
     public String getStudentID() { return id;}

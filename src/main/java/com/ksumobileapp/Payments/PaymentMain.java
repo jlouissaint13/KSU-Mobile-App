@@ -11,8 +11,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import com.ksumobileapp.Payments.PaymentOptions;
-
 import java.sql.*;
 
 public class PaymentMain extends Application {
@@ -77,7 +75,7 @@ public class PaymentMain extends Application {
 
         // Simple payment button
         Button makePaymentBtn = new Button("Make Payment");
-        Label confirmationLabel = new Label(); // Will say "Payment Successful!" after click
+        Label confirmationLabel = new Label();
 
         makePaymentBtn.setOnAction(e -> {
             try {
@@ -86,8 +84,8 @@ public class PaymentMain extends Application {
                 Stage paymentStage = new Stage();
                 paymentOptions.start(paymentStage);
 
-                // Optional: Close current Payment screen
-                // primaryStage.close();
+                //Close current Payment screen
+                ((Stage) makePaymentBtn.getScene().getWindow()).close();
 
             } catch (Exception ex) {
                 ex.printStackTrace();

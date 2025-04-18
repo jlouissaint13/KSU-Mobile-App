@@ -9,43 +9,41 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 public class PaymentOptions extends Application {
-
     @Override
     public void start(Stage stage) {
-        // Title
-        Label title = new Label("Choose Payment Method");
+        Button cardBtn = new Button("Credit/Debit Card");
+        Button bankBtn = new Button("Bank Transfer");
 
-        // Payment options(can customize later)
-        RadioButton creditCardOption = new RadioButton("Credit/Debit Card");
-        RadioButton bankTransferOption = new RadioButton("Bank Transfer");
-        RadioButton financialAidOption = new RadioButton("Use Financial Aid");
-        ToggleGroup paymentGroup = new ToggleGroup();
-        creditCardOption.setToggleGroup(paymentGroup);
-        bankTransferOption.setToggleGroup(paymentGroup);
-        financialAidOption.setToggleGroup(paymentGroup);
-
-        VBox paymentOptionsBox = new VBox(10, creditCardOption, bankTransferOption, financialAidOption);
-        paymentOptionsBox.setPadding(new Insets(10));
-
-        // Proceed Button
-        Button proceedBtn = new Button("Proceed");
-        Label confirmationLabel = new Label();
-
-        proceedBtn.setOnAction(e -> {
-            confirmationLabel.setText("Payment Method Selected!");
+        // Open CreditCardPayment on click
+        cardBtn.setOnAction(e -> {
+            try {
+                CreditCardPayment cardWindow = new CreditCardPayment();
+                Stage newStage = new Stage();
+                cardWindow.start(newStage);
+                stage.close(); // Optional: close current PaymentOptions window
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
         });
 
-        VBox root = new VBox(20, title, paymentOptionsBox, proceedBtn, confirmationLabel);
+        // Open BankTransferPayment on click
+        bankBtn.setOnAction(e -> {
+            try {
+                BankTransferPayment bankWindow = new BankTransferPayment();
+                Stage newStage = new Stage();
+                bankWindow.start(newStage);
+                stage.close(); // Optional: close current PaymentOptions window
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
+
+        VBox root = new VBox(15, cardBtn, bankBtn);
+        root.setAlignment(Pos.CENTER);
         root.setPadding(new Insets(20));
-        root.setAlignment(Pos.TOP_CENTER);
 
-        Scene scene = new Scene(root, 350, 300);
-        stage.setTitle("Payment Options");
-        stage.setScene(scene);
+        stage.setScene(new Scene(root, 300, 200));
+        stage.setTitle("Select Payment Method");
         stage.show();
-    }
-
-    public static void main(String[] args) {
-        launch(args);
     }
 }

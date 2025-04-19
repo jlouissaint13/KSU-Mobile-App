@@ -68,10 +68,6 @@ KSU Colors - via Official KSU Website: https://www.kennesaw.edu/stratcomm/brandi
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 5, 0.3, 0, 2);
 }
 
-.table-view.label{
-    -fx-font-weight: bold;
-}
-
 .list-view.label{
     -fx-font-weight: bold;
 }
@@ -117,5 +113,36 @@ Text{
     -fx-background-color: #d3d4d3;
 }
 
+.table-view{
+    -fx-background-color: #B7A99A;
+    -fx-background-radius: 15px;
+    -fx-border-radius: 15px;
+    -fx-border-width: 2px;
+    -fx-border-color: #2D2926;
+    -fx-padding: 5px;
+}
 
+.table-view.table-cell{
+    -fx-fill-text: #2D2926;
+    -fx-font-weight: bold;
+    -fx-font-family: Arial;
+    -fx-font-size: 13px;
+}
+
+.table-view.label{
+    -fx-font-weight: bold;
+}
+
+.table-view.column-header-background{
+    -fx-background-color: #B2B4B2;
+}
+
+.table-view.column-header{
+    -fx-background-color: transparent;
+}
+
+.table-cell{
+    -fx-background-color: transparent;
+    -fx-text-fill: #2D2926;
+}
 

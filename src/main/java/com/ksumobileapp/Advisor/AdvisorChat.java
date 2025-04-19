@@ -64,7 +64,7 @@ public class AdvisorChat extends Application {
 
     // welcome message + options
     private void advisorIntroMessage() {
-        String welcome = "Hi there! I'm your advisor 😊\n\nWhat do you need help with today?\nHere are some things I can assist with:\n- Class registration\n- Graduation requirements\n- Course withdrawals\n- Academic probation\n- General questions";
+        String welcome = "Hi there! I'm Dr.Thompson, your advisor 😊\n\nWhat do you need help with today?\nHere are some things I can assist with:\n- Class registration\n- Graduation requirements\n- Course withdrawals\n- Academic probation\n- General questions";
         addAdvisorText(welcome);
     }
 
@@ -97,14 +97,18 @@ public class AdvisorChat extends Application {
     private String generateAdvisorReply(String userMsg) {
         String msg = userMsg.toLowerCase();
         if (msg.contains("schedule") || msg.contains("register")) {
-            return "Let's take a look at your schedule. Are you \ntrying to add or drop a class?";
-        } else if (msg.contains("graduation")) {
-            return "Awesome! Have you already applied for graduation through Owl Express?";
-        } else if (msg.contains("thank")) {
-            return "You're very welcome! 😊 Let me know if there's anything else.";
+            return "Registered classes can be viewed \nin the Registration section on OwlExpress as well\n as viewing your required courses, any other questions?";
+        } else if (msg.contains("graduation") || msg.contains("graduating")) {
+            return "Awesome! You just need to though the graduation application through Owl Express";
+        } else if (msg.contains("withdrawal") || msg.contains("withdrawals") || msg.contains("withdrawing")) {
+            return "Theres a certain period of time you can opt-out\nwithout repercussions, it can be done on Owl Express \n\nAnything else?";
+        } else if (msg.contains("probation") || msg.contains("reported") || msg.contains("consequences")) {
+            return "Its is a warning saying that your GPA has fallen \nbelow the minimum required standard—usually 2.0 /nit means you need to improve your grades within \na set time, or you could face suspension or dismissal \nfrom the university";
+        }else if (msg.contains("thanks") || msg.contains("thank") || msg.contains("appreciate")) {
+            return "You're very welcome!";
         } else if (msg.contains("withdraw")) {
             return "For withdrawals, the deadline varies by semester. Do you know the course you want to withdraw from?";
         }
-        return "Thanks for your message! I’ll look into that and \nget back to you shortly.";
+        return "Alright then! I’ll look into that and \nget back to you shortly";
     }
 }

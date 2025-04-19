@@ -4,46 +4,70 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 public class PaymentOptions extends Application {
+
     @Override
     public void start(Stage stage) {
-        Button cardBtn = new Button("Credit/Debit Card");
-        Button bankBtn = new Button("Bank Transfer");
+
+        // === Back Button ===
+        Button backButton = new Button("<");
+        backButton.setOnAction(e -> {
+            try {
+                PaymentMain paymentMain = new PaymentMain();
+                Stage paymentStage = new Stage();
+                paymentMain.start(paymentStage);
+                stage.close(); // close PaymentOptions
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
+
+        // Back button positioned top-left
+        HBox backBox = new HBox(backButton);
+        backBox.setAlignment(Pos.TOP_LEFT);
+        backBox.setPadding(new Insets(10));
+
+        // === Payment Option Buttons ===
+        Button creditCardBtn = new Button("Credit/Debit Card");
+        Button bankTransferBtn = new Button("Bank Transfer");
 
         // Open CreditCardPayment on click
-        cardBtn.setOnAction(e -> {
+        creditCardBtn.setOnAction(e -> {
             try {
-                CreditCardPayment cardWindow = new CreditCardPayment();
-                Stage newStage = new Stage();
-                cardWindow.start(newStage);
-                stage.close(); // Optional: close current PaymentOptions window
+                CreditCardPayment creditCard = new CreditCardPayment();
+                Stage creditStage = new Stage();
+                creditCard.start(creditStage);
+                stage.close();
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
         });
 
         // Open BankTransferPayment on click
-        bankBtn.setOnAction(e -> {
+        bankTransferBtn.setOnAction(e -> {
             try {
-                BankTransferPayment bankWindow = new BankTransferPayment();
-                Stage newStage = new Stage();
-                bankWindow.start(newStage);
-                stage.close(); // Optional: close current PaymentOptions window
+                BankTransferPayment bankTransfer = new BankTransferPayment();
+                Stage bankStage = new Stage();
+                bankTransfer.start(bankStage);
+                stage.close();
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
         });
 
-        VBox root = new VBox(15, cardBtn, bankBtn);
-        root.setAlignment(Pos.CENTER);
-        root.setPadding(new Insets(20));
+        VBox optionsBox = new VBox(20, creditCardBtn, bankTransferBtn);
+        optionsBox.setAlignment(Pos.CENTER);
+        optionsBox.setPadding(new Insets(20));
 
-        stage.setScene(new Scene(root, 350, 600));
-        stage.setTitle("Select Payment Method");
+        VBox layout = new VBox(backBox, optionsBox);
+        Scene scene = new Scene(layout, 350, 600);
+
+        stage.setTitle("Payment Options");
+        stage.setScene(scene);
         stage.show();
     }
 }

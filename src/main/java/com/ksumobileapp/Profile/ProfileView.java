@@ -32,6 +32,7 @@ public class ProfileView {
         //text
         profileT.setLayoutX(140);
         profileT.setLayoutY(40);
+        profileT.setId("profile");
 
         //buttons
         viewInformation.setLayoutX(110);

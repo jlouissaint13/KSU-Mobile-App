@@ -61,7 +61,7 @@ public class CreditCardPayment extends Application {
         VBox mainBox = new VBox(10, backContainer, titleLabel, cardNumberField, expiryField, cvvField, submitBtn, errorLabel);
         mainBox.setAlignment(Pos.CENTER);
         mainBox.setPadding(new Insets(20));
-
+        mainBox.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
         stage.setScene(new Scene(mainBox, 300, 320));
         stage.setTitle("Credit/Debit Card Payment");
         stage.show();

@@ -52,7 +52,7 @@ public class AdvisorMain extends Application {
 
         VBox root = new VBox(backContainer, content);
         Scene scene = new Scene(root, 350, 600);
-
+        scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
         stage.setScene(scene);
         stage.setTitle("Advisor Page");
         stage.show();

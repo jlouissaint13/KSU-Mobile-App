@@ -54,6 +54,7 @@ public class AdvisorChat extends Application {
 
         // Set window size
         Scene scene = new Scene(root, 350, 600);
+        scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
         stage.setTitle("Email Your Advisor");
         stage.setScene(scene);
         stage.show();

@@ -84,7 +84,7 @@ private ScheduleBMain scheduleBMain;
         pane.getChildren().addAll(semesterChoice,semesterSelection,enter,back);
         primaryStage.setTitle("Semester Selection");
         Scene scene1 = new Scene(pane,350,600);
-
+        scene1.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
         primaryStage.setScene(scene1);
         primaryStage.show();
     }

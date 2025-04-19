@@ -40,7 +40,7 @@ KSU Colors - via Official KSU Website: https://www.kennesaw.edu/stratcomm/brandi
 #courseList.list-cell{
     -fx-background-color: transparent;
     -fx-text-fill: black;
-    -fx-font-size: 14;
+    -fx-font-size: 14px;
 }
 
 .button{
@@ -51,7 +51,7 @@ KSU Colors - via Official KSU Website: https://www.kennesaw.edu/stratcomm/brandi
     -fx-border-color: black;
     -fx-padding: 5;
     -fx-font-weight: bold;
-    -fx-font-size: 14;
+    -fx-font-size: 14px;
 }
 
 .button:hover{
@@ -60,3 +60,24 @@ KSU Colors - via Official KSU Website: https://www.kennesaw.edu/stratcomm/brandi
     -fx-scale-y: 1.05;
 }
 
+.button:pressed{
+    -fx-translate-y: 2px;
+    -fx-scale-x: 0.98;
+    -fx-scale-y: 0.98;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 5, 0.3, 0, 2);
+}
+
+.table-view.label{
+    -fx-font-weight: bold;
+}
+
+.list-view.label{
+    -fx-font-weight: bold;
+}
+
+#profile{
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-font-family: Arial;
+    -fx-fill: black;
+}

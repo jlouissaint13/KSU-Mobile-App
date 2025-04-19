@@ -65,7 +65,7 @@ public class PaymentOptions extends Application {
 
         VBox layout = new VBox(backBox, optionsBox);
         Scene scene = new Scene(layout, 350, 600);
-
+        scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
         stage.setTitle("Payment Options");
         stage.setScene(scene);
         stage.show();

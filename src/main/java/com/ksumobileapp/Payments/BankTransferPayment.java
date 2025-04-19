@@ -55,7 +55,7 @@ public class BankTransferPayment extends Application {
         VBox mainBox = new VBox(10, backContainer, titleLabel, routingNumberField, accountNumberField, submitBtn, errorLabel);
         mainBox.setAlignment(Pos.CENTER);
         mainBox.setPadding(new Insets(20));
-
+        mainBox.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
         stage.setScene(new Scene(mainBox, 300, 280));
         stage.setTitle("Bank Transfer Payment");
         stage.show();

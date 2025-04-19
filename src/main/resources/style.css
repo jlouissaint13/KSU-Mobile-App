@@ -30,11 +30,11 @@ KSU Colors - via Official KSU Website: https://www.kennesaw.edu/stratcomm/brandi
 #courseList{
     -fx-background-color: #B7A99A;
     -fx-control-inner-background: #B7A99A;
-    -fx-background-radius: 15;
-    -fx-border-radius: 15;
-    -fx-border-width: 2;
+    -fx-background-radius: 15px;
+    -fx-border-radius: 15px;
+    -fx-border-width: 2px;
     -fx-border-color: #2D2926;
-    -fx-padding: 5;
+    -fx-padding: 15px;
 }
 
 #courseList.list-cell{
@@ -45,11 +45,11 @@ KSU Colors - via Official KSU Website: https://www.kennesaw.edu/stratcomm/brandi
 
 .button{
     -fx-background-color: #B7A99A;
-    -fx-background-radius: 5;
-    -fx-border-radius: 5;
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
     -fx-border-width: 1.25;
     -fx-border-color: #2D2926;
-    -fx-padding: 5;
+    -fx-padding: 5px;
     -fx-font-weight: bold;
     -fx-font-size: 14px;
 }
@@ -58,6 +58,7 @@ KSU Colors - via Official KSU Website: https://www.kennesaw.edu/stratcomm/brandi
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.6), 10, 0.5, 0, 4);
     -fx-scale-x: 1.05;
     -fx-scale-y: 1.05;
+    -fx-cursor: hand;
 }
 
 .button:pressed{
@@ -94,5 +95,27 @@ Text{
     -fx-background-color: #FFFFFF;
     -fx-background-radius: 8px;
 }
+
+.combo-box{
+    -fx-background-color: #B2B4B2;
+    -fx-background-radius: 10px;
+    -fx-border-color: #2D2926;
+    -fx-border-radius: 10px;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-font-family: Arial;
+    -fx-padding: 5px;
+}
+
+.combo-box.list-cell{
+    -fx-fill: #2D2926;
+    -fx-font-size: 13px;
+}
+
+.combo-box:hover{
+    -fx-cursor: hand;
+    -fx-background-color: #d3d4d3;
+}
+
 
 

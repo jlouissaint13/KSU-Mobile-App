@@ -18,6 +18,8 @@ public class PaymentMain extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+    EnrollmentService enrollmentService = new EnrollmentService();
+    double creditsBalance =  enrollmentService.getCreditForPayment() * 185.21;
 
         // Back button to return to Profile screen
         Button backButton = new Button("<");
@@ -61,12 +63,12 @@ public class PaymentMain extends Application {
         }
 
         // === Calculate balance based on enrolled credits (credits * $121) ===
-        double balance = calculateBalanceFromCredits(currentUserID);
+
 
         // Display user's account information
         Label nameLabel = new Label("Name: " + fullName);
         Label idLabel = new Label("ID: " + studentID);
-        Label balanceLabel = new Label(String.format("Balance: $%.2f", balance));
+        Label balanceLabel = new Label(String.format("Balance: $%.2f", creditsBalance));
         Label aidLabel = new Label("Estimated Financial Aid: $961.60");
         Label totalLabel = new Label("Balance including estimated aid: -$1099.70");
         Label ebillLabel = new Label("Latest eBill Statement (1/8/25): -$3,238.00");
@@ -113,24 +115,7 @@ public class PaymentMain extends Application {
     }
 
     // === Method to calculate balance from enrolled credits ===
-    private double calculateBalanceFromCredits(String studentID) {
-        double totalCredits = 0;
 
-        try (Connection conn = DriverManager.getConnection("jdbc:sqlite:accounts.db");
-             PreparedStatement stmt = conn.prepareStatement("SELECT SUM(credits) AS total FROM enrollments WHERE studentID = ?")) {
-
-            stmt.setString(1, studentID);
-            ResultSet rs = stmt.executeQuery();
-
-            if (rs.next()) {
-                totalCredits = rs.getDouble("total");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return totalCredits * 121; // Tuition cost per credit
-    }
 
     public static void main(String[] args) {
         launch(args);

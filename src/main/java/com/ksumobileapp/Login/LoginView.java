@@ -107,7 +107,4 @@ public LoginView(Stage stage) {
         pause.setOnFinished(e -> pane.getChildren().remove(allFields));
         pause.play();
     }
-
-
-
 }

@@ -25,6 +25,5 @@ public class LoginMain extends Application {
        loginService = new LoginService();
 
        LoginController loginController = new LoginController(primaryStage,loginView,loginModel,loginService);
-
     }
 }

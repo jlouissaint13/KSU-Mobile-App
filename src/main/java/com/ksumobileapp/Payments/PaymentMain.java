@@ -69,8 +69,18 @@ public class PaymentMain extends Application {
         Label nameLabel = new Label("Name: " + fullName);
         Label idLabel = new Label("ID: " + studentID);
         Label balanceLabel = new Label(String.format("Balance: $%.2f", creditsBalance));
-        Label aidLabel = new Label("Estimated Financial Aid: $961.60");
-        Label totalLabel = new Label("Balance including estimated aid: -$1099.70");
+
+        double aidAmount = 961.60;
+        Label aidLabel = new Label(String.format("Estimated Financial Aid: $%.2f", aidAmount));
+
+// Calculate total balance after aid
+        double finalBalance = creditsBalance - aidAmount;
+        String formattedBalance = finalBalance < 0
+                ? String.format("Credit Balance: -$%.2f", Math.abs(finalBalance))
+                : String.format("Balance Due: $%.2f", finalBalance);
+
+        Label totalLabel = new Label(formattedBalance);
+
         Label ebillLabel = new Label("Latest eBill Statement (1/8/25): -$3,238.00");
 
         // Stack all account-related info

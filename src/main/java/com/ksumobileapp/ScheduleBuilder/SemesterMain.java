@@ -61,6 +61,7 @@ private ScheduleBMain scheduleBMain;
         semesterChoice.setPromptText("Select a Semester");
         semesterChoice.setLayoutX(100);
         semesterChoice.setLayoutY(250);
+
         enter.setLayoutX(140);
         enter.setLayoutY(290);
 

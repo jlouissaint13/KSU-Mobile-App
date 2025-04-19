@@ -75,9 +75,10 @@ KSU Colors - via Official KSU Website: https://www.kennesaw.edu/stratcomm/brandi
     -fx-font-weight: bold;
 }
 
-#profile{
-    -fx-font-size: 15px;
+
+
+Text{
     -fx-font-weight: bold;
     -fx-font-family: Arial;
-    -fx-fill: black;
+    -fx-font-size: 13px;
 }

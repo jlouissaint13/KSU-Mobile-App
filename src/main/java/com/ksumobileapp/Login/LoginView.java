@@ -23,12 +23,15 @@ public class LoginView {
     pane = new Pane();
     login = new Text("Login");
     campusEmailT = new Text("Email");
-
     passwordT = new Text("Password");
     campusEmail = new TextField();
     password = new PasswordField();
+
     loginButton = new Button("Login");
+    loginButton.setId("loginButton");
+
     createAccountButton = new Button("Create Account");
+    createAccountButton.setId("createAccountButton");
     }
 
     public void properties(){

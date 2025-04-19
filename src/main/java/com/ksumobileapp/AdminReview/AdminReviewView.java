@@ -231,7 +231,7 @@ public class AdminReviewView {
         addComponents();
         stage.setTitle("Admin Review Page");
         Scene scene1 = new Scene(scrollPane,350,600);
-
+        scene1.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
         stage.setScene(scene1);
         stage.show();
 

@@ -62,7 +62,7 @@ public class AcademicHistory extends Application {
         fillTable();
         primaryStage.setTitle("Academic History");
         Scene scene1 = new Scene(pane,350,600);
-
+        scene1.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
         primaryStage.setScene(scene1);
         primaryStage.show();
     }

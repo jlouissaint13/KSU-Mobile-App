@@ -68,7 +68,7 @@ public class ProfileView {
 
         stage.setTitle("Profile");
         Scene scene1 = new Scene(pane,350,600);
-
+        scene1.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
         stage.setScene(scene1);
         stage.show();
     }

@@ -105,6 +105,7 @@ public class PaymentMain extends Application {
         // Final layout: top = back button, middle = content
         VBox root = new VBox(backButtonContainer, contentBox);
         Scene scene = new Scene(root, 350, 600);
+        scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
         /*
         EnrollmentService enrollmentService = new EnrollmentService();
         enrollmentService.getCreditForPayment();

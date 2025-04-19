@@ -36,6 +36,7 @@ public class AdvisorMain extends Application {
         layout.setPadding(new Insets(20));
 
         Scene scene = new Scene(layout, 350, 300);
+        scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.setTitle("Advisor");
         primaryStage.show();

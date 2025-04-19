@@ -10,6 +10,7 @@ import com.ksumobileapp.RecommendCourses.RecommendationMain;
 import com.ksumobileapp.Registration.RegisterModel;
 import com.ksumobileapp.Schedule.ScheduleMain;
 import com.ksumobileapp.ScheduleBuilder.SemesterMain;
+import com.ksumobileapp.Advisor.AdvisorMain;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -29,6 +30,9 @@ public class ProfileController {
     private SemesterMain semesterMain;
     private AcademicHistory academicHistory;
     private RecommendationMain recommendationMain;
+    private Button digitalAdvisor;
+    private AdvisorMain advisorMain;
+
     public ProfileController(Stage stage, ProfileView profileView) {
         this.profileView = profileView;
         loginMain = new LoginMain();
@@ -43,6 +47,8 @@ public class ProfileController {
         schedule = profileView.getScheduleBuilder();
         viewAcademic = profileView.getViewCourses();
         recCourses = profileView.getRecCourses();
+        advisorMain = new AdvisorMain();
+        digitalAdvisor = profileView.getDigitalAdvisor();
 
 
 
@@ -57,6 +63,14 @@ public class ProfileController {
                 throw new RuntimeException(ex);
             }
         });
+        digitalAdvisor.setOnAction(e -> {
+            try {
+                advisorMain.start(stage);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
+
 
 
         backButton.setOnAction(e-> {

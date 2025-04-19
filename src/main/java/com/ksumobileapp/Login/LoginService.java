@@ -64,8 +64,6 @@ public class LoginService {
     }
     //run this everytime on when clicking login so this can prevent needing to be reset;
     /*public String getCurrentUser(LoginModel loginModel) {
-
     }
-
      */
 }

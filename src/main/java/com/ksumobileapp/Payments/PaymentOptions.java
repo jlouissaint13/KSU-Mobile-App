@@ -4,7 +4,7 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
@@ -12,40 +12,62 @@ public class PaymentOptions extends Application {
 
     @Override
     public void start(Stage stage) {
-        // Title
-        Label title = new Label("Choose Payment Method");
 
-        // Payment options(can customize later)
-        RadioButton creditCardOption = new RadioButton("Credit/Debit Card");
-        RadioButton bankTransferOption = new RadioButton("Bank Transfer");
-        RadioButton financialAidOption = new RadioButton("Use Financial Aid");
-        ToggleGroup paymentGroup = new ToggleGroup();
-        creditCardOption.setToggleGroup(paymentGroup);
-        bankTransferOption.setToggleGroup(paymentGroup);
-        financialAidOption.setToggleGroup(paymentGroup);
-
-        VBox paymentOptionsBox = new VBox(10, creditCardOption, bankTransferOption, financialAidOption);
-        paymentOptionsBox.setPadding(new Insets(10));
-
-        // Proceed Button
-        Button proceedBtn = new Button("Proceed");
-        Label confirmationLabel = new Label();
-
-        proceedBtn.setOnAction(e -> {
-            confirmationLabel.setText("Payment Method Selected!");
+        // === Back Button ===
+        Button backButton = new Button("<");
+        backButton.setOnAction(e -> {
+            try {
+                PaymentMain paymentMain = new PaymentMain();
+                Stage paymentStage = new Stage();
+                paymentMain.start(paymentStage);
+                stage.close(); // close PaymentOptions
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
         });
 
-        VBox root = new VBox(20, title, paymentOptionsBox, proceedBtn, confirmationLabel);
-        root.setPadding(new Insets(20));
-        root.setAlignment(Pos.TOP_CENTER);
+        // Back button positioned top-left
+        HBox backBox = new HBox(backButton);
+        backBox.setAlignment(Pos.TOP_LEFT);
+        backBox.setPadding(new Insets(10));
 
-        Scene scene = new Scene(root, 350, 300);
+        // === Payment Option Buttons ===
+        Button creditCardBtn = new Button("Credit/Debit Card");
+        Button bankTransferBtn = new Button("Bank Transfer");
+
+        // Open CreditCardPayment on click
+        creditCardBtn.setOnAction(e -> {
+            try {
+                CreditCardPayment creditCard = new CreditCardPayment();
+                Stage creditStage = new Stage();
+                creditCard.start(creditStage);
+                stage.close();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
+
+        // Open BankTransferPayment on click
+        bankTransferBtn.setOnAction(e -> {
+            try {
+                BankTransferPayment bankTransfer = new BankTransferPayment();
+                Stage bankStage = new Stage();
+                bankTransfer.start(bankStage);
+                stage.close();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
+
+        VBox optionsBox = new VBox(20, creditCardBtn, bankTransferBtn);
+        optionsBox.setAlignment(Pos.CENTER);
+        optionsBox.setPadding(new Insets(20));
+
+        VBox layout = new VBox(backBox, optionsBox);
+        Scene scene = new Scene(layout, 350, 600);
+
         stage.setTitle("Payment Options");
         stage.setScene(scene);
         stage.show();
-    }
-
-    public static void main(String[] args) {
-        launch(args);
     }
 }

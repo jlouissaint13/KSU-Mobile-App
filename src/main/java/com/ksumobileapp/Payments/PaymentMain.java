@@ -2,6 +2,7 @@ package com.ksumobileapp.Payments;
 
 import com.ksumobileapp.Login.LoginModel;
 import com.ksumobileapp.Profile.ProfileMain;
+import com.ksumobileapp.ScheduleBuilder.EnrollmentService;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -11,14 +12,15 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import com.ksumobileapp.Payments.PaymentOptions;
-
 import java.sql.*;
 
 public class PaymentMain extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+    EnrollmentService enrollmentService = new EnrollmentService();
+    double creditsBalance =  enrollmentService.getCreditForPayment() * 185.21;
+
         // Back button to return to Profile screen
         Button backButton = new Button("<");
         backButton.setOnAction(e -> {
@@ -60,14 +62,25 @@ public class PaymentMain extends Application {
             e.printStackTrace(); // If something goes wrong, show the error
         }
 
-        // Shows that info in in UI
+        // === Calculate balance based on enrolled credits (credits * $121) ===
+
+
+        // Display user's account information
         Label nameLabel = new Label("Name: " + fullName);
         Label idLabel = new Label("ID: " + studentID);
+        Label balanceLabel = new Label(String.format("Balance: $%.2f", creditsBalance));
 
-        // Hardcode but can hook real data later
-        Label balanceLabel = new Label("Balance: $1,961.30");
-        Label aidLabel = new Label("Estimated Financial Aid: $961.60");
-        Label totalLabel = new Label("Balance including estimated aid: -$1099.70");
+        double aidAmount = 961.60;
+        Label aidLabel = new Label(String.format("Estimated Financial Aid: $%.2f", aidAmount));
+
+// Calculate total balance after aid
+        double finalBalance = creditsBalance - aidAmount;
+        String formattedBalance = finalBalance < 0
+                ? String.format("Credit Balance: -$%.2f", Math.abs(finalBalance))
+                : String.format("Balance Due: $%.2f", finalBalance);
+
+        Label totalLabel = new Label(formattedBalance);
+
         Label ebillLabel = new Label("Latest eBill Statement (1/8/25): -$3,238.00");
 
         // Stack all account-related info
@@ -77,7 +90,7 @@ public class PaymentMain extends Application {
 
         // Simple payment button
         Button makePaymentBtn = new Button("Make Payment");
-        Label confirmationLabel = new Label(); // Will say "Payment Successful!" after click
+        Label confirmationLabel = new Label();
 
         makePaymentBtn.setOnAction(e -> {
             try {
@@ -86,8 +99,8 @@ public class PaymentMain extends Application {
                 Stage paymentStage = new Stage();
                 paymentOptions.start(paymentStage);
 
-                // Optional: Close current Payment screen
-                // primaryStage.close();
+                // Close current Payment screen
+                ((Stage) makePaymentBtn.getScene().getWindow()).close();
 
             } catch (Exception ex) {
                 ex.printStackTrace();
@@ -105,15 +118,14 @@ public class PaymentMain extends Application {
         // Final layout: top = back button, middle = content
         VBox root = new VBox(backButtonContainer, contentBox);
         Scene scene = new Scene(root, 350, 600);
-        scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
-        /*
-        EnrollmentService enrollmentService = new EnrollmentService();
-        enrollmentService.getCreditForPayment();
-         */
+
         primaryStage.setTitle("Payment");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
+
+    // === Method to calculate balance from enrolled credits ===
+
 
     public static void main(String[] args) {
         launch(args);

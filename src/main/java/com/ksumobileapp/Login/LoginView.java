@@ -23,6 +23,7 @@ public class LoginView {
     pane = new Pane();
     login = new Text("Login");
     campusEmailT = new Text("Email");
+
     passwordT = new Text("Password");
     campusEmail = new TextField();
     password = new PasswordField();
@@ -106,7 +107,4 @@ public LoginView(Stage stage) {
         pause.setOnFinished(e -> pane.getChildren().remove(allFields));
         pause.play();
     }
-
-
-
 }

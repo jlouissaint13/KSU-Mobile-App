@@ -2,6 +2,7 @@ package com.ksumobileapp.Payments;
 
 import com.ksumobileapp.Login.LoginModel;
 import com.ksumobileapp.Profile.ProfileMain;
+import com.ksumobileapp.ScheduleBuilder.EnrollmentService;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -17,6 +18,7 @@ public class PaymentMain extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+
         // Back button to return to Profile screen
         Button backButton = new Button("<");
         backButton.setOnAction(e -> {
@@ -58,12 +60,13 @@ public class PaymentMain extends Application {
             e.printStackTrace(); // If something goes wrong, show the error
         }
 
-        // Shows that info in in UI
+        // === Calculate balance based on enrolled credits (credits * $121) ===
+        double balance = calculateBalanceFromCredits(currentUserID);
+
+        // Display user's account information
         Label nameLabel = new Label("Name: " + fullName);
         Label idLabel = new Label("ID: " + studentID);
-
-        // Hardcode but can hook real data later
-        Label balanceLabel = new Label("Balance: $1,961.30");
+        Label balanceLabel = new Label(String.format("Balance: $%.2f", balance));
         Label aidLabel = new Label("Estimated Financial Aid: $961.60");
         Label totalLabel = new Label("Balance including estimated aid: -$1099.70");
         Label ebillLabel = new Label("Latest eBill Statement (1/8/25): -$3,238.00");
@@ -84,7 +87,7 @@ public class PaymentMain extends Application {
                 Stage paymentStage = new Stage();
                 paymentOptions.start(paymentStage);
 
-                //Close current Payment screen
+                // Close current Payment screen
                 ((Stage) makePaymentBtn.getScene().getWindow()).close();
 
             } catch (Exception ex) {
@@ -103,13 +106,30 @@ public class PaymentMain extends Application {
         // Final layout: top = back button, middle = content
         VBox root = new VBox(backButtonContainer, contentBox);
         Scene scene = new Scene(root, 350, 600);
-        /*
-        EnrollmentService enrollmentService = new EnrollmentService();
-        enrollmentService.getCreditForPayment();
-         */
+
         primaryStage.setTitle("Payment");
         primaryStage.setScene(scene);
         primaryStage.show();
+    }
+
+    // === Method to calculate balance from enrolled credits ===
+    private double calculateBalanceFromCredits(String studentID) {
+        double totalCredits = 0;
+
+        try (Connection conn = DriverManager.getConnection("jdbc:sqlite:accounts.db");
+             PreparedStatement stmt = conn.prepareStatement("SELECT SUM(credits) AS total FROM enrollments WHERE studentID = ?")) {
+
+            stmt.setString(1, studentID);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                totalCredits = rs.getDouble("total");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return totalCredits * 121; // Tuition cost per credit
     }
 
     public static void main(String[] args) {

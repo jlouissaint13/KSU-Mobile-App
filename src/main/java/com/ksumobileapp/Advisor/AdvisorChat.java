@@ -127,7 +127,7 @@ public class AdvisorChat extends Application {
         } else if (msg.contains("graduation") || msg.contains("graduating")) {
             return "Awesome! You just need to though the graduation application through Owl Express";
         } else if (msg.contains("withdrawal") || msg.contains("withdrawals") || msg.contains("withdrawing")) {
-            return "Theres a certain period of time you can opt-out\nwithout repercussions, it can be done on Owl Express \n\nAnything else?";
+            return "Awesome! Just make sure you submit your graduation application through Owl Express";
         } else if (msg.contains("probation") || msg.contains("reported") || msg.contains("consequences")) {
             return "Its is a warning saying that your GPA has fallen \nbelow the minimum required standard—usually 2.0 /nit means you need to improve your grades within \na set time, or you could face suspension or dismissal \nfrom the university";
         }else if (msg.contains("thanks") || msg.contains("thank") || msg.contains("appreciate")) {

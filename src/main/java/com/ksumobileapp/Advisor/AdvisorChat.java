@@ -14,9 +14,34 @@ public class AdvisorChat extends Application {
 
     @Override
     public void start(Stage stage) {
-        // Top label for chat window
+
+        // Back button (top-left)
+        Button backButton = new Button("<");
+        backButton.setStyle("-fx-font-size: 14px; -fx-background-color: transparent;");
+        backButton.setOnAction(e -> {
+            try {
+                AdvisorMain advisorMain = new AdvisorMain();
+                Stage advisorStage = new Stage();
+                advisorMain.start(advisorStage);
+                stage.close();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
+
+        // Title
         Label titleLabel = new Label("Chat with Advisor");
         titleLabel.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
+        titleLabel.setMaxWidth(Double.MAX_VALUE);
+        titleLabel.setAlignment(Pos.CENTER);
+
+// StackPane to center title & float back arrow to left
+        StackPane topBar = new StackPane();
+        topBar.setPadding(new Insets(10));
+        topBar.setPrefHeight(40);
+        StackPane.setAlignment(titleLabel, Pos.CENTER);
+        StackPane.setAlignment(backButton, Pos.CENTER_LEFT);
+        topBar.getChildren().addAll(titleLabel, backButton);
 
         // VBox to hold all chat messages
         chatBox = new VBox(10);
@@ -49,7 +74,7 @@ public class AdvisorChat extends Application {
         inputArea.setPadding(new Insets(10));
 
         // Main layout
-        VBox root = new VBox(10, titleLabel, scrollPane, inputArea);
+        VBox root = new VBox(10, topBar, scrollPane, inputArea);
         root.setPadding(new Insets(15));
 
         // Set window size

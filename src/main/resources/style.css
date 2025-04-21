@@ -145,4 +145,10 @@ Text{
     -fx-background-color: transparent;
     -fx-text-fill: #2D2926;
 }
+.text-field {
+    -fx-background-color: white;
+    -fx-border-color: #2D2926;
+    -fx-pref-height: 30px;
+    -fx-pref-width: 150px;
+}
 

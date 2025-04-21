@@ -5,6 +5,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
@@ -18,9 +19,14 @@ public class PaymentOptions extends Application {
         backButton.setOnAction(e -> {
             try {
                 PaymentMain paymentMain = new PaymentMain();
-                Stage paymentStage = new Stage();
-                paymentMain.start(paymentStage);
-                stage.close(); // close PaymentOptions
+
+                // Reuse the same stage instead of creating a new one
+                paymentMain.start(stage);
+
+                // Re-add logo to top-left of window
+                stage.getIcons().clear(); // clear existing icons
+                stage.getIcons().add(new Image("logo.png")); // add logo again
+
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
@@ -39,9 +45,11 @@ public class PaymentOptions extends Application {
         creditCardBtn.setOnAction(e -> {
             try {
                 CreditCardPayment creditCard = new CreditCardPayment();
-                Stage creditStage = new Stage();
-                creditCard.start(creditStage);
-                stage.close();
+
+                creditCard.start(stage); // reuse stage
+                stage.getIcons().clear();
+                stage.getIcons().add(new Image("logo.png")); // re-add icon
+
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
@@ -51,9 +59,11 @@ public class PaymentOptions extends Application {
         bankTransferBtn.setOnAction(e -> {
             try {
                 BankTransferPayment bankTransfer = new BankTransferPayment();
-                Stage bankStage = new Stage();
-                bankTransfer.start(bankStage);
-                stage.close();
+
+                bankTransfer.start(stage); // reuse stage
+                stage.getIcons().clear();
+                stage.getIcons().add(new Image("logo.png")); // re-add icon
+
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
@@ -67,6 +77,11 @@ public class PaymentOptions extends Application {
         Scene scene = new Scene(layout, 350, 600);
         scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
         stage.setTitle("Payment Options");
+
+        // Make sure the logo is added when this screen first loads
+        stage.getIcons().clear();
+        stage.getIcons().add(new Image("logo.png"));
+
         stage.setScene(scene);
         stage.show();
     }

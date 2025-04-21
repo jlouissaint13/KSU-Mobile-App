@@ -18,7 +18,6 @@ public class AdminUpdateController {
 
 
         this.adminUpdateView.getBackButton().setOnAction(e-> adminMain.start(stage));
-
         this.adminUpdateView.getUpdateProfile().setOnAction(e->{
             if (this.adminUpdateView.isEmptyCheck()) {
                 this.adminUpdateView.fieldsEmpty();

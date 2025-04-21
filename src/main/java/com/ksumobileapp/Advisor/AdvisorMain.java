@@ -17,8 +17,9 @@ public class AdvisorMain extends Application {
         Button backButton = new Button("<");
         backButton.setOnAction(e -> {
             try {
-                new ProfileMain().start(new Stage());
-                stage.close();
+                // Replace the current scene with ProfileMain on the same stage
+                ProfileMain profileMain = new ProfileMain();
+                profileMain.start(stage);  // Reuse the same stage
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
@@ -39,8 +40,9 @@ public class AdvisorMain extends Application {
         Button emailBtn = new Button("Email Advisor");
         emailBtn.setOnAction(e -> {
             try {
-                new AdvisorChat().start(new Stage()); // Open chat
-                stage.close(); // Close this screen
+                // Set the same stage to the AdvisorChat screen
+                AdvisorChat chatWindow = new AdvisorChat();
+                chatWindow.start(stage);  // Reuse the same stage for the chat screen
             } catch (Exception ex) {
                 ex.printStackTrace();
             }

@@ -39,7 +39,7 @@ public class ProfileController {
 
         ProfileService profileService = new ProfileService();
         profileService.setStatus();
-        System.out.println(ProfileModel.getStatus());
+        if (!ProfileModel.getStatus().equals("Accepted")) this.profileView.disableButtons();
         personalMain = new PersonalMain();
         paymentMain = new PaymentMain();
         semesterMain = new SemesterMain();
@@ -91,5 +91,6 @@ public class ProfileController {
     public void viewInfo(Stage stage,PersonalMain personalMain) {
         personalMain.start(stage);
     }
+
 
 }

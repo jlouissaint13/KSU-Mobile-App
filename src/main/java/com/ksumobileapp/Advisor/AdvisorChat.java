@@ -5,43 +5,34 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 public class AdvisorChat extends Application {
-
     private VBox chatBox; // Container for chat messages
-
     @Override
     public void start(Stage stage) {
-
-        // Back button (top-left)
+        // Back button to go back to AdvisorMain
         Button backButton = new Button("<");
-        backButton.setStyle("-fx-font-size: 14px; -fx-background-color: transparent;");
         backButton.setOnAction(e -> {
-            try {
-                AdvisorMain advisorMain = new AdvisorMain();
-                Stage advisorStage = new Stage();
-                advisorMain.start(advisorStage);
-                stage.close();
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
+            AdvisorMain advisorMain = new AdvisorMain();
+            advisorMain.start(stage); // Reuse the same stage
+
+            // Set window/taskbar icon again for consistency
+            stage.getIcons().clear();
+            stage.getIcons().add(new Image("logo.png"));
         });
 
-        // Title
+        // Title label
         Label titleLabel = new Label("Chat with Advisor");
         titleLabel.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
-        titleLabel.setMaxWidth(Double.MAX_VALUE);
-        titleLabel.setAlignment(Pos.CENTER);
 
-// StackPane to center title & float back arrow to left
-        StackPane topBar = new StackPane();
+        // Top bar layout
+        HBox topBar = new HBox(backButton, titleLabel);
+        topBar.setAlignment(Pos.CENTER_LEFT);
+        topBar.setSpacing(10);
         topBar.setPadding(new Insets(10));
-        topBar.setPrefHeight(40);
-        StackPane.setAlignment(titleLabel, Pos.CENTER);
-        StackPane.setAlignment(backButton, Pos.CENTER_LEFT);
-        topBar.getChildren().addAll(titleLabel, backButton);
 
         // VBox to hold all chat messages
         chatBox = new VBox(10);
@@ -53,11 +44,10 @@ public class AdvisorChat extends Application {
         scrollPane.setFitToWidth(true);
         scrollPane.setPrefHeight(500);
 
-        // Input field to type a message
+        // Input field and send button
         TextField inputField = new TextField();
         inputField.setPromptText("Type your message...");
 
-        // Send button
         Button sendBtn = new Button("Send");
         sendBtn.setOnAction(e -> {
             String message = inputField.getText().trim();
@@ -68,33 +58,32 @@ public class AdvisorChat extends Application {
             }
         });
 
-        // Layout for input area
         HBox inputArea = new HBox(10, inputField, sendBtn);
         inputArea.setAlignment(Pos.CENTER);
         inputArea.setPadding(new Insets(10));
 
-        // Main layout
         VBox root = new VBox(10, topBar, scrollPane, inputArea);
         root.setPadding(new Insets(15));
 
-        // Set window size
         Scene scene = new Scene(root, 350, 600);
         scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
+
+        // Set window/taskbar icon
+        stage.getIcons().clear();
+        stage.getIcons().add(new Image("logo.png"));
+
         stage.setTitle("Email Your Advisor");
         stage.setScene(scene);
         stage.show();
 
-        // Advisor initiates conversation
         advisorIntroMessage();
     }
 
-    // welcome message + options
     private void advisorIntroMessage() {
         String welcome = "Hi there! I'm Dr.Thompson, your advisor 😊\n\nWhat do you need help with today?\nHere are some things I can assist with:\n- Class registration\n- Graduation requirements\n- Course withdrawals\n- Academic probation\n- General questions";
         addAdvisorText(welcome);
     }
 
-    // Display user's message
     private void addUserMessage(String msg) {
         Label messageLabel = new Label(msg);
         messageLabel.setStyle("-fx-background-color: #d1e7dd; -fx-padding: 8; -fx-background-radius: 10;");
@@ -103,14 +92,11 @@ public class AdvisorChat extends Application {
         chatBox.getChildren().add(box);
     }
 
-    // Display advisor's response
     private void addAdvisorResponse(String userMsg) {
         String reply = generateAdvisorReply(userMsg);
-
         addAdvisorText(reply);
     }
 
-    // Display advisor text
     private void addAdvisorText(String msg) {
         Label replyLabel = new Label(msg);
         replyLabel.setStyle("-fx-background-color: #f8d7da; -fx-padding: 8; -fx-background-radius: 10;");
@@ -119,22 +105,21 @@ public class AdvisorChat extends Application {
         chatBox.getChildren().add(box);
     }
 
-    // auto-response logic
     private String generateAdvisorReply(String userMsg) {
         String msg = userMsg.toLowerCase();
         if (msg.contains("schedule") || msg.contains("register")) {
-            return "Registered classes can be viewed \nin the Registration section on OwlExpress as well\n as viewing your required courses, any other questions?";
+            return "Registered classes can be viewed \nin the Registration section on OwlExpress as well\nas viewing your required courses. Any other questions?";
         } else if (msg.contains("graduation") || msg.contains("graduating")) {
-            return "Awesome! You just need to though the graduation application through Owl Express";
+            return "Awesome! You just need to complete the graduation application through Owl Express.";
         } else if (msg.contains("withdrawal") || msg.contains("withdrawals") || msg.contains("withdrawing")) {
-            return "Awesome! Just make sure you submit your graduation application through Owl Express";
+            return "There's a certain period of time you can opt out\nwithout repercussions. It can be done on Owl Express.\n\nAnything else?";
         } else if (msg.contains("probation") || msg.contains("reported") || msg.contains("consequences")) {
-            return "Its is a warning saying that your GPA has fallen \nbelow the minimum required standard—usually 2.0 /nit means you need to improve your grades within \na set time, or you could face suspension or dismissal \nfrom the university";
-        }else if (msg.contains("thanks") || msg.contains("thank") || msg.contains("appreciate")) {
+            return "It's a warning that your GPA has fallen below\nthe minimum required standard—usually 2.0.\nYou need to improve your grades within a set time\nor you could face suspension or dismissal.";
+        } else if (msg.contains("thanks") || msg.contains("thank") || msg.contains("appreciate")) {
             return "You're very welcome!";
         } else if (msg.contains("withdraw")) {
-            return "For withdrawals, the deadline varies by semester. Do you know the course you want to withdraw from?";
+            return "For withdrawals, the deadline varies by semester.\nDo you know the course you want to withdraw from?";
         }
-        return "Alright then! I’ll look into that and \nget back to you shortly";
+        return "Alright then! I’ll look into that and \nget back to you shortly.";
     }
 }

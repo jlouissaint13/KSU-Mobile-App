@@ -26,9 +26,7 @@ public class PaymentMain extends Application {
         backButton.setOnAction(e -> {
             try {
                 ProfileMain profile = new ProfileMain();
-                Stage profileStage = new Stage();
-                profile.start(profileStage);
-                primaryStage.close(); // Close this window
+                profile.start(primaryStage);
             } catch (Exception ex) {
                 ex.printStackTrace();
             }

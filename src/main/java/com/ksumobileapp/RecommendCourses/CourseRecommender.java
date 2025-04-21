@@ -46,7 +46,6 @@ public class CourseRecommender {
             if(completed.contains(courseID)) continue;
 
             if(prerequisite == null || prerequisite.isEmpty() || completed.contains(prerequisite)) {
-                    System.out.println("Found a eligible course: " + courseID); //debugging
                     if(!eligibleCourses.contains(courseID)) eligibleCourses.add(courseID);
             }
         }

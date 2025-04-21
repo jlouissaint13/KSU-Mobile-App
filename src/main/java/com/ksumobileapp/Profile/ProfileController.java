@@ -67,6 +67,7 @@ public class ProfileController {
                 throw new RuntimeException(ex);
             }
         });
+
         digitalAdvisor.setOnAction(e -> {
             try {
                 advisorMain.start(stage);
@@ -74,8 +75,6 @@ public class ProfileController {
                 ex.printStackTrace();
             }
         });
-
-
 
         backButton.setOnAction(e-> {
             LoginModel.resetLogin();

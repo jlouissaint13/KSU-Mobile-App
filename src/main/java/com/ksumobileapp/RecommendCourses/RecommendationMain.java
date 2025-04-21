@@ -33,9 +33,7 @@ public class RecommendationMain extends Application {
         back.setOnAction(e -> {
             try{
                 ProfileMain profile = new ProfileMain();
-                Stage profileStage = new Stage();
-                profile.start(profileStage);
-                primaryStage.close();
+                profile.start(primaryStage);
             }catch (Exception exception){
                 exception.printStackTrace();
             }

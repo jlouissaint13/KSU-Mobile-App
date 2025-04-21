@@ -35,7 +35,7 @@ public class AdvisorChat extends Application {
         titleLabel.setMaxWidth(Double.MAX_VALUE);
         titleLabel.setAlignment(Pos.CENTER);
 
-// StackPane to center title & float back arrow to left
+        // StackPane to center title & float back arrow to left
         StackPane topBar = new StackPane();
         topBar.setPadding(new Insets(10));
         topBar.setPrefHeight(40);

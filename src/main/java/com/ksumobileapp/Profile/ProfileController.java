@@ -36,6 +36,10 @@ public class ProfileController {
     public ProfileController(Stage stage, ProfileView profileView) {
         this.profileView = profileView;
         loginMain = new LoginMain();
+
+        ProfileService profileService = new ProfileService();
+        profileService.setStatus();
+        if (!ProfileModel.getStatus().equals("Accepted")) this.profileView.disableButtons();
         personalMain = new PersonalMain();
         paymentMain = new PaymentMain();
         semesterMain = new SemesterMain();
@@ -87,4 +91,6 @@ public class ProfileController {
     public void viewInfo(Stage stage,PersonalMain personalMain) {
         personalMain.start(stage);
     }
+
+
 }

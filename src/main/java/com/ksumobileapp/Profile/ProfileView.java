@@ -95,4 +95,14 @@ public class ProfileView {
     public Button getBackButton() {
         return backButton;
     }
+
+
+    public void disableButtons() {
+        payCourses.setDisable(true);
+        viewCourses.setDisable(true);
+        recCourses.setDisable(true);
+        scheduleBuilder.setDisable(true);
+        digitalAdvisor.setDisable(true);
+
+    }
 }

@@ -50,10 +50,9 @@ public class AdminController {
 
                   if (result.isPresent() && result.get() == ButtonType.OK) {
                       adminReviewService.deleteUser();
-                  } else {
-
                   }
 
+            studentLookUpMain.start(stage);
       });
 
       logout.setOnAction(e -> studentLookUpMain.start(stage));
